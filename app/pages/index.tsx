@@ -5,6 +5,7 @@ import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
 import logo from "public/logo.png"
 import getIssues from "app/queries/getIssues"
+import IssuePage from "./issues/[issueId]"
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -53,12 +54,17 @@ const UserInfo = () => {
   }
 }
 
+Routes.IssuePage
 const IssueList = () => {
   const [issues] = useQuery(getIssues, undefined)
   return (
     <ul>
       {issues.map((issue) => (
-        <li key={issue.id}>{issue.title}</li>
+        <Link key={issue.id} href={Routes.IssuePage({ issueId: issue.id })}>
+          <a>
+            <li>{issue.title}</li>
+          </a>
+        </Link>
       ))}
     </ul>
   )
