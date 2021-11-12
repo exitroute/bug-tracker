@@ -70,7 +70,7 @@ const IssueList = () => {
   )
 }
 
-const Home: BlitzPage = () => {
+const LandingPage: BlitzPage = () => {
   return (
     <div className="container">
       <Suspense fallback="Loading...">
@@ -83,7 +83,7 @@ const Home: BlitzPage = () => {
   )
 }
 
-Home.suppressFirstRenderFlicker = true
-Home.getLayout = (page) => <Layout title="Home">{page}</Layout>
+LandingPage.suppressFirstRenderFlicker = true
+LandingPage.getLayout = (page) => <Layout title="Landing Page">{page}</Layout>
 
-export default Home
+export default LandingPage

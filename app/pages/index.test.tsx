@@ -1,6 +1,6 @@
 import { render } from "test/utils"
 
-import Home from "./index"
+import LandingPage from "./index"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 
 jest.mock("app/core/hooks/useCurrentUser")
@@ -19,7 +19,7 @@ test.skip("renders blitz documentation link", () => {
     role: "user",
   })
 
-  const { getByText } = render(<Home />)
+  const { getByText } = render(<LandingPage />)
   const linkElement = getByText(/Documentation/i)
   expect(linkElement).toBeInTheDocument()
 })
