@@ -26,7 +26,7 @@ const IssueList = () => {
 const Issues: BlitzPage = () => {
   return (
     <main>
-      <Suspense fallback="loading">
+      <Suspense fallback="Loading issues...">
         <IssueList />
       </Suspense>
     </main>
