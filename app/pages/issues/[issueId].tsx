@@ -1,5 +1,6 @@
 import { BlitzPage, useParam, useQuery } from "blitz"
 import { Suspense } from "react"
+import Layout from "app/core/layouts/Layout"
 import getIssue from "app/queries/getIssue"
 
 const IssueDetails = () => {
@@ -24,5 +25,9 @@ const IssuePage: BlitzPage = () => {
     </Suspense>
   )
 }
+
+IssuePage.authenticate = true
+IssuePage.suppressFirstRenderFlicker = true
+IssuePage.getLayout = (page) => <Layout title="Issue">{page}</Layout>
 
 export default IssuePage
