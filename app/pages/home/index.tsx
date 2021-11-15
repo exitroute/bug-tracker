@@ -1,9 +1,7 @@
 import { Suspense } from "react"
-import { Image, Link, BlitzPage, useMutation, Routes, useQuery } from "blitz"
+import { Image, Link, BlitzPage, Routes, useQuery } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getIssues from "app/queries/getIssues"
-import logout from "app/auth/mutations/logout"
-import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 
 /**
  * this is where the user arrives after logging in
@@ -38,40 +36,9 @@ const IssueList = () => {
   )
 }
 
-const UserInfo = () => {
-  const currentUser = useCurrentUser()
-
-  if (currentUser) {
-    return (
-      <div>
-        User email: <code>{currentUser.email}</code>
-        <br />
-        User id: <code>{currentUser.id}</code>
-        <br />
-        User role: <code>{currentUser.role}</code>
-      </div>
-    )
-  } else {
-    return null
-  }
-}
-
 const Home: BlitzPage = () => {
-  const [logoutMutation] = useMutation(logout)
   return (
     <main>
-      <h1>Home page</h1>
-      <Suspense fallback="Loading...">
-        <UserInfo />
-      </Suspense>
-      <button
-        className="button small"
-        onClick={async () => {
-          await logoutMutation()
-        }}
-      >
-        Logout
-      </button>
       <Suspense fallback="loading">
         <IssueList />
       </Suspense>
