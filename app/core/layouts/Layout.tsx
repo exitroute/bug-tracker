@@ -1,5 +1,6 @@
 import { Head, BlitzLayout } from "blitz"
 import Navigation from "../components/Navigation"
+import Header from "../components/Header"
 import styles from "./Layout.module.css"
 
 const Layout: BlitzLayout<{ title?: string }> = ({ title, children }) => {
@@ -9,10 +10,7 @@ const Layout: BlitzLayout<{ title?: string }> = ({ title, children }) => {
         <title>{title || "bug-tracker"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <div>Profile</div>
-        <div>Category</div>
-      </header>
+      <Header title={title} />
       <div className={styles.content}>{children}</div>
 
       <Navigation />
