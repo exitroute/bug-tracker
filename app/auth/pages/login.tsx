@@ -9,7 +9,7 @@ const LoginPage: BlitzPage = () => {
     <div>
       <LoginForm
         onSuccess={(_user) => {
-          const next = router.query.next ? decodeURIComponent(router.query.next as string) : "/home"
+          const next = router.query.next ? decodeURIComponent(router.query.next as string) : "/"
           router.push(next)
         }}
       />
@@ -17,7 +17,7 @@ const LoginPage: BlitzPage = () => {
   )
 }
 
-LoginPage.redirectAuthenticatedTo = "/"
+LoginPage.redirectAuthenticatedTo = "/home"
 LoginPage.getLayout = (page) => <Layout title="Log In">{page}</Layout>
 
 export default LoginPage
