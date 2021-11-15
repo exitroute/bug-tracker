@@ -21,8 +21,9 @@ import getIssues from "app/queries/getIssues"
  *
  */
 
-const IssueList = () => {
+const HomeList = () => {
   const [issues] = useQuery(getIssues, undefined)
+  // This list also returns projects and teams
   return (
     <ul>
       {issues.map((issue) => (
@@ -39,8 +40,8 @@ const IssueList = () => {
 const Home: BlitzPage = () => {
   return (
     <main>
-      <Suspense fallback="loading">
-        <IssueList />
+      <Suspense fallback="Loading your data...">
+        <HomeList />
       </Suspense>
     </main>
   )
