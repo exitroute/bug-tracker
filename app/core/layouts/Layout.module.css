@@ -1,0 +1,9 @@
+.wrapper {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 16vh 1fr 16vh;
+}
+
+.content {
+  overflow-y: scroll;
+}
