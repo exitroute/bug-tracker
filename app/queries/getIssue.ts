@@ -12,7 +12,6 @@ export default async function getIssue(id: number) {
       },
     },
   })
-  console.log("###", issue)
   if (!issue) {
     throw new NotFoundError()
   }
