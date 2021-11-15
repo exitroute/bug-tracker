@@ -3,9 +3,6 @@ import { Image, Link, BlitzPage, useMutation, Routes, useQuery } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import { useCurrentUser } from "app/core/hooks/useCurrentUser"
 import logout from "app/auth/mutations/logout"
-import logo from "public/logo.png"
-import getIssues from "app/queries/getIssues"
-import IssuePage from "./issues/[issueId]"
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -54,30 +51,13 @@ const UserInfo = () => {
   }
 }
 
-Routes.IssuePage
-const IssueList = () => {
-  const [issues] = useQuery(getIssues, undefined)
-  return (
-    <ul>
-      {issues.map((issue) => (
-        <Link key={issue.id} href={Routes.IssuePage({ issueId: issue.id })}>
-          <a>
-            <li>{issue.title}</li>
-          </a>
-        </Link>
-      ))}
-    </ul>
-  )
-}
-
 const LandingPage: BlitzPage = () => {
   return (
     <div className="container">
+      <h1>Bug Tracker</h1>
+      <p>An ExitRoute Project by Ryan O&apos;Shea</p>
       <Suspense fallback="Loading...">
         <UserInfo />
-      </Suspense>
-      <Suspense fallback="Loading...">
-        <IssueList />
       </Suspense>
     </div>
   )
