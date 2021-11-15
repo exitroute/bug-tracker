@@ -1,5 +1,6 @@
 import db from "db"
 
 export default async function getIssues() {
-  return db.issue.findMany()
+  const issues = await db.issue.findMany()
+  return issues
 }
