@@ -1,7 +1,7 @@
 import { BlitzPage, useParam, useQuery } from "blitz"
 import { Suspense } from "react"
 import Layout from "app/core/layouts/Layout"
-import getIssue from "app/queries/getIssue"
+import getIssue from "app/issues/queries/getIssue"
 
 const IssueDetails = () => {
   const issueId = useParam("issueId", "number")!

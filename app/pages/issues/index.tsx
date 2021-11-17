@@ -6,7 +6,7 @@
 import { Suspense } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import Layout from "app/core/layouts/Layout"
-import getIssues from "app/queries/getIssues"
+import getIssues from "app/issues/queries/getIssues"
 
 const IssueList = () => {
   const [issues] = useQuery(getIssues, undefined)

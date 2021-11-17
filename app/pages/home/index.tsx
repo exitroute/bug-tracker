@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { Image, Link, BlitzPage, Routes, useQuery } from "blitz"
 import Layout from "app/core/layouts/Layout"
-import getIssues from "app/queries/getIssues"
+import getIssues from "app/issues/queries/getIssues"
 
 /**
  * this is where the user arrives after logging in
