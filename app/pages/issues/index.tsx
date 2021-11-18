@@ -5,6 +5,7 @@
 
 import { Suspense } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
+import styles from "./Index.module.css"
 import Layout from "app/core/layouts/Layout"
 import getIssues from "app/issues/queries/getIssues"
 
@@ -25,7 +26,7 @@ const IssueList = () => {
 
 const Issues: BlitzPage = () => {
   return (
-    <main>
+    <main className={styles.main}>
       <Suspense fallback="Loading issues...">
         <IssueList />
       </Suspense>
