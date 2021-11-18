@@ -1,6 +1,7 @@
 import { Head, BlitzLayout } from "blitz"
 import Navigation from "../components/Navigation"
 import Header from "../components/Header"
+import CreateNewIssueButton from "app/issues/components/CreateNewIssueButton"
 import styles from "./Layout.module.css"
 
 const Layout: BlitzLayout<{ title?: string }> = ({ title, children }) => {
@@ -12,7 +13,7 @@ const Layout: BlitzLayout<{ title?: string }> = ({ title, children }) => {
       </Head>
       <Header title={title} />
       <div className={styles.content}>{children}</div>
-
+      <CreateNewIssueButton />
       <Navigation />
     </div>
   )
