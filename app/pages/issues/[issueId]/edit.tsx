@@ -28,7 +28,6 @@ export const EditIssueForm = () => {
             })
             await setQueryData(updated)
           } catch (error: any) {
-            console.log("Edit Issue", error)
             return { [FORM_ERROR]: error.toString() }
           }
         }}

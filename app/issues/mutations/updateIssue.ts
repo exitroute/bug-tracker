@@ -3,7 +3,6 @@ import db from "db"
 
 export default async function updateIssue({ id, ...data }, ctx: Ctx) {
   ctx.session.$authorize()
-  console.log("###", data)
   const issue = await db.issue.update({
     where: { id },
     data: {
