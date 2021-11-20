@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { BlitzPage, useRouter, useParam, useMutation, useQuery } from "blitz"
+import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "blitz"
 
 import { FORM_ERROR } from "app/issues/components/Form"
 import { IssueForm } from "app/issues/components/IssueForm"
@@ -10,13 +10,14 @@ import updateIssue from "app/issues/mutations/updateIssue"
 export const EditIssueForm = () => {
   const router = useRouter()
   const issueId = useParam("issueId", "number")!
-  const [issue, { setQueryData }] = useQuery(getIssue, issueId, { staleTime: Infinity })
-  const [updateIssueMutation] = useMutation(updateIssue)
+  const [issue] = useQuery(getIssue, issueId)
+
+  const redirect = (updated) => router.push(Routes.IssuePage({ issueId: updated.id }))
+  const [updateIssueMutation] = useMutation(updateIssue, { onSuccess: redirect })
 
   return (
     <>
       <h1>Edit Issue: {issue.title}</h1>
-      <pre>{JSON.stringify(issue, null, 2)}</pre>
       <IssueForm
         submitText="Update Issue"
         initialValues={issue}
@@ -26,7 +27,6 @@ export const EditIssueForm = () => {
               id: issue.id,
               ...values,
             })
-            await setQueryData(updated)
           } catch (error: any) {
             return { [FORM_ERROR]: error.toString() }
           }
