@@ -3,7 +3,6 @@ import { Form } from "./Form"
 export { FORM_ERROR } from "./Form"
 
 export const IssueForm = (props) => {
-  console.log("issueForm", props)
   return (
     <Form {...props}>
       <div>

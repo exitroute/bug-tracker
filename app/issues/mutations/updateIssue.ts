@@ -2,6 +2,7 @@ import { Ctx } from "blitz"
 import db from "db"
 
 export default async function updateIssue({ id, ...data }, ctx: Ctx) {
+  console.log("data", data)
   ctx.session.$authorize()
   const issue = await db.issue.update({
     where: { id },

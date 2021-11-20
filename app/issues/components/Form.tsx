@@ -1,9 +1,7 @@
-import { useMutation } from "blitz"
-import { Form as FinalForm, Field } from "react-final-form"
+import { Form as FinalForm } from "react-final-form"
 export { FORM_ERROR } from "final-form"
 
 export const Form = ({ children, ...props }) => {
-  console.log(props)
   return (
     <FinalForm
       initialValues={props.initialValues}
