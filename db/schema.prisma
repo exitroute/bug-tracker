@@ -21,9 +21,13 @@ model User {
   hashedPassword String?
   role           String   @default("USER")
 
-  tokens        Token[]
-  sessions      Session[]
-  createdIssues Issue[]
+  tokens   Token[]
+  sessions Session[]
+
+  // todo: make Profile and add to Profile
+  createdIssues  Issue[] @relation("createdByUser")
+  assignedIssues Issue[] @relation("assignedTo")
+  updatedIssues  Issue[] @relation("updatedByUser")
 }
 
 model Session {
@@ -70,7 +74,13 @@ model Issue {
   createdAt   DateTime @default(now())
   title       String
   description String
-
-  createdBy   User @relation(fields: [createdById], references: [id])
+  createdBy   User     @relation(name: "createdByUser", fields: [createdById], references: [id])
   createdById Int
+
+  assignedTo   User?   @relation(name: "assignedTo", fields: [assignedToId], references: [email])
+  assignedToId String?
+
+  updatedAt   DateTime? @default("2020-10-24T03:25:00+02:00") @updatedAt
+  updatedBy   User[]    @relation(name: "updatedByUser", fields: [updatedById], references: [id])
+  updatedById Int?
 }
