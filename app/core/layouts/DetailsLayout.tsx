@@ -1,7 +1,7 @@
 import { Head, BlitzLayout } from "blitz"
-import React, { Suspense } from "react"
+import React from "react"
 import styles from "./DetailsLayout.module.css"
-import EditIssueButton from "app/issues/components/EditIssueButton"
+import DetailsHeader from "app/core/components/DetailsHeader"
 
 const DetailsLayout: BlitzLayout<{ title?: string }> = ({ title, children }) => {
   return (
@@ -10,19 +10,7 @@ const DetailsLayout: BlitzLayout<{ title?: string }> = ({ title, children }) => 
         <title>{title || "bug-tracker"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <a href="">Back</a>
-        <Suspense fallback="Loading...">
-          {title === "Issue" ? (
-            <EditIssueButton />
-          ) : (
-            <button form="issue-form" type="submit">
-              Save
-            </button>
-          )}
-        </Suspense>
-      </header>
-
+      <DetailsHeader title={title} />
       <div className={styles.content}>{children}</div>
     </div>
   )
