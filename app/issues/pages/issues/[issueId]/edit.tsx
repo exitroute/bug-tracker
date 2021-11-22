@@ -1,6 +1,7 @@
 import { Suspense } from "react"
 import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "blitz"
 
+import DetailsLayout from "app/core/layouts/DetailsLayout"
 import { FORM_ERROR } from "app/issues/components/Form"
 import { IssueForm } from "app/issues/components/IssueForm"
 
@@ -47,4 +48,6 @@ const EditIssuePage: BlitzPage = () => {
 }
 
 EditIssuePage.authenticate = true
+EditIssuePage.suppressFirstRenderFlicker = true
+EditIssuePage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
 export default EditIssuePage
