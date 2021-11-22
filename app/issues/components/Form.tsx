@@ -7,19 +7,13 @@ export const Form = ({ children, ...props }) => {
       initialValues={props.initialValues}
       onSubmit={props.onSubmit}
       render={({ handleSubmit, form, submitting, pristine, submitError }) => (
-        <form onSubmit={handleSubmit}>
+        <form id="issue-form" onSubmit={handleSubmit}>
           {children}
 
           {props.submitError && (
             <div role="alert" style={{ color: "red" }}>
               {submitError}
             </div>
-          )}
-
-          {props.submitText && (
-            <button type="submit" disabled={submitting || pristine}>
-              {props.submitText}
-            </button>
           )}
 
           <button type="button" onClick={form.reset} disabled={submitting || pristine}>

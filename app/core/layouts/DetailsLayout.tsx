@@ -12,7 +12,15 @@ const DetailsLayout: BlitzLayout<{ title?: string }> = ({ title, children }) => 
       </Head>
       <header>
         <a href="">Back</a>
-        <Suspense fallback="Loading...">{title === "Issue" ? <EditIssueButton /> : null}</Suspense>
+        <Suspense fallback="Loading...">
+          {title === "Issue" ? (
+            <EditIssueButton />
+          ) : (
+            <button form="issue-form" type="submit">
+              Save
+            </button>
+          )}
+        </Suspense>
       </header>
 
       <div className={styles.content}>{children}</div>

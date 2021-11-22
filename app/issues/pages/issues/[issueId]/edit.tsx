@@ -20,7 +20,7 @@ export const EditIssueForm = () => {
     <>
       <h1>Edit Issue: {issue.title}</h1>
       <IssueForm
-        submitText="Update Issue"
+        submitText="Save"
         initialValues={issue}
         onSubmit={async (values) => {
           try {
