@@ -23,8 +23,8 @@ const seed = async () => {
       createdIssues: {
         create: [
           {
-            title: faker.hacker.phrase(),
-            description: `${faker.hacker.noun} Does't Work`,
+            title: `${faker.hacker.noun()} Does't Work`,
+            description: faker.hacker.phrase(),
           },
         ],
       },
@@ -41,8 +41,8 @@ const seed = async () => {
       createdIssues: {
         create: [
           {
-            title: faker.hacker.phrase(),
-            description: `${faker.hacker.noun} Does't Work`,
+            title: `${faker.hacker.noun()} Does't Work`,
+            description: faker.hacker.phrase(),
           },
         ],
       },
@@ -52,8 +52,6 @@ const seed = async () => {
   for (let i = 0; i < 5; i++) {
     let name: string = faker.name.firstName()
     let email: string = faker.internet.exampleEmail(`${name}`)
-    let description: string = faker.hacker.phrase()
-    let title: string = `${faker.hacker.noun()} Does't Work`
     await db.user.create({
       data: {
         name: name,
@@ -64,24 +62,24 @@ const seed = async () => {
         createdIssues: {
           create: [
             {
-              title: title,
-              description: description,
+              title: `${faker.hacker.noun()} Does't Work`,
+              description: faker.hacker.phrase(),
             },
             {
-              title: title,
-              description: description,
+              title: `${faker.hacker.noun()} Does't Work`,
+              description: faker.hacker.phrase(),
             },
             {
-              title: title,
-              description: description,
+              title: `${faker.hacker.noun()} Does't Work`,
+              description: faker.hacker.phrase(),
             },
             {
-              title: title,
-              description: description,
+              title: `${faker.hacker.noun()} Does't Work`,
+              description: faker.hacker.phrase(),
             },
             {
-              title: title,
-              description: description,
+              title: `${faker.hacker.noun()} Does't Work`,
+              description: faker.hacker.phrase(),
             },
           ],
         },
