@@ -1,10 +1,5 @@
-/**
- * This is where the user makes a new issue
- *
- * [ ] Add redirect to [issue] on success
- *
- */
 import { useRouter, BlitzPage, Routes, useMutation } from "blitz"
+import DetailsLayout from "app/core/layouts/DetailsLayout"
 import { IssueForm } from "app/issues/components/IssueForm"
 import createIssue from "app/issues/mutations/createIssue"
 
@@ -37,4 +32,5 @@ const NewIssuePage: BlitzPage = () => {
 
 NewIssuePage.authenticate = true
 NewIssuePage.suppressFirstRenderFlicker = true
+NewIssuePage.getLayout = (page) => <DetailsLayout title="New">{page}</DetailsLayout>
 export default NewIssuePage
