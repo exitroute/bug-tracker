@@ -1,8 +1,7 @@
 import { BlitzPage, useParam, useQuery } from "blitz"
 import { Suspense } from "react"
-import Layout from "app/core/layouts/Layout"
+import DetailsLayout from "app/core/layouts/DetailsLayout"
 import getIssue from "app/issues/queries/getIssue"
-import EditIssueButton from "app/issues/components/EditIssueButton"
 
 const IssueDetails = () => {
   const issueId = useParam("issueId", "number")!
@@ -15,7 +14,6 @@ const IssueDetails = () => {
       <p>
         Created by {issue?.createdBy.email} on {issue?.createdAt.toTimeString()}
       </p>
-      <EditIssueButton issueId={issue?.id} />
     </main>
   )
 }
@@ -30,6 +28,6 @@ const IssuePage: BlitzPage = () => {
 
 IssuePage.authenticate = true
 IssuePage.suppressFirstRenderFlicker = true
-IssuePage.getLayout = (page) => <Layout title="Issue">{page}</Layout>
+IssuePage.getLayout = (page) => <DetailsLayout title="Issue">{page}</DetailsLayout>
 
 export default IssuePage
