@@ -8,7 +8,6 @@ import getUsers from "app/users/queries/getUsers"
 
 export const IssueForm = (props) => {
   const [users] = useQuery(getUsers, undefined, { suspense: false })
-  console.log(users)
 
   return (
     <Suspense fallback="Loading...">
@@ -26,7 +25,7 @@ export const IssueForm = (props) => {
         <div>
           <label htmlFor="assign-user">Assigned to</label>
           <br />
-          <Field name="users" component="select" multiple id="assign-user">
+          <Field name="assignedTo" component="select" multiple id="assign-user">
             {users?.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.name}

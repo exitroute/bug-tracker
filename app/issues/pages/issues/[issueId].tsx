@@ -12,8 +12,14 @@ const IssueDetails = () => {
       <h1>{issue?.title}</h1>
       <p>{issue?.description}</p>
       <p>
-        Created by {issue?.createdBy.email} on {issue?.createdAt.toTimeString()}
+        Created by {issue?.createdBy.name} on {issue?.createdAt.toTimeString()}
       </p>
+      {issue?.assignedTo && (
+        <p>
+          Assigned to {issue?.assignedTo.name}
+          {/* TODO add assignedTo by and the assigned time */}
+        </p>
+      )}
     </main>
   )
 }

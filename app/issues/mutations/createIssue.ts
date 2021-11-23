@@ -13,6 +13,11 @@ export default async function createIssue(input: any, ctx: Ctx) {
           id: ctx.session.userId,
         },
       },
+      assignedTo: {
+        connect: {
+          id: Number(input.assignedTo[0]),
+        },
+      },
     },
   })
 

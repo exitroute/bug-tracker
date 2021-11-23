@@ -6,7 +6,7 @@ import createIssue from "app/issues/mutations/createIssue"
 const NewIssuePage: BlitzPage = () => {
   const router = useRouter()
   const [createIssueMutation] = useMutation(createIssue)
-  const initialValues = { title: "", description: "" }
+  const initialValues = { title: "", description: "", assignedTo: "" }
   const onSuccess = (issue) => router.push(Routes.IssuePage({ issueId: issue.id }))
 
   return (
@@ -17,6 +17,7 @@ const NewIssuePage: BlitzPage = () => {
           onSubmit={async (values) => {
             try {
               const issue = await createIssueMutation(values)
+              console.log(issue)
               onSuccess(issue)
             } catch (error) {
               console.log(error)

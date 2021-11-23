@@ -7,11 +7,17 @@ export default async function getIssue(id: number) {
     include: {
       createdBy: {
         select: {
-          email: true,
+          name: true,
+        },
+      },
+      assignedTo: {
+        select: {
+          name: true,
         },
       },
     },
   })
+  console.log("getIssue###", issue)
   if (!issue) {
     throw new NotFoundError()
   }
