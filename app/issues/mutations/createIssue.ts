@@ -3,7 +3,6 @@ import db from "db"
 
 export default async function createIssue(input: any, ctx: Ctx) {
   ctx.session.$authorize()
-
   const issue = await db.issue.create({
     data: {
       title: input.title,
@@ -15,7 +14,7 @@ export default async function createIssue(input: any, ctx: Ctx) {
       },
       assignedTo: {
         connect: {
-          id: Number(input.assignedTo[0]),
+          id: Number(input.assignedTo),
         },
       },
     },
