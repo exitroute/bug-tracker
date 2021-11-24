@@ -10,6 +10,11 @@ export default async function getIssue(id: number) {
           name: true,
         },
       },
+      updatedBy: {
+        select: {
+          name: true,
+        },
+      },
       assignedTo: {
         select: {
           name: true,
@@ -17,7 +22,6 @@ export default async function getIssue(id: number) {
       },
     },
   })
-  console.log("getIssue###", issue)
   if (!issue) {
     throw new NotFoundError()
   }
