@@ -2,7 +2,6 @@ import { Link, useParam } from "blitz"
 
 const DetailsHeader = ({ title }) => {
   const issueId = useParam("issueId", "number")!
-  console.log(title)
   return (
     <header>
       {(() => {
