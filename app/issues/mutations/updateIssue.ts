@@ -3,7 +3,6 @@ import db from "db"
 
 export default async function updateIssue({ id, ...data }, ctx: Ctx) {
   ctx.session.$authorize()
-  console.log("##", data)
   const issue = await db.issue.update({
     where: { id },
     data: {
@@ -15,11 +14,11 @@ export default async function updateIssue({ id, ...data }, ctx: Ctx) {
         },
       },
       updatedAt: new Date().toISOString(),
-      // assignedTo: {
-      //   connect: {
-      //     id: Number(data.assignedTo[0]),
-      //   },
-      // },
+      assignedTo: {
+        connect: {
+          id: Number(data.assignedUser.id),
+        },
+      },
     },
     // add an updateBy and when record
   })
