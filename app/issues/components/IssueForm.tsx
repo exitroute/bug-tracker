@@ -25,10 +25,8 @@ export const IssueForm = (props) => {
         <div>
           <label htmlFor="assign-user">Assigned to</label>
           <br />
-          {}
-          <Field name="assignedTo" component="select" id="assign-user">
-            <option value="">--Select--</option>
-            {props.initialValues.users?.map((user) => (
+          <Field name="assignedUser.id" component="select" id="assign-user">
+            {props.users?.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.name}
               </option>
