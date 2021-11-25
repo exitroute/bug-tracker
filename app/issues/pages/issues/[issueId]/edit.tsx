@@ -12,6 +12,7 @@ import updateIssue from "app/issues/mutations/updateIssue"
 export const EditIssueForm = () => {
   const router = useRouter()
   const issueId = useParam("issueId", "number")!
+
   const [issue] = useQuery(getIssue, issueId, { suspense: false })
   const [users] = useQuery(getUsers, undefined, { suspense: false })
   const assignedUser = issue?.assignedTo
@@ -22,14 +23,14 @@ export const EditIssueForm = () => {
 
   return (
     <>
-      <h1>Edit Issue: {issue.title}</h1>
+      <h1>Edit Issue: {issue?.title}</h1>
       <IssueForm
         initialValues={initialValues}
         users={users}
         onSubmit={async (values) => {
           try {
             const updated = await updateIssueMutation({
-              id: issue.id,
+              id: issue?.id,
               ...values,
             })
           } catch (error: any) {
