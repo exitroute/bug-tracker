@@ -6,11 +6,13 @@ import { FORM_ERROR } from "app/issues/components/Form"
 import { IssueForm } from "app/issues/components/IssueForm"
 
 import getIssue from "app/issues/queries/getIssue"
+import getUsers from "app/users/queries/getUsers"
 import updateIssue from "app/issues/mutations/updateIssue"
 
 export const EditIssueForm = () => {
   const router = useRouter()
   const issueId = useParam("issueId", "number")!
+  const [users] = useQuery(getUsers, undefined, { suspense: false })
   const [issue] = useQuery(getIssue, issueId)
 
   const redirect = (updated) => router.push(Routes.IssuePage({ issueId: updated.id }))
@@ -20,8 +22,7 @@ export const EditIssueForm = () => {
     <>
       <h1>Edit Issue: {issue.title}</h1>
       <IssueForm
-        submitText="Save"
-        initialValues={issue}
+        users={users}
         onSubmit={async (values) => {
           try {
             const updated = await updateIssueMutation({
