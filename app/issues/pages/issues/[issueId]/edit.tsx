@@ -12,8 +12,10 @@ import updateIssue from "app/issues/mutations/updateIssue"
 export const EditIssueForm = () => {
   const router = useRouter()
   const issueId = useParam("issueId", "number")!
+  const [issue] = useQuery(getIssue, issueId, { suspense: false })
   const [users] = useQuery(getUsers, undefined, { suspense: false })
-  const [issue] = useQuery(getIssue, issueId)
+  const assignedUser = issue?.assignedTo
+  const initialValues = { issue, assignedUser }
 
   const redirect = (updated) => router.push(Routes.IssuePage({ issueId: updated.id }))
   const [updateIssueMutation] = useMutation(updateIssue, { onSuccess: redirect })
@@ -22,6 +24,7 @@ export const EditIssueForm = () => {
     <>
       <h1>Edit Issue: {issue.title}</h1>
       <IssueForm
+        initialValues={initialValues}
         users={users}
         onSubmit={async (values) => {
           try {
