@@ -10,12 +10,17 @@ export const IssueForm = (props) => {
         <div>
           <label>Title</label>
           <br />
-          <Field name="title" component="input" type="text" placeholder="Add a descriptive title" />
+          <Field
+            name="issue.title"
+            component="input"
+            type="text"
+            placeholder="Add a descriptive title"
+          />
         </div>
         <div>
           <label>Expected behavior</label>
           <br />
-          <Field name="description" component="textarea" placeholder="What happened?" />
+          <Field name="issue.description" component="textarea" placeholder="What happened?" />
         </div>
         <div>
           <label htmlFor="assign-user">Assigned to</label>
