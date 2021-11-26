@@ -14,23 +14,18 @@ export const IssueForm = (props) => {
         <div>
           <label>Title</label>
           <br />
-          <Field
-            name="issue.title"
-            component="input"
-            type="text"
-            placeholder="Add a descriptive title"
-          />
+          <Field name="title" component="input" type="text" placeholder="Add a descriptive title" />
         </div>
         <div>
           <label>Expected behavior</label>
           <br />
-          <Field name="issue.description" component="textarea" placeholder="What happened?" />
+          <Field name="description" component="textarea" placeholder="What happened?" />
         </div>
         <div>
           <label htmlFor="assign-user">Assigned to</label>
           <br />
-          <Field name="assignedUser.id" component="select" id="assign-user">
-            {props.users?.map((user) => (
+          <Field name="assignedTo.id" component="select" id="assign-user">
+            {users?.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.name}
               </option>
