@@ -77,10 +77,10 @@ model Issue {
   createdBy   User     @relation(name: "createdByUser", fields: [createdById], references: [id])
   createdById Int
 
-  assignedTo   User?   @relation(name: "assignedTo", fields: [assignedToId], references: [email])
-  assignedToId String?
+  assignedTo   User? @relation(name: "assignedTo", fields: [assignedToId], references: [id])
+  assignedToId Int?
 
-  updatedAt   DateTime? @default("2020-10-24T03:25:00+02:00") @updatedAt
+  updatedAt   DateTime? @updatedAt
   updatedBy   User[]    @relation(name: "updatedByUser", fields: [updatedById], references: [id])
   updatedById Int?
 }
