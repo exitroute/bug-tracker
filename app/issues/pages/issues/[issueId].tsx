@@ -1,4 +1,4 @@
-import { BlitzPage, useParam, useQuery } from "blitz"
+import { BlitzPage, useParam, useQuery, Link } from "blitz"
 import { Suspense } from "react"
 import DetailsLayout from "app/core/layouts/DetailsLayout"
 import getIssue from "app/issues/queries/getIssue"
@@ -27,6 +27,9 @@ const IssueDetails = () => {
           {/* TODO add assignedTo by and the assigned time */}
         </p>
       )}
+      <Link href={`/issues/${issueId}/edit`}>
+        <a>Update Issue</a>
+      </Link>
     </main>
   )
 }
