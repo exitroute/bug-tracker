@@ -81,6 +81,6 @@ model Issue {
   assignedToId Int?
 
   updatedAt   DateTime? @updatedAt
-  updatedBy   User[]    @relation(name: "updatedByUser", fields: [updatedById], references: [id])
+  updatedBy   User?     @relation(name: "updatedByUser", fields: [updatedById], references: [id])
   updatedById Int?
 }
