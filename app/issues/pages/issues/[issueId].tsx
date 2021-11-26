@@ -5,8 +5,7 @@ import getIssue from "app/issues/queries/getIssue"
 
 const IssueDetails = () => {
   const issueId = useParam("issueId", "number")!
-  const [issue] = useQuery(getIssue, issueId, { suspense: false })
-  const updatedBy = issue?.updatedBy.pop()
+  const [issue] = useQuery(getIssue, issueId)
 
   return (
     <main>
@@ -15,16 +14,10 @@ const IssueDetails = () => {
       <p>
         Created by {issue?.createdBy.name} on {issue?.createdAt.toTimeString()}
       </p>
-      {issue?.assignedTo && (
-        <p>
-          Assigned to {issue?.assignedTo.name}
-          {/* TODO add assignedTo by and the assigned time */}
-        </p>
-      )}
+      {issue?.assignedTo && <p>Assigned to {issue?.assignedTo.name}</p>}
       {issue?.updatedBy && (
         <p>
-          Updated by {updatedBy?.name} on {issue?.updatedAt?.toTimeString()}
-          {/* TODO add assignedTo by and the assigned time */}
+          Updated by {issue.updatedBy?.name} on {issue?.updatedAt?.toTimeString()}
         </p>
       )}
       <Link href={`/issues/${issueId}/edit`}>
