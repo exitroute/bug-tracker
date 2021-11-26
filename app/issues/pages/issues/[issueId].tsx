@@ -6,7 +6,7 @@ import getIssue from "app/issues/queries/getIssue"
 const IssueDetails = () => {
   const issueId = useParam("issueId", "number")!
   const [issue] = useQuery(getIssue, issueId, { suspense: false })
-  const name = issue?.updatedBy.pop()
+  const updatedBy = issue?.updatedBy.pop()
 
   return (
     <main>
@@ -23,7 +23,7 @@ const IssueDetails = () => {
       )}
       {issue?.updatedBy && (
         <p>
-          Updated by {name?.name} on {issue?.updatedAt?.toTimeString()}
+          Updated by {updatedBy?.name} on {issue?.updatedAt?.toTimeString()}
           {/* TODO add assignedTo by and the assigned time */}
         </p>
       )}
