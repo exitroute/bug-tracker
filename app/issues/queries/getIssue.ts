@@ -17,6 +17,7 @@ export default async function getIssue(id: number) {
       },
       assignedTo: {
         select: {
+          id: true,
           name: true,
         },
       },
