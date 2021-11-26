@@ -1,13 +1,11 @@
-import { useRouter, BlitzPage, Routes, useQuery, useMutation } from "blitz"
+import { useRouter, BlitzPage, Routes, useMutation } from "blitz"
 import DetailsLayout from "app/core/layouts/DetailsLayout"
 import { IssueForm } from "app/issues/components/IssueForm"
 import createIssue from "app/issues/mutations/createIssue"
-import getUsers from "app/users/queries/getUsers"
 
 const NewIssuePage: BlitzPage = () => {
   const router = useRouter()
-  const [users] = useQuery(getUsers, undefined, { suspense: false })
-  const initialValues = { users: users }
+  const initialValues = { title: "", description: "" }
 
   const [createIssueMutation] = useMutation(createIssue)
   const onSuccess = (issue) => router.push(Routes.IssuePage({ issueId: issue.id }))
