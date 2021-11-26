@@ -13,7 +13,6 @@ export default async function updateIssue({ id, ...data }, ctx: Ctx) {
           id: ctx.session.userId,
         },
       },
-      updatedAt: new Date().toISOString(),
       assignedTo: {
         connect: {
           id: Number(data.assignedTo.id),
