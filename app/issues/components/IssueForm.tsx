@@ -1,9 +1,13 @@
 import { Suspense } from "react"
+import { useQuery } from "blitz"
 import { Field } from "react-final-form"
 import { Form } from "./Form"
 export { FORM_ERROR } from "./Form"
+import getUsers from "app/users/queries/getUsers"
 
 export const IssueForm = (props) => {
+  const [users] = useQuery(getUsers, undefined, { suspense: false })
+
   return (
     <Suspense fallback="Loading...">
       <Form {...props}>
