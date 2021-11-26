@@ -16,11 +16,10 @@ export default async function updateIssue({ id, ...data }, ctx: Ctx) {
       updatedAt: new Date().toISOString(),
       assignedTo: {
         connect: {
-          id: Number(data.assignedUser.id),
+          id: Number(data.assignedTo.id),
         },
       },
     },
-    // add an updateBy and when record
   })
 
   return issue
