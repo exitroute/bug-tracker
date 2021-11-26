@@ -2,7 +2,6 @@ import { Form as FinalForm } from "react-final-form"
 export { FORM_ERROR } from "final-form"
 
 export const Form = ({ children, ...props }) => {
-  console.log(props.initialValues.issue)
   return (
     <FinalForm
       initialValues={props.initialValues.issue}
