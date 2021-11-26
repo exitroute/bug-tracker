@@ -24,6 +24,7 @@ export const EditIssueForm = () => {
       <h1>Edit Issue: {issue?.title}</h1>
       <IssueForm
         initialValues={initialValues}
+        submitText="Update Issue"
         onSubmit={async (values) => {
           try {
             const updated = await updateIssueMutation({

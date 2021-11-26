@@ -16,6 +16,12 @@ export const Form = ({ children, ...props }) => {
             </div>
           )}
 
+          {props.submitText && (
+            <button type="submit" disabled={submitting || pristine}>
+              {props.submitText}
+            </button>
+          )}
+
           <button type="button" onClick={form.reset} disabled={submitting || pristine}>
             Reset
           </button>

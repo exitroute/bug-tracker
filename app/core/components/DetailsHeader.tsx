@@ -28,16 +28,6 @@ const DetailsHeader = ({ title }) => {
             return null
         }
       })()}
-      <br />
-      {title === "Issue" ? (
-        <Link href={`/issues/${issueId}/edit`}>
-          <a>Update Issue</a>
-        </Link>
-      ) : (
-        <button form="issue-form" type="submit">
-          Save
-        </button>
-      )}
     </header>
   )
 }
