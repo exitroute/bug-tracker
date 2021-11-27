@@ -1,11 +1,22 @@
-import { BlitzPage, useParam, useQuery, Link } from "blitz"
+import { BlitzPage, useParam, useQuery, useMutation, Link, Router } from "blitz"
 import { Suspense } from "react"
 import DetailsLayout from "app/core/layouts/DetailsLayout"
 import getIssue from "app/issues/queries/getIssue"
+import deleteIssue from "app/issues/mutations/deleteIssue"
 
 const IssueDetails = () => {
   const issueId = useParam("issueId", "number")!
-  const [issue] = useQuery(getIssue, issueId)
+  const [issue, { refetch }] = useQuery(getIssue, issueId)
+  const [deleteIssueMutation] = useMutation(deleteIssue)
+
+  const deleteIssueHandler = (e, id) => {
+    e.preventDefault()
+    deleteIssueMutation({ id })
+    confirm("Warning: You are about to delete this issue. \nAre you sure?")
+    console.log("issue " + id + " deleted")
+    Router.push("/issues")
+    refetch()
+  }
 
   return (
     <main>
@@ -23,6 +34,8 @@ const IssueDetails = () => {
       <Link href={`/issues/${issueId}/edit`}>
         <a>Update Issue</a>
       </Link>
+      <br />
+      <button onClick={(e) => deleteIssueHandler(e, issueId)}>Delete</button>
     </main>
   )
 }
