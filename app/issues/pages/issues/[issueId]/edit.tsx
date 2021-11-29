@@ -1,6 +1,8 @@
 import { Suspense } from "react"
 import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "blitz"
 
+import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
+
 import DetailsLayout from "app/core/layouts/DetailsLayout"
 import { FORM_ERROR } from "app/issues/components/Form"
 import { IssueForm } from "app/issues/components/IssueForm"
@@ -20,23 +22,35 @@ export const EditIssueForm = () => {
   const [updateIssueMutation] = useMutation(updateIssue, { onSuccess: redirect })
 
   return (
-    <>
-      <h1>Edit Issue: {issue?.title}</h1>
-      <IssueForm
-        initialValues={initialValues}
-        submitText="Update Issue"
-        onSubmit={async (values) => {
-          try {
-            const updated = await updateIssueMutation({
-              id: issue?.id,
-              ...values,
-            })
-          } catch (error: any) {
-            return { [FORM_ERROR]: error.toString() }
-          }
-        }}
-      />
-    </>
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading>Edit Issue: {issue?.title}</Heading>
+          <Text fontSize={"lg"} color={"gray.600"}>
+            What do you want to change?
+          </Text>
+        </Stack>
+        <IssueForm
+          initialValues={initialValues}
+          submitText="Update Issue"
+          onSubmit={async (values) => {
+            try {
+              const updated = await updateIssueMutation({
+                id: issue?.id,
+                ...values,
+              })
+            } catch (error: any) {
+              return { [FORM_ERROR]: error.toString() }
+            }
+          }}
+        />
+      </Stack>
+    </Flex>
   )
 }
 
