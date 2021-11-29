@@ -14,7 +14,7 @@ export const EditIssueForm = () => {
   const router = useRouter()
   const issueId = useParam("issueId", "number")!
 
-  const [issue] = useQuery(getIssue, issueId, { suspense: false })
+  const [issue] = useQuery(getIssue, issueId, { suspense: false, staleTime: Infinity })
   const assignedTo = issue?.assignedTo
   const initialValues = { issue, assignedTo }
 
