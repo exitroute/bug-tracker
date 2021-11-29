@@ -1,4 +1,7 @@
 import { useRouter, BlitzPage, Routes, useMutation } from "blitz"
+
+import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
+
 import DetailsLayout from "app/core/layouts/DetailsLayout"
 import { IssueForm } from "app/issues/components/IssueForm"
 import createIssue from "app/issues/mutations/createIssue"
@@ -11,9 +14,19 @@ const NewIssuePage: BlitzPage = () => {
   const onSuccess = (issue) => router.push(Routes.IssuePage({ issueId: issue.id }))
 
   return (
-    <>
-      <h1>Create A New Issue</h1>
-      <div>
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={useColorModeValue("gray.50", "gray.800")}
+    >
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading>Create Issue</Heading>
+          <Text fontSize={"lg"} color={"gray.600"}>
+            What do you want to report?
+          </Text>
+        </Stack>
         <IssueForm
           onSubmit={async (values) => {
             try {
@@ -26,8 +39,8 @@ const NewIssuePage: BlitzPage = () => {
           initialValues={initialValues}
           submitText="Create Issue"
         />
-      </div>
-    </>
+      </Stack>
+    </Flex>
   )
 }
 
