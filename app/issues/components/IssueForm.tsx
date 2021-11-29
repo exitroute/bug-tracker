@@ -2,7 +2,17 @@ import { Suspense } from "react"
 import { useQuery } from "blitz"
 import { Field, useField } from "react-final-form"
 
-import { Input, Textarea, Select, FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react"
+import {
+  Box,
+  Stack,
+  useColorModeValue,
+  Input,
+  Textarea,
+  Select,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+} from "@chakra-ui/react"
 
 import { Form } from "./Form"
 export { FORM_ERROR } from "./Form"
@@ -14,21 +24,31 @@ export const IssueForm = (props) => {
 
   return (
     <Suspense fallback="Loading...">
-      <Form {...props}>
-        <InputControl name="title" placeholder="Add a descriptive title" label="Title" />
-        <TextareaControl
-          name="description"
-          placeholder="What did you expect to happen?"
-          label="Expected Behaviour"
-        />
-        <SelectControl name="assignedTo.id" label="Assigned to" placeholder="Assign this issue!">
-          {users?.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </SelectControl>
-      </Form>
+      <Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")} boxShadow={"lg"} p={8}>
+        <Stack spacing={4}>
+          <Form {...props}>
+            <Stack spacing={8}>
+              <InputControl name="title" placeholder="Add a descriptive title" label="Title" />
+              <TextareaControl
+                name="description"
+                placeholder="What did you expect to happen?"
+                label="Expected Behaviour"
+              />
+              <SelectControl
+                name="assignedTo.id"
+                label="Assigned to"
+                placeholder="Assign this issue!"
+              >
+                {users?.map((user) => (
+                  <option key={user.id} value={user.id}>
+                    {user.name}
+                  </option>
+                ))}
+              </SelectControl>
+            </Stack>
+          </Form>
+        </Stack>
+      </Box>
     </Suspense>
   )
 }
