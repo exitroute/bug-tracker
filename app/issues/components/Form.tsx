@@ -1,4 +1,5 @@
 import { Form as FinalForm } from "react-final-form"
+import { Flex, Button } from "@chakra-ui/react"
 export { FORM_ERROR } from "final-form"
 
 export const Form = ({ children, ...props }) => {
@@ -16,15 +17,17 @@ export const Form = ({ children, ...props }) => {
             </div>
           )}
 
-          {props.submitText && (
-            <button type="submit" disabled={submitting || pristine}>
-              {props.submitText}
-            </button>
-          )}
+          <Flex justifyContent={"space-evenly"} mt={8}>
+            {props.submitText && (
+              <Button type="submit" disabled={submitting || pristine}>
+                {props.submitText}
+              </Button>
+            )}
 
-          <button type="button" onClick={form.reset} disabled={submitting || pristine}>
-            Reset
-          </button>
+            <Button type="button" onClick={form.reset} disabled={submitting || pristine}>
+              Reset
+            </Button>
+          </Flex>
         </form>
       )}
     />
