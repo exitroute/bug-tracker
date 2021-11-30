@@ -1,15 +1,32 @@
+import { useQuery } from "blitz"
 import { Suspense } from "react"
-import { useCurrentUser } from "app/core/hooks/useCurrentUser"
+import {
+  Box,
+  Heading,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerContent,
+  DrawerCloseButton,
+  Button,
+  Flex,
+  Skeleton,
+  useDisclosure,
+} from "@chakra-ui/react"
+
+import getCurrentUser from "app/users/queries/getCurrentUser"
 import LogoutButton from "app/core/components/LogoutButton"
 
-const UserInfo = () => {
-  const currentUser = useCurrentUser()
+const UserButton = ({ onOpen }) => {
+  const [user, { isLoading }] = useQuery(getCurrentUser, null)
 
-  if (currentUser) {
+  if (user) {
     return (
-      <div>
-        User: <code>{currentUser.email}</code>
-      </div>
+      <Button onClick={onOpen}>
+        <Skeleton isLoaded={!isLoading}>
+          <code>{user.name}</code>
+        </Skeleton>
+      </Button>
     )
   } else {
     return null
@@ -17,13 +34,30 @@ const UserInfo = () => {
 }
 
 const Header = (props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <header>
-      <Suspense fallback="Loading profile...">
-        <UserInfo />
-      </Suspense>
-      <div>{props.title}</div>
-      <LogoutButton />
+      <Box p={4}>
+        <Flex justifyContent={"space-between"} alignItems={"center"}>
+          <Suspense fallback={<Skeleton />}>
+            <UserButton onOpen={onOpen} />
+            <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
+                <DrawerBody>
+                  <p>Some contents...</p>
+                  <p>Some contents...</p>
+                  <p>Some contents...</p>
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
+          </Suspense>
+          <Heading textAlign="center">{props.title}</Heading>
+          <LogoutButton />
+        </Flex>
+      </Box>
     </header>
   )
 }
