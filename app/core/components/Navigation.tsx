@@ -1,22 +1,20 @@
-import { Routes, Link } from "blitz"
+import { ReactNode } from "react"
+import { Link } from "blitz"
+import { Box, Flex } from "@chakra-ui/react"
+
+const routes = ["Home", "Users", "Projects", "Teams"]
 
 const Navigation = () => {
   return (
-    <nav>
-      Navigation
-      <ul>
-        <li>
-          <Link href={Routes.Home()}>
-            <a>Home</a>
+    <Box>
+      <Flex justifyContent="space-around">
+        {routes.map((route, index) => (
+          <Link key={index} href={`/${route.toLowerCase()}`}>
+            <a>{route}</a>
           </Link>
-        </li>
-        <li>
-          <Link href={Routes.Issues()}>
-            <a>Issues</a>
-          </Link>
-        </li>
-      </ul>
-    </nav>
+        ))}
+      </Flex>
+    </Box>
   )
 }
 
