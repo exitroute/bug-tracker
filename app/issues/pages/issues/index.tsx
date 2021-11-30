@@ -5,6 +5,7 @@
 
 import { Suspense } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
+import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
 import styles from "./Index.module.css"
 import Layout from "app/core/layouts/Layout"
 import getIssues from "app/issues/queries/getIssues"
@@ -12,15 +13,17 @@ import getIssues from "app/issues/queries/getIssues"
 const IssueList = () => {
   const [issues] = useQuery(getIssues, undefined)
   return (
-    <ul>
-      {issues.map((issue) => (
-        <Link key={issue.id} href={Routes.IssuePage({ issueId: issue.id })}>
-          <a>
-            <li>{issue.title}</li>
-          </a>
-        </Link>
-      ))}
-    </ul>
+    <Box>
+      <UnorderedList styleType="none">
+        {issues.map((issue) => (
+          <ListItem key={issue.id}>
+            <Link href={Routes.IssuePage({ issueId: issue.id })}>
+              <a>{issue.title}</a>
+            </Link>
+          </ListItem>
+        ))}
+      </UnorderedList>
+    </Box>
   )
 }
 
