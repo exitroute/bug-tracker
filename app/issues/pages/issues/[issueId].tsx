@@ -6,7 +6,6 @@ import {
   BoxProps,
   Flex,
   FlexProps,
-  VStack,
   Heading,
   Button,
   useColorModeValue,
