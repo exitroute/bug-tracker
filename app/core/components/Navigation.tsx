@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 import { Link } from "blitz"
 import { Box, Flex } from "@chakra-ui/react"
 
-const routes = ["Home", "Projects", "Users", "Teams"]
+const routes = ["Home", "Issues", "Projects", "Users", "Teams"]
 
 const Navigation = () => {
   return (
