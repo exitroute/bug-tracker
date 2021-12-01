@@ -86,6 +86,10 @@ model Issue {
   updatedAt   DateTime? @updatedAt
   updatedBy   User?     @relation(name: "updatedByUser", fields: [updatedById], references: [id])
   updatedById Int?
+
+  assignedToProject Project? @relation(name: "assignedToProject", fields: [projectId], references: [id])
+  projectId         Int?
+
 }
 
 model Project {
@@ -100,4 +104,6 @@ model Project {
   updatedAt   DateTime? @updatedAt
   updatedBy   User?     @relation(name: "p_updatedByUser", fields: [updatedById], references: [id])
   updatedById Int?
+
+  assignedIssues Issue[] @relation("assignedToProject")
 }
