@@ -10,17 +10,17 @@ export default async function getProject(id: number) {
           name: true,
         },
       },
-      // updatedBy: {
-      //   select: {
-      //     name: true,
-      //   },
-      // },
-      // assignedTo: {
-      //   select: {
-      //     id: true,
-      //     name: true,
-      //   },
-      // },
+      updatedBy: {
+        select: {
+          name: true,
+        },
+      },
+      assignedIssues: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
     },
   })
   if (!project) {
