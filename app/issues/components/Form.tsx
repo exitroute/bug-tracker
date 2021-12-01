@@ -5,7 +5,7 @@ export { FORM_ERROR } from "final-form"
 export const Form = ({ children, ...props }) => {
   return (
     <FinalForm
-      initialValues={props.initialValues.issue}
+      initialValues={props.initialValues}
       onSubmit={props.onSubmit}
       render={({ handleSubmit, form, submitting, pristine, submitError }) => (
         <form id="issue-form" onSubmit={handleSubmit}>

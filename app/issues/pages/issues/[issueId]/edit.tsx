@@ -15,8 +15,7 @@ export const EditIssueForm = () => {
   const issueId = useParam("issueId", "number")!
 
   const [issue] = useQuery(getIssue, issueId, { suspense: false, staleTime: Infinity })
-  const assignedTo = issue?.assignedTo
-  const initialValues = { issue, assignedTo }
+  const initialValues = { issue }
 
   const redirect = (updated) => router.push(Routes.IssuePage({ issueId: updated.id }))
   const [updateIssueMutation] = useMutation(updateIssue, { onSuccess: redirect })
@@ -40,7 +39,7 @@ export const EditIssueForm = () => {
           submitText="Update Issue"
           onSubmit={async (values) => {
             try {
-              const updated = await updateIssueMutation({
+              await updateIssueMutation({
                 id: issue?.id,
                 ...values,
               })

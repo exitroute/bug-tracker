@@ -3,23 +3,27 @@ import db from "db"
 
 export default async function updateIssue({ id, ...data }, ctx: Ctx) {
   ctx.session.$authorize()
-  const issue = await db.issue.update({
-    where: { id },
-    data: {
-      title: data.title,
-      description: data.description,
-      updatedBy: {
-        connect: {
-          id: ctx.session.userId,
+  try {
+    const { issue } = data
+    const updatedIssue = await db.issue.update({
+      where: { id },
+      data: {
+        title: issue.title,
+        description: issue.description,
+        updatedBy: {
+          connect: {
+            id: ctx.session.userId,
+          },
+        },
+        assignedTo: {
+          connect: {
+            id: Number(issue.assignedTo.id),
+          },
         },
       },
-      assignedTo: {
-        connect: {
-          id: Number(data.assignedTo.id),
-        },
-      },
-    },
-  })
-
-  return issue
+    })
+    return updatedIssue
+  } catch (error) {
+    console.error("UPDATE ISSUE ERROR", error)
+  }
 }

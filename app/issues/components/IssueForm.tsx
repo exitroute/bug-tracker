@@ -28,14 +28,18 @@ export const IssueForm = (props) => {
         <Stack spacing={4}>
           <Form {...props}>
             <Stack spacing={8}>
-              <InputControl name="title" placeholder="Add a descriptive title" label="Title" />
+              <InputControl
+                name="issue.title"
+                placeholder="Add a descriptive title"
+                label="Title"
+              />
               <TextareaControl
-                name="description"
+                name="issue.description"
                 placeholder="What did you expect to happen?"
                 label="Expected Behaviour"
               />
               <SelectControl
-                name="assignedTo.id"
+                name="issue.assignedTo.id"
                 label="Assigned to"
                 placeholder="Assign this issue!"
               >
