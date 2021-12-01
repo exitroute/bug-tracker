@@ -1,8 +1,7 @@
 import { Head, BlitzLayout } from "blitz"
-import { Grid, GridItem, Box } from "@chakra-ui/react"
+import { Flex, Box } from "@chakra-ui/react"
 import Navigation from "../components/Navigation"
 import Header from "../components/Header"
-import CreateNewIssueButton from "app/issues/components/CreateNewIssueButton"
 
 const Layout: BlitzLayout<{ title?: string }> = ({ title, children }) => {
   return (
@@ -11,12 +10,13 @@ const Layout: BlitzLayout<{ title?: string }> = ({ title, children }) => {
         <title>{title || "bug-tracker"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Grid templateRows="auto 1fr auto" h="100vh">
+      <Flex direction="column" justify="space-between" h="100vh">
         <Header title={title} />
-        <Box overflowY="scroll">{children}</Box>
-        <CreateNewIssueButton />
+        <Box h="100%" overflowY="scroll">
+          {children}
+        </Box>
         <Navigation />
-      </Grid>
+      </Flex>
     </>
   )
 }
