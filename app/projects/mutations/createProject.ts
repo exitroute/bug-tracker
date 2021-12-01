@@ -3,7 +3,7 @@ import db from "db"
 
 export default async function createProject(input: any, ctx: Ctx) {
   ctx.session.$authorize("ADMIN")
-  const newIssue = await db.project.create({
+  const newProject = await db.project.create({
     data: {
       title: input.project.title,
       description: input.project.description,
@@ -12,13 +12,13 @@ export default async function createProject(input: any, ctx: Ctx) {
           id: ctx.session.userId,
         },
       },
-      // assignedTo: {
-      //   connect: {
-      //     id: Number(input.project.assignedTo.id),
-      //   },
-      // },
+      assignedIssues: {
+        connect: {
+          id: Number(input.project.assignedTo.id),
+        },
+      },
     },
   })
 
-  return newIssue
+  return newProject
 }

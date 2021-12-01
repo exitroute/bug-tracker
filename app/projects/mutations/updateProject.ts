@@ -15,11 +15,11 @@ export default async function updateProject({ id, ...data }, ctx: Ctx) {
             id: ctx.session.userId,
           },
         },
-        //   assignedTo: {
-        //     connect: {
-        //       id: Number(project.assignedTo.id),
-        //     },
-        //   },
+        assignedIssues: {
+          connect: {
+            id: Number(project.assignedTo.id),
+          },
+        },
       },
     })
     return updatedProject
