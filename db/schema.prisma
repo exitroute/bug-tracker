@@ -28,6 +28,8 @@ model User {
   createdIssues  Issue[] @relation("createdByUser")
   assignedIssues Issue[] @relation("assignedTo")
   updatedIssues  Issue[] @relation("updatedByUser")
+
+  createdProjects Project[] @relation("p_createdByUser")
 }
 
 model Session {
@@ -83,4 +85,13 @@ model Issue {
   updatedAt   DateTime? @updatedAt
   updatedBy   User?     @relation(name: "updatedByUser", fields: [updatedById], references: [id])
   updatedById Int?
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  title       String
+  description String
+  createdBy   User     @relation(name: "p_createdByUser", fields: [createdById], references: [id])
+  createdById Int
 }
