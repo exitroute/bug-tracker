@@ -9,7 +9,7 @@ import React from "react"
 const CreateNewIssueButton = () => {
   return (
     <Link href={Routes.NewIssuePage()}>
-      <Button as="a" maxW="32" pos="fixed" right="5" top="75%" colorScheme="blue">
+      <Button as="a" size="sm" colorScheme="blue">
         Create Issue
       </Button>
     </Link>
