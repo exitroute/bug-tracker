@@ -1,20 +1,33 @@
-import { BlitzPage } from "next"
+import { Suspense } from "react"
+import { Link, BlitzPage, Routes, useQuery } from "blitz"
+import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
 
+import getProjects from "app/projects/queries/getProjects"
 import Layout from "app/core/layouts/Layout"
-import { Box } from "@chakra-ui/layout"
+
+const ProjectList = () => {
+  const [items] = useQuery(getProjects, undefined)
+  return (
+    <Box>
+      <UnorderedList styleType="none">
+        {items?.map((item) => (
+          <ListItem key={item.id}>
+            {/* <Link href={Routes.ProjectPage({ projectId: item.id })}> */}
+            <a>{item.title}</a>
+            {/* </Link> */}
+          </ListItem>
+        ))}
+      </UnorderedList>
+    </Box>
+  )
+}
 
 const Projects: BlitzPage = () => {
   return (
     <Box as="main" h="100%" pos="relative">
-      <div>
-        <ul>
-          <li>New projects!</li>
-          <li>New projects!</li>
-          <li>New projects!</li>
-          <li>New projects!</li>
-          <li>New projects!</li>
-        </ul>
-      </div>
+      <Suspense fallback="Loading projects...">
+        <ProjectList />
+      </Suspense>
     </Box>
   )
 }
