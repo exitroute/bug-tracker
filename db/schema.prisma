@@ -30,6 +30,7 @@ model User {
   updatedIssues  Issue[] @relation("updatedByUser")
 
   createdProjects Project[] @relation("p_createdByUser")
+  updatedProjects Project[] @relation("p_updatedByUser")
 }
 
 model Session {
@@ -92,6 +93,11 @@ model Project {
   createdAt   DateTime @default(now())
   title       String
   description String
-  createdBy   User     @relation(name: "p_createdByUser", fields: [createdById], references: [id])
+
+  createdBy   User @relation(name: "p_createdByUser", fields: [createdById], references: [id])
   createdById Int
+
+  updatedAt   DateTime? @updatedAt
+  updatedBy   User?     @relation(name: "p_updatedByUser", fields: [updatedById], references: [id])
+  updatedById Int?
 }
