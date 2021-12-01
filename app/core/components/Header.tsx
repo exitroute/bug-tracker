@@ -15,14 +15,15 @@ import {
 } from "@chakra-ui/react"
 
 import getCurrentUser from "app/users/queries/getCurrentUser"
-import LogoutButton from "app/core/components/LogoutButton"
+import LogoutButton from "./LogoutButton"
+import CreateNewIssueButton from "app/issues/components/CreateNewIssueButton"
 
 const UserButton = ({ onOpen }) => {
   const [user, { isLoading }] = useQuery(getCurrentUser, null)
 
   if (user) {
     return (
-      <Button onClick={onOpen}>
+      <Button size="sm" onClick={onOpen}>
         <Skeleton isLoaded={!isLoading}>
           <code>{user.name}</code>
         </Skeleton>
@@ -47,7 +48,7 @@ const Header = (props) => {
                 <DrawerCloseButton />
                 <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
                 <DrawerBody>
-                  <p>Some contents...</p>
+                  <LogoutButton />
                   <p>Some contents...</p>
                   <p>Some contents...</p>
                 </DrawerBody>
@@ -55,7 +56,7 @@ const Header = (props) => {
             </Drawer>
           </Suspense>
           <Heading textAlign="center">{props.title}</Heading>
-          <LogoutButton />
+          <CreateNewIssueButton />
         </Flex>
       </Box>
     </header>
