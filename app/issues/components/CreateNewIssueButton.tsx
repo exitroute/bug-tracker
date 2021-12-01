@@ -1,6 +1,6 @@
 import { Link, Routes } from "blitz"
+import { Button } from "@chakra-ui/react"
 import React from "react"
-import styles from "./CreateNewIssueButton.module.css"
 
 // takes user to the create new issue page
 
@@ -8,11 +8,11 @@ import styles from "./CreateNewIssueButton.module.css"
 
 const CreateNewIssueButton = () => {
   return (
-    <div className={styles.wrapper}>
-      <Link href={Routes.NewIssuePage()}>
-        <a className={styles.anchor}>Create Issue</a>
-      </Link>
-    </div>
+    <Link href={Routes.NewIssuePage()}>
+      <Button as="a" maxW="32" pos="fixed" right="5" top="75%" colorScheme="blue">
+        Create Issue
+      </Button>
+    </Link>
   )
 }
 
