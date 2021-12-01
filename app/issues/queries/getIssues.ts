@@ -1,6 +1,10 @@
 import db from "db"
 
 export default async function getIssues() {
-  const issues = await db.issue.findMany()
-  return issues
+  try {
+    const issues = await db.issue.findMany()
+    return issues
+  } catch (error) {
+    console.error("getIssues Error ", error)
+  }
 }
