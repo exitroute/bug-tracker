@@ -3,11 +3,10 @@ import db from "db"
 
 export default async function createIssue(input: any, ctx: Ctx) {
   ctx.session.$authorize()
-  console.log(input)
-  const issue = await db.issue.create({
+  const newIssue = await db.issue.create({
     data: {
-      title: input.title,
-      description: input.description,
+      title: input.issue.title,
+      description: input.issue.description,
       createdBy: {
         connect: {
           id: ctx.session.userId,
@@ -15,11 +14,11 @@ export default async function createIssue(input: any, ctx: Ctx) {
       },
       assignedTo: {
         connect: {
-          id: Number(input.assignedTo.id),
+          id: Number(input.issue.assignedTo.id),
         },
       },
     },
   })
 
-  return issue
+  return newIssue
 }
