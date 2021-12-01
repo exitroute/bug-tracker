@@ -1,21 +1,12 @@
 import { Suspense } from "react"
 import { useQuery } from "blitz"
-import { Field, useField } from "react-final-form"
 
-import {
-  Box,
-  Stack,
-  useColorModeValue,
-  Input,
-  Textarea,
-  Select,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-} from "@chakra-ui/react"
+import { InputControl, TextareaControl, SelectControl } from "app/core/components/FormComponents"
 
-import { Form } from "./Form"
-export { FORM_ERROR } from "./Form"
+import { Box, Stack, useColorModeValue } from "@chakra-ui/react"
+
+import { Form } from "../../core/components/AppForm"
+export { FORM_ERROR } from "../../core/components/AppForm"
 
 import getUsers from "app/users/queries/getUsers"
 
@@ -57,55 +48,55 @@ export const IssueForm = (props) => {
   )
 }
 
-const Control = ({ name, ...rest }) => {
-  const {
-    meta: { error, touched },
-  } = useField(name, { subscription: { touched: true, error: true } })
-  return <FormControl {...rest} isInvalid={error && touched} />
-}
+// const Control = ({ name, ...rest }) => {
+//   const {
+//     meta: { error, touched },
+//   } = useField(name, { subscription: { touched: true, error: true } })
+//   return <FormControl {...rest} isInvalid={error && touched} />
+// }
 
-const Error = ({ name }) => {
-  const {
-    meta: { error },
-  } = useField(name, { subscription: { error: true } })
-  return <FormErrorMessage>{error}</FormErrorMessage>
-}
+// const Error = ({ name }) => {
+//   const {
+//     meta: { error },
+//   } = useField(name, { subscription: { error: true } })
+//   return <FormErrorMessage>{error}</FormErrorMessage>
+// }
 
-const InputControl = ({ name, placeholder, label }) => {
-  const { input, meta } = useField(name)
-  return (
-    <Control name={name}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Input {...input} isInvalid={meta.error && meta.touched} placeholder={placeholder} />
-      <Error name={label} />
-    </Control>
-  )
-}
+// const InputControl = ({ name, placeholder, label }) => {
+//   const { input, meta } = useField(name)
+//   return (
+//     <Control name={name}>
+//       <FormLabel htmlFor={name}>{label}</FormLabel>
+//       <Input {...input} isInvalid={meta.error && meta.touched} placeholder={placeholder} />
+//       <Error name={label} />
+//     </Control>
+//   )
+// }
 
-const AdaptedTextarea = ({ input, meta, ...rest }) => (
-  <Textarea {...input} {...rest} isInvalid={meta.error && meta.touched} />
-)
+// const AdaptedTextarea = ({ input, meta, ...rest }) => (
+//   <Textarea {...input} {...rest} isInvalid={meta.error && meta.touched} />
+// )
 
-const TextareaControl = ({ name, placeholder, label }) => {
-  const { input, meta } = useField(name)
-  return (
-    <Control name={name}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
-      <Field name={name} component={AdaptedTextarea} placeholder={placeholder} />
-      <Error name={label} />
-    </Control>
-  )
-}
+// const TextareaControl = ({ name, placeholder, label }) => {
+//   const { input, meta } = useField(name)
+//   return (
+//     <Control name={name}>
+//       <FormLabel htmlFor={name}>{label}</FormLabel>
+//       <Field name={name} component={AdaptedTextarea} placeholder={placeholder} />
+//       <Error name={label} />
+//     </Control>
+//   )
+// }
 
-const SelectControl = ({ name, label, children, placeholder, ...props }) => {
-  const { input, meta } = useField(name)
-  return (
-    <Control name={name}>
-      <FormLabel htmlFor={name} />
-      <Select placeholder={placeholder} id={name} {...input} isInvalid={meta.error && meta.touched}>
-        {children}
-      </Select>
-      <FormErrorMessage>{name}</FormErrorMessage>
-    </Control>
-  )
-}
+// const SelectControl = ({ name, label, children, placeholder, ...props }) => {
+//   const { input, meta } = useField(name)
+//   return (
+//     <Control name={name}>
+//       <FormLabel htmlFor={name} />
+//       <Select placeholder={placeholder} id={name} {...input} isInvalid={meta.error && meta.touched}>
+//         {children}
+//       </Select>
+//       <FormErrorMessage>{name}</FormErrorMessage>
+//     </Control>
+//   )
+// }
