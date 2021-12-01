@@ -14,7 +14,7 @@ const IssueList = () => {
   return (
     <Box>
       <UnorderedList styleType="none">
-        {issues.map((issue) => (
+        {issues?.map((issue) => (
           <ListItem key={issue.id}>
             <Link href={Routes.IssuePage({ issueId: issue.id })}>
               <a>{issue.title}</a>
