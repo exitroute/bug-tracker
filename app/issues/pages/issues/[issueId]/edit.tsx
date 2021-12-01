@@ -4,7 +4,7 @@ import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "b
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
 import DetailsLayout from "app/core/layouts/DetailsLayout"
-import { FORM_ERROR } from "app/issues/components/Form"
+import { FORM_ERROR } from "app/core/components/AppForm"
 import { IssueForm } from "app/issues/components/IssueForm"
 
 import getIssue from "app/issues/queries/getIssue"
