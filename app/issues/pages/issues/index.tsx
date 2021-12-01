@@ -6,7 +6,6 @@
 import { Suspense } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
-import styles from "./Index.module.css"
 import Layout from "app/core/layouts/Layout"
 import getIssues from "app/issues/queries/getIssues"
 
@@ -29,7 +28,7 @@ const IssueList = () => {
 
 const Issues: BlitzPage = () => {
   return (
-    <main className={styles.main}>
+    <main>
       <Suspense fallback="Loading issues...">
         <IssueList />
       </Suspense>
