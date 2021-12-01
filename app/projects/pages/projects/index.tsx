@@ -6,15 +6,15 @@ import getProjects from "app/projects/queries/getProjects"
 import Layout from "app/core/layouts/Layout"
 
 const ProjectList = () => {
-  const [items] = useQuery(getProjects, undefined)
+  const [projects] = useQuery(getProjects, undefined)
   return (
     <Box>
       <UnorderedList styleType="none">
-        {items?.map((item) => (
-          <ListItem key={item.id}>
-            {/* <Link href={Routes.ProjectPage({ projectId: item.id })}> */}
-            <a>{item.title}</a>
-            {/* </Link> */}
+        {projects?.map((project) => (
+          <ListItem key={project.id}>
+            <Link href={`/projects/${project.id}`}>
+              <a>{project.title}</a>
+            </Link>
           </ListItem>
         ))}
       </UnorderedList>
