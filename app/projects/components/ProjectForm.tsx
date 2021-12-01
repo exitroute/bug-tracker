@@ -1,18 +1,18 @@
 import { Suspense } from "react"
-// import { useQuery } from "blitz"
+import { useQuery } from "blitz"
 
-import { InputControl, TextareaControl } from "app/core/components/FormComponents"
+import { InputControl, TextareaControl, SelectControl } from "app/core/components/FormComponents"
 
 import { Box, Stack, useColorModeValue } from "@chakra-ui/react"
 
 import { Form } from "../../core/components/AppForm"
 export { FORM_ERROR } from "../../core/components/AppForm"
 
-// import getIssues from "app/issues/queries/getIssues"
+import getIssuesWithNoProject from "app/issues/queries/getIssuesWithNoProject"
 // TODO filter without projects to make list smaller
 
 export const ProjectForm = (props) => {
-  // const [issues] = useQuery(getIssues, undefined, { suspense: false })
+  const [issues] = useQuery(getIssuesWithNoProject, undefined, { suspense: false })
 
   return (
     <Suspense fallback="Loading...">
@@ -31,17 +31,17 @@ export const ProjectForm = (props) => {
                 label="Project Description"
               />
               {/* TODO Make into assignIssue tool */}
-              {/* <SelectControl
-                name=".assignedTo.id"
+              <SelectControl
+                name="project.assignedTo.id"
                 label="Assigned to"
-                placeholder="Assign this issue!"
+                placeholder="Find issues for this project!"
               >
-                {users?.map((user) => (
-                  <option key={user.id} value={user.id}>
-                    {user.name}
+                {issues?.map((issue) => (
+                  <option key={issue.id} value={issue.id}>
+                    {issue.title}
                   </option>
                 ))}
-              </SelectControl> */}
+              </SelectControl>
             </Stack>
           </Form>
         </Stack>
