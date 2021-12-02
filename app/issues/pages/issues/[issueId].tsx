@@ -1,15 +1,15 @@
 import { Suspense } from "react"
 import { BlitzPage, useParam, useQuery, useMutation, Link, Router } from "blitz"
 
+import { Box, Flex, Button, useColorModeValue } from "@chakra-ui/react"
+
 import {
-  Box,
-  BoxProps,
-  Flex,
-  FlexProps,
-  Heading,
-  Button,
-  useColorModeValue,
-} from "@chakra-ui/react"
+  Card,
+  Property,
+  CardHeader,
+  CardFooter,
+  CardContent,
+} from "app/core/components/CardComponents"
 
 import DetailsLayout from "app/core/layouts/DetailsLayout"
 import getIssue from "app/issues/queries/getIssue"
@@ -71,71 +71,6 @@ const IssueDetails = () => {
     </Box>
   )
 }
-
-const Card = (props: BoxProps) => (
-  <Box
-    bg={useColorModeValue("white", "gray.700")}
-    rounded={{ md: "lg" }}
-    shadow="base"
-    overflow="hidden"
-    {...props}
-  />
-)
-
-interface Props extends FlexProps {
-  label: string
-  value: string
-}
-
-const Property = (props: Props) => {
-  const { label, value, ...flexProps } = props
-  return (
-    <Flex
-      as="dl"
-      direction={{ base: "column", sm: "row" }}
-      px="6"
-      py="4"
-      _even={{ bg: useColorModeValue("gray.50", "gray.600") }}
-      {...flexProps}
-    >
-      <Box as="dt" minWidth="180px">
-        {label}
-      </Box>
-      <Box as="dd" flex="1" fontWeight="semibold">
-        {value}
-      </Box>
-    </Flex>
-  )
-}
-interface HeaderProps {
-  title: string
-  action?: React.ReactNode
-}
-
-const CardHeader = (props: HeaderProps) => {
-  const { title, action } = props
-  return (
-    <Flex align="center" justify="space-between" px="6" py="4" borderBottomWidth="1px">
-      <Heading fontSize="lg">{title}</Heading>
-      {action}
-    </Flex>
-  )
-}
-
-interface FooterProps {
-  action?: React.ReactNode
-}
-
-const CardFooter = (props: FooterProps) => {
-  const { action } = props
-  return (
-    <Flex align="center" justify="center" px="6" py="4" borderTopWidth="1px">
-      {action}
-    </Flex>
-  )
-}
-
-const CardContent = (props: BoxProps) => <Box {...props} />
 
 const IssuePage: BlitzPage = () => {
   return (
