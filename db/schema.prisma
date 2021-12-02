@@ -31,6 +31,9 @@ model User {
 
   createdProjects Project[] @relation("p_createdByUser")
   updatedProjects Project[] @relation("p_updatedByUser")
+
+  createdTeams Team[] @relation("t_createdByUser")
+  inTeams      Team[]
 }
 
 model Session {
@@ -106,4 +109,21 @@ model Project {
   updatedById Int?
 
   assignedIssues Issue[] @relation("assignedToProject")
+
+  assignedTeam   Team? @relation(name: "assignedTeam", fields: [assignedTeamId], references: [id])
+  assignedTeamId Int?
+}
+
+model Team {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  title       String
+  description String
+
+  createdBy   User @relation(name: "t_createdByUser", fields: [createdById], references: [id])
+  createdById Int
+
+  members User[]
+
+  assignedProjects Project[] @relation("assignedTeam")
 }
