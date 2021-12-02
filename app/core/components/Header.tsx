@@ -16,7 +16,7 @@ import {
 
 import getCurrentUser from "app/users/queries/getCurrentUser"
 import LogoutButton from "./LogoutButton"
-import CreateNewIssueButton from "app/issues/components/CreateNewIssueButton"
+import CreateNewButton from "app/core/components/CreateNewButton"
 
 const UserButton = ({ onOpen }) => {
   const [user, { isLoading }] = useQuery(getCurrentUser, null)
@@ -56,7 +56,7 @@ const Header = (props) => {
             </Drawer>
           </Suspense>
           <Heading textAlign="center">{props.title}</Heading>
-          <CreateNewIssueButton />
+          <CreateNewButton title={props.title} />
         </Flex>
       </Box>
     </header>
