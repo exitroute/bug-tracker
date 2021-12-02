@@ -10,7 +10,7 @@ const Layout: BlitzLayout<{ title?: string }> = ({ title, children }) => {
         <title>{title || "bug-tracker"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex direction="column" justify="space-between" h="100vh">
+      <Flex direction="column" justify="space-between" h="100vh" mx="auto" maxW="80ch">
         <Header title={title} />
         <Box h="100%" overflowY="scroll">
           {children}
