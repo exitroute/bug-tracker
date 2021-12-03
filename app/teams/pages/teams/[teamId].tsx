@@ -50,15 +50,12 @@ const TeamDetails = () => {
                 label="Created by"
                 value={`${team?.createdBy.name} on ${team?.createdAt.toTimeString()}`}
               />
-              {team?.assignedTo && (
-                <Property label="Assigned to" value={`${team?.assignedTo.name}`} />
-              )}
-              {team?.updatedBy && (
-                <Property
-                  label="Updated by"
-                  value={`${team?.updatedBy.name} on ${team?.updatedAt?.toTimeString()}`}
-                />
-              )}
+              {team?.members.map((member, index) => (
+                <Property key={index} label="Member" value={`${member.name}`} />
+              ))}
+              {team?.assignedProjects.map((project, index) => (
+                <Property key={index} label="Project" value={`${project.title}`} />
+              ))}
             </CardContent>
             <CardFooter
               action={

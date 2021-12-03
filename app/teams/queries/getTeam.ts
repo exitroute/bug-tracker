@@ -10,17 +10,16 @@ export default async function getTeam(id: number) {
           name: true,
         },
       },
-      // updatedBy: {
-      //   select: {
-      //     name: true,
-      //   },
-      // },
-      // assignedTo: {
-      //   select: {
-      //     id: true,
-      //     name: true,
-      //   },
-      // },
+      members: {
+        select: {
+          name: true,
+        },
+      },
+      assignedProjects: {
+        select: {
+          title: true,
+        },
+      },
     },
   })
   if (!team) {
