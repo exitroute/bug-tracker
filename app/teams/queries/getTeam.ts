@@ -13,6 +13,7 @@ export default async function getTeam(id: number) {
       members: {
         select: {
           name: true,
+          id: true,
         },
       },
       assignedProjects: {
