@@ -1,7 +1,14 @@
 import { Suspense } from "react"
-import { Image, Link, BlitzPage, Routes, useQuery } from "blitz"
+import { Link, BlitzPage, Routes, useQuery } from "blitz"
+import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
+
 import Layout from "app/core/layouts/Layout"
 import getIssues from "app/issues/queries/getIssues"
+
+/**
+ *
+ * @returns list of users bugs, teams, projects, open unassigned bugs
+ */
 
 /**
  * this is where the user arrives after logging in
@@ -25,15 +32,17 @@ const HomeList = () => {
   const [issues] = useQuery(getIssues, undefined)
   // This list also returns projects and teams
   return (
-    <ul>
-      {issues.map((issue) => (
-        <Link key={issue.id} href={Routes.IssuePage({ issueId: issue.id })}>
-          <a>
-            <li>{issue.title}</li>
-          </a>
-        </Link>
-      ))}
-    </ul>
+    <Box>
+      <UnorderedList styleType="none">
+        {issues?.map((issue) => (
+          <ListItem key={issue.id}>
+            <Link href={Routes.IssuePage({ issueId: issue.id })}>
+              <a>{issue.title}</a>
+            </Link>
+          </ListItem>
+        ))}
+      </UnorderedList>
+    </Box>
   )
 }
 
