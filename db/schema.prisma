@@ -34,6 +34,7 @@ model User {
   assignedProjects Project[] @relation("p_assignedTo")
 
   createdTeams Team[] @relation("t_createdByUser")
+  updatedTeams Team[] @relation("t_updatedByUser")
   inTeams      Team[]
 }
 
@@ -126,6 +127,10 @@ model Team {
 
   createdBy   User @relation(name: "t_createdByUser", fields: [createdById], references: [id])
   createdById Int
+
+  updatedAt   DateTime? @updatedAt
+  updatedBy   User?     @relation(name: "t_updatedByUser", fields: [updatedById], references: [id])
+  updatedById Int?
 
   members User[]
 
