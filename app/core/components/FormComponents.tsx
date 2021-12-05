@@ -88,14 +88,9 @@ export const CheckboxArrayControl = ({ name, value, isMember, children }) => {
     type: "checkbox", // important for RFF to manage the checked prop
     value, // important for RFF to manage list of strings
   })
-  console.log("value", value)
-  console.log("name", name)
-  // console.log("isMember", isMember)
 
   let isChecked
   isMember === true ? (isChecked = true) : (isChecked = false)
-
-  // console.log("isChecked", isChecked)
 
   return (
     <Checkbox
@@ -103,7 +98,6 @@ export const CheckboxArrayControl = ({ name, value, isMember, children }) => {
       isChecked={checked}
       defaultChecked={isChecked}
       isInvalid={error && touched}
-      // onChange={(e) => console.log("###", e.target.checked)}
     >
       {children}
     </Checkbox>
