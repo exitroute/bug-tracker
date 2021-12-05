@@ -1,6 +1,14 @@
 import { Field, useField } from "react-final-form"
 
-import { Input, Textarea, Select, FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react"
+import {
+  Input,
+  Textarea,
+  Select,
+  FormControl,
+  FormLabel,
+  Checkbox,
+  FormErrorMessage,
+} from "@chakra-ui/react"
 
 export const Control = ({ name, ...rest }) => {
   const {
@@ -52,5 +60,52 @@ export const SelectControl = ({ name, label, children, placeholder, ...props }) 
       </Select>
       <FormErrorMessage>{name}</FormErrorMessage>
     </Control>
+  )
+}
+
+export const CheckboxControl = ({ name, value, children }) => {
+  const {
+    input: { checked, ...input },
+    meta: { error, touched, invalid },
+  } = useField(name, {
+    type: "checkbox", // important for RFF to manage the checked prop
+  })
+  return (
+    <FormControl isInvalid={touched && invalid} my={4}>
+      <Checkbox {...input} isInvalid={touched && invalid} my={4}>
+        {children}
+      </Checkbox>
+      <FormErrorMessage>{error}</FormErrorMessage>
+    </FormControl>
+  )
+}
+
+export const CheckboxArrayControl = ({ name, value, isMember, children }) => {
+  const {
+    input: { checked, ...input },
+    meta: { error, touched },
+  } = useField(name, {
+    type: "checkbox", // important for RFF to manage the checked prop
+    value, // important for RFF to manage list of strings
+  })
+  console.log("value", value)
+  console.log("name", name)
+  // console.log("isMember", isMember)
+
+  let isChecked
+  isMember === true ? (isChecked = true) : (isChecked = false)
+
+  // console.log("isChecked", isChecked)
+
+  return (
+    <Checkbox
+      {...input}
+      isChecked={checked}
+      defaultChecked={isChecked}
+      isInvalid={error && touched}
+      // onChange={(e) => console.log("###", e.target.checked)}
+    >
+      {children}
+    </Checkbox>
   )
 }
