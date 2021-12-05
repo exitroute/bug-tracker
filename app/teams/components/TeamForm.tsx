@@ -22,7 +22,10 @@ import getUsers from "app/users/queries/getUsers"
 export const TeamForm = (props) => {
   const team = props.initialValues.team
 
-  const [users] = useQuery(getUsers, undefined, { suspense: false, staleTime: Infinity })
+  const [users, { refetch }] = useQuery(getUsers, undefined, {
+    suspense: false,
+    staleTime: Infinity,
+  })
 
   const isMember = (arg) => {
     if (team) return arg.inTeams.find(({ id }) => id === team.id)
