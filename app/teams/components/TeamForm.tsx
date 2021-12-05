@@ -20,9 +20,13 @@ export { FORM_ERROR } from "../../core/components/AppForm"
 import getUsers from "app/users/queries/getUsers"
 
 export const TeamForm = (props) => {
-  const [users] = useQuery(getUsers, undefined, { suspense: false })
+  const team = props.initialValues.team
 
-  const isMember = (arg) => arg.inTeams.find(({ id }) => id === props.initialValues.team.id)
+  const [users] = useQuery(getUsers, undefined, { suspense: false, staleTime: Infinity })
+
+  const isMember = (arg) => {
+    if (team) return arg.inTeams.find(({ id }) => id === team.id)
+  }
 
   return (
     <Suspense fallback="Loading...">
@@ -51,7 +55,7 @@ export const TeamForm = (props) => {
                 <FormLabel htmlFor="team.members">Select your team</FormLabel>
                 <Stack pl={6} mt={1} spacing={1}>
                   {users?.map((user, index) => {
-                    let result = user.inTeams.find(({ id }) => id === props.initialValues.team.id)
+                    let result = isMember(user)
                     if (!result) {
                       return (
                         <CheckboxArrayControl
