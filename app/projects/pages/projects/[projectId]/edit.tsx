@@ -40,10 +40,8 @@ export const EditProjectForm = () => {
           submitText="Update Project"
           onSubmit={async (values) => {
             try {
-              await updateProjectMutation({
-                id: project?.id,
-                ...values,
-              })
+                const updated = await updateProjectMutation({
+                  ...values,
                 redirect(updated)
               } catch (error: any) {
   )
