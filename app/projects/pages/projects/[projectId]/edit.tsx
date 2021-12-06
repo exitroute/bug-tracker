@@ -16,6 +16,7 @@ export const EditProjectForm = () => {
 
   const [project] = useQuery(getProject, projectId, { suspense: false, staleTime: Infinity })
   const initialValues = { project }
+  const [updateProjectMutation] = useMutation(updateProject)
 
   const redirect = (updated) => router.push(Routes.ProjectPage({ projectId: updated.id }))
   const [updateProjectMutation] = useMutation(updateProject, { onSuccess: redirect })
@@ -43,13 +44,8 @@ export const EditProjectForm = () => {
                 id: project?.id,
                 ...values,
               })
-            } catch (error: any) {
-              return { [FORM_ERROR]: error.toString() }
-            }
-          }}
-        />
-      </Stack>
-    </Flex>
+                redirect(updated)
+              } catch (error: any) {
   )
 }
 
