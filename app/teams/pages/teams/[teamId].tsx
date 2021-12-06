@@ -50,6 +50,12 @@ const TeamDetails = () => {
                 label="Created by"
                 value={`${team?.createdBy.name} on ${team?.createdAt.toTimeString()}`}
               />
+              {team?.updatedBy && (
+                <Property
+                  label="Updated by"
+                  value={`${team?.updatedBy.name} on ${team?.updatedAt?.toTimeString()}`}
+                />
+              )}
               {team?.members.map((member, index) => (
                 <Property key={index} label="Member" value={`${member.name}`} />
               ))}
