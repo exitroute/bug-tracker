@@ -39,10 +39,7 @@ export const EditIssueForm = () => {
           submitText="Update Issue"
           onSubmit={async (values) => {
             try {
-              await updateIssueMutation({
-                id: issue?.id,
-                ...values,
-              })
+              await updateIssueMutation(values)
             } catch (error: any) {
               return { [FORM_ERROR]: error.toString() }
             }
