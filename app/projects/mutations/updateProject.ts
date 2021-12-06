@@ -17,7 +17,7 @@ export default async function updateProject({ ...data }, ctx: Ctx) {
         },
         assignedIssues: {
           connect: {
-            id: Number(project.assignedTo.id),
+            id: Number(project.assignedIssues),
           },
         },
       },
