@@ -4,5 +4,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "cSpell.words": ["chakra"]
+  "cSpell.words": ["chakra", "mutators"]
 }
