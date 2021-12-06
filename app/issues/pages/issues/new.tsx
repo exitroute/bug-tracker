@@ -1,4 +1,4 @@
-import { useRouter, BlitzPage, Routes, useMutation } from "blitz"
+import { BlitzPage, Router, useMutation } from "blitz"
 
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
@@ -7,11 +7,9 @@ import { IssueForm } from "app/issues/components/IssueForm"
 import createIssue from "app/issues/mutations/createIssue"
 
 const NewIssuePage: BlitzPage = () => {
-  const router = useRouter()
   const initialValues = { title: "", description: "" }
 
   const [createIssueMutation] = useMutation(createIssue)
-  const onSuccess = (issue) => router.push(Routes.IssuePage({ issueId: issue.id }))
 
   return (
     <Flex
@@ -31,9 +29,9 @@ const NewIssuePage: BlitzPage = () => {
           onSubmit={async (values) => {
             try {
               const issue = await createIssueMutation(values)
-              onSuccess(issue)
+              Router.push(`/issues/${issue?.id}`)
             } catch (error) {
-              console.log(error)
+              console.error("CREATE ISSUE MUTATION ERROR", error)
             }
           }}
           initialValues={initialValues}
