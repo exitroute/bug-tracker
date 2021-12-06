@@ -21,35 +21,38 @@ export const EditTeamForm = () => {
   const [updateTeamMutation] = useMutation(updateTeam, { onSuccess: redirect })
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading>Edit Team: {team?.title}</Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            What do you want to change?
-          </Text>
+    <>
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading>Edit Team: {team?.title}</Heading>
+            <Text fontSize={"lg"} color={"gray.600"}>
+              What do you want to change?
+            </Text>
+          </Stack>
+          <TeamForm
+            initialValues={initialValues}
+            submitText="Update Team"
+            onSubmit={async (values) => {
+              try {
+                await updateTeamMutation({
+                  id: team?.id,
+                  ...values,
+                })
+              } catch (error: any) {
+                return { [FORM_ERROR]: error.toString() }
+              }
+            }}
+          />
         </Stack>
-        <TeamForm
-          initialValues={initialValues}
-          submitText="Update Team"
-          onSubmit={async (values) => {
-            try {
-              await updateTeamMutation({
-                id: team?.id,
-                ...values,
-              })
-            } catch (error: any) {
-              return { [FORM_ERROR]: error.toString() }
-            }
-          }}
-        />
-      </Stack>
-    </Flex>
+      </Flex>
+      <pre>{JSON.stringify(team, null, 2)}</pre>
+    </>
   )
 }
 
