@@ -1,12 +1,12 @@
 import { Suspense } from "react"
 import { useQuery } from "blitz"
 
+import { FieldArray } from "react-final-form-arrays"
 import { InputControl, TextareaControl, SelectControl } from "app/core/components/FormComponents"
-
-import { Box, Stack, useColorModeValue } from "@chakra-ui/react"
-
 import { Form } from "../../core/components/AppForm"
 export { FORM_ERROR } from "../../core/components/AppForm"
+
+import { Box, Stack, Button, useColorModeValue } from "@chakra-ui/react"
 
 import getIssuesWithNoProject from "app/issues/queries/getIssuesWithNoProject"
 // TODO filter without projects to make list smaller
@@ -31,6 +31,16 @@ export const ProjectForm = (props) => {
                 label="Project Description"
               />
               {/* TODO Make into assignIssue tool */}
+              <FieldArray name="project.assignedIssues" initialValues>
+                {({ fields }) => {
+                  return fields.map((name, index) => (
+                    <div key={index}>
+                      {fields.value[index].title}
+                      <Button onClick={() => fields.remove(index)}>Remove</Button>
+                    </div>
+                  ))
+                }}
+              </FieldArray>
               <SelectControl
                 name="project.assignedTo.id"
                 label="Assigned to"
