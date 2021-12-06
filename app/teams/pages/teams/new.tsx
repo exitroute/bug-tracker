@@ -24,7 +24,7 @@ const NewTeamPage: BlitzPage = () => {
         <Stack align={"center"}>
           <Heading>Create Team</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
-            What do you want to report?
+            What&apos;s your team?
           </Text>
         </Stack>
         <TeamForm
