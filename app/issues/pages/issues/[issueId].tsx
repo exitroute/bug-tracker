@@ -24,7 +24,6 @@ const IssueDetails = () => {
     e.preventDefault()
     deleteIssueMutation({ id })
     confirm("Warning: You are about to delete this issue. \nAre you sure?")
-    console.log("issue " + id + " deleted")
     Router.push("/issues")
     refetch()
   }
