@@ -10,6 +10,11 @@ export default async function getTeam(id: number) {
           name: true,
         },
       },
+      updatedBy: {
+        select: {
+          name: true,
+        },
+      },
       members: {
         select: {
           name: true,
