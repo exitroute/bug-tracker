@@ -10,15 +10,13 @@ export default async function updateTeam({ id, ...data }, ctx: Ctx) {
       data: {
         title: team.title,
         description: team.description,
-        updatedBy: {
-          connect: {
-            id: ctx.session.userId,
-          },
-        },
-        // assignedTo: {
+        // updatedBy: {
         //   connect: {
-        //     id: Number(team.assignedTo.id),
+        //     id: ctx.session.userId,
         //   },
+        // },
+        // members: {
+        //   set: team.members,
         // },
       },
     })
