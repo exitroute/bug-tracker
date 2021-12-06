@@ -42,7 +42,7 @@ export const ProjectForm = (props) => {
                 }}
               </FieldArray>
               <SelectControl
-                name="project.assignedTo.id"
+                name="project.assignedIssues"
                 label="Assigned to"
                 placeholder="Find issues for this project!"
               >
