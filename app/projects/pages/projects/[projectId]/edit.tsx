@@ -19,31 +19,40 @@ export const EditProjectForm = () => {
   const [updateProjectMutation] = useMutation(updateProject)
 
   const redirect = (updated) => router.push(Routes.ProjectPage({ projectId: updated.id }))
-  const [updateProjectMutation] = useMutation(updateProject, { onSuccess: redirect })
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading>Edit Project: {project?.title}</Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            What do you want to change?
-          </Text>
-        </Stack>
-        <ProjectForm
-          initialValues={initialValues}
-          submitText="Update Project"
-          onSubmit={async (values) => {
-            try {
+    <>
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading>Edit Project: {project?.title}</Heading>
+            <Text fontSize={"lg"} color={"gray.600"}>
+              What do you want to change?
+            </Text>
+          </Stack>
+          <ProjectForm
+            initialValues={initialValues}
+            submitText="Update Project"
+            onSubmit={async (values) => {
+              try {
                 const updated = await updateProjectMutation({
                   ...values,
+                })
                 redirect(updated)
               } catch (error: any) {
+                return { [FORM_ERROR]: error.toString() }
+              }
+            }}
+          />
+        </Stack>
+      </Flex>
+      <pre>{JSON.stringify(project, null, 2)}</pre>
+    </>
   )
 }
 
