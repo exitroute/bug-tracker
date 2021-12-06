@@ -14,23 +14,27 @@ export default async function createIssue(input: any, ctx: Ctx) {
     assignedTo: any
   } = input.issue
 
-  const newIssue = await db.issue.create({
-    data: {
-      title: title,
-      description: description,
-      createdBy: {
-        connect: {
-          id: ctx.session.userId,
-        },
-      },
-      ...(assignedTo && {
-        assignedTo: {
+  try {
+    const newIssue = await db.issue.create({
+      data: {
+        title: title,
+        description: description,
+        createdBy: {
           connect: {
-            id: Number(assignedTo.id),
+            id: ctx.session.userId,
           },
         },
-      }),
-    },
-  })
-  return newIssue
+        ...(assignedTo && {
+          assignedTo: {
+            connect: {
+              id: Number(assignedTo.id),
+            },
+          },
+        }),
+      },
+    })
+    return newIssue
+  } catch (error) {
+    console.error("CREATE ISSUE ERROR", error)
+  }
 }
