@@ -3,25 +3,34 @@ import db from "db"
 
 export default async function createIssue(input: any, ctx: Ctx) {
   ctx.session.$authorize()
-  try {
-    const newIssue = await db.issue.create({
-      data: {
-        title: input.issue.title,
-        description: input.issue.description,
-        createdBy: {
-          connect: {
-            id: ctx.session.userId,
-          },
-        },
-        assignedTo: {
-          connect: {
-            id: Number(input.issue.assignedTo.id),
-          },
+
+  const {
+    title,
+    description,
+    assignedTo,
+  }: {
+    title: string
+    description: string
+    assignedTo: any
+  } = input.issue
+
+  const newIssue = await db.issue.create({
+    data: {
+      title: title,
+      description: description,
+      createdBy: {
+        connect: {
+          id: ctx.session.userId,
         },
       },
-    })
-    return newIssue
-  } catch (error) {
-    console.error("CREATE ISSUE ERROR", error)
-  }
+      ...(assignedTo && {
+        assignedTo: {
+          connect: {
+            id: Number(assignedTo.id),
+          },
+        },
+      }),
+    },
+  })
+  return newIssue
 }
