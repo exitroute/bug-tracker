@@ -8,7 +8,7 @@ import createTeam from "app/teams/mutations/createTeam"
 
 const NewTeamPage: BlitzPage = () => {
   const router = useRouter()
-  const initialValues = { title: "", description: "" }
+  const initialValues = { team: { title: "", description: "" } }
 
   const [createTeamMutation] = useMutation(createTeam)
   const onSuccess = (team) => router.push(Routes.TeamPage({ teamId: team.id }))
