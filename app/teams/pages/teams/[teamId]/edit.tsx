@@ -15,6 +15,7 @@ export const EditTeamForm = () => {
   const teamId = useParam("teamId", "number")!
 
   const [team] = useQuery(getTeam, teamId, { suspense: false, staleTime: Infinity })
+  // team?.members.map((member) => delete member.name)
   const initialValues = { team }
 
   const redirect = (updated) => router.push(Routes.TeamPage({ teamId: updated.id }))
@@ -40,10 +41,7 @@ export const EditTeamForm = () => {
             submitText="Update Team"
             onSubmit={async (values) => {
               try {
-                await updateTeamMutation({
-                  id: team?.id,
-                  ...values,
-                })
+                await updateTeamMutation(values)
               } catch (error: any) {
                 return { [FORM_ERROR]: error.toString() }
               }
