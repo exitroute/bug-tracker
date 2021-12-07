@@ -43,7 +43,6 @@ export const TeamForm = (props) => {
                 placeholder="What does this team work on?"
                 label="Team Description"
               />
-              {/* Add members */}
               <FieldArray name="team.members" initialValues>
                 {({ fields }) => {
                   return fields.map((name, index) => (
@@ -80,20 +79,31 @@ export const TeamForm = (props) => {
   )
 }
 
-// const CheckboxGroup = ({ fields, props }) => {
-//   console.log(props)
-//   const toggle = (event, user) => {
-//     if (event.target.checked) fields.push(user)
-//     else fields.remove(user)
+// {/* <FieldArray
+//   name="team.members"
+//   component={CheckboxGroup}
+//   members={users}
+//   isMember={isMember}
+// /> */}
+
+// const CheckboxGroup = ({ fields, members, isMember }) => {
+//   const toggle = (event, member) => {
+//     if (event.target.checked) fields.push(member)
+//     else fields.remove(member)
 //   }
 //   return (
 //     <div style={{ color: "blue" }}>
-//       {users.map((user) => (
-//         <div key={user.id}>
-//           <input type="checkbox" onClick={(event) => toggle(event, user)} />
-//           {user.name}
-//         </div>
-//       ))}
+//       {members.map((member) => {
+//         let result = isMember(member)
+//         let isChecked
+//         result ? (isChecked = true) : (isChecked = false)
+//         return (
+//           <div key={member.id}>
+//             <input type="checkbox" onClick={(event) => toggle(event, member)} />
+//             {member.name}
+//           </div>
+//         )
+//       })}
 //     </div>
 //   )
 // }
