@@ -30,7 +30,6 @@ export const Form = ({ children, ...props }) => {
               {submitError}
             </div>
           )}
-
           <Flex justifyContent={"space-evenly"} mt={8}>
             {props.submitText && (
               <Button type="submit" disabled={submitting || pristine}>
