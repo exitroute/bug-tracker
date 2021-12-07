@@ -92,15 +92,22 @@ export const CheckboxArrayControl = ({ name, value, isMember, children }) => {
   let defaultChecked
   isMember === true ? (defaultChecked = true) : (defaultChecked = false)
 
-  let isChecked
-  isMember === true ? (isChecked = true) : (isChecked = false)
+  // let isChecked
+  // const toggleChecked = (e) => {
+  //   if (e.target.checked) {
+  //     isChecked === true
+  //   } else {
+  //     isChecked === false
+  //   }
+  // }
 
   return (
     <Checkbox
       {...input}
-      isChecked={checked}
-      defaultChecked={isChecked}
+      // isChecked={isChecked}
+      defaultChecked={defaultChecked}
       isInvalid={error && touched}
+      // onChange={(e) => toggleChecked(e)}
     >
       {children}
     </Checkbox>
