@@ -15,7 +15,6 @@ export const EditTeamForm = () => {
   const teamId = useParam("teamId", "number")!
 
   const [team] = useQuery(getTeam, teamId, { suspense: false, staleTime: Infinity })
-  // team?.members.map((member) => delete member.name)
   const initialValues = { team }
 
   const redirect = (updated) => router.push(Routes.TeamPage({ teamId: updated.id }))
