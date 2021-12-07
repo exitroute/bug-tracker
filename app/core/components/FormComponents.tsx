@@ -89,6 +89,9 @@ export const CheckboxArrayControl = ({ name, value, isMember, children }) => {
     value, // important for RFF to manage list of strings
   })
 
+  let defaultChecked
+  isMember === true ? (defaultChecked = true) : (defaultChecked = false)
+
   let isChecked
   isMember === true ? (isChecked = true) : (isChecked = false)
 
