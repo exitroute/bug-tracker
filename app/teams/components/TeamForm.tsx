@@ -59,20 +59,16 @@ export const TeamForm = (props) => {
                 <Stack pl={6} mt={1} spacing={1}>
                   {users?.map((user, index) => {
                     let result = isMember(user)
-                    if (!result) {
-                      return (
-                        <CheckboxArrayControl
-                          key={index}
-                          name={`team.members`}
-                          value={{ name: user.name, id: user.id }}
-                          isMember={isMember(user) ? true : false}
-                        >
-                          {user.name}
-                        </CheckboxArrayControl>
-                      )
-                    } else {
-                      return null
-                    }
+                    return (
+                      <CheckboxArrayControl
+                        key={index}
+                        name={`team.members`}
+                        value={{ id: user.id }}
+                        isMember={result ? true : false}
+                      >
+                        {user.name}
+                      </CheckboxArrayControl>
+                    )
                   })}
                 </Stack>
               </Control>
