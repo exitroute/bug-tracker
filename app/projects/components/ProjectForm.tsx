@@ -31,7 +31,7 @@ export const ProjectForm = (props) => {
                 label="Project Description"
               />
               {/* TODO Make into assignIssue tool */}
-              <FieldArray name="project.assignedIssues" initialValues>
+              <FieldArray name="project.assignedIssue.id" initialValues>
                 {({ fields }) => {
                   return fields.map((name, index) => (
                     <div key={index}>
@@ -42,7 +42,7 @@ export const ProjectForm = (props) => {
                 }}
               </FieldArray>
               <SelectControl
-                name="project.assignedIssues"
+                name="project.assignedIssue.id"
                 label="Assigned to"
                 placeholder="Find issues for this project!"
               >
