@@ -1,24 +1,39 @@
 import { Ctx } from "blitz"
 import db from "db"
 
-export default async function updateTeam({ id, ...data }, ctx: Ctx) {
+export default async function updateTeam(input: any, ctx: Ctx) {
   ctx.session.$authorize()
+
+  const {
+    id,
+    title,
+    description,
+    members,
+  }: {
+    id: number
+    title: string
+    description: string
+    members: any
+  } = input.team
+
+  members.map((member) => delete member.name)
+
   try {
-    const { team } = data
     const updatedTeam = await db.team.update({
       where: { id },
       data: {
-        title: team.title,
-        description: team.description,
-        updatedBy: {
-          connect: {
-            id: ctx.session.userId,
+        title: title,
+        description: description,
+
+        ...(members && {
+          members: {
+            set: members,
           },
-        },
+        }),
       },
     })
     return updatedTeam
   } catch (error) {
-    console.error("UPDATE ISSUE ERROR", error)
+    console.error("UPDATE TEAM ERROR", error)
   }
 }
