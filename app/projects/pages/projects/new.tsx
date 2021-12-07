@@ -3,12 +3,13 @@ import { useRouter, BlitzPage, Routes, useMutation } from "blitz"
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
 import DetailsLayout from "app/core/layouts/DetailsLayout"
+import { FORM_ERROR } from "app/core/components/AppForm"
 import { ProjectForm } from "app/projects/components/ProjectForm"
 import createProject from "app/projects/mutations/createProject"
 
 const NewProjectPage: BlitzPage = () => {
   const router = useRouter()
-  const initialValues = { title: "", description: "" }
+  const initialValues = { project: { title: "", description: "" } }
 
   const [createProjectMutation] = useMutation(createProject)
   const onSuccess = (project) => router.push(Routes.ProjectPage({ projectId: project.id }))
@@ -32,8 +33,8 @@ const NewProjectPage: BlitzPage = () => {
             try {
               const issue = await createProjectMutation(values)
               onSuccess(issue)
-            } catch (error) {
-              console.log(error)
+            } catch (error: any) {
+              return { [FORM_ERROR]: error.toString() }
             }
           }}
           initialValues={initialValues}
