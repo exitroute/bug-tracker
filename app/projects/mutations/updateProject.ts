@@ -1,25 +1,39 @@
 import { Ctx } from "blitz"
 import db from "db"
 
-export default async function updateProject({ ...data }, ctx: Ctx) {
+export default async function updateProject(input: any, ctx: Ctx) {
   ctx.session.$authorize("ADMIN")
+
+  const {
+    id,
+    title,
+    description,
+    assignedIssue,
+  }: {
+    id: number
+    title: string
+    description: string
+    assignedIssue: any
+  } = input.project
+
   try {
-    const { project } = data
     const updatedProject = await db.project.update({
-      where: { id: project.id },
+      where: { id },
       data: {
-        title: project.title,
-        description: project.description,
+        title: title,
+        description: description,
         updatedBy: {
           connect: {
             id: ctx.session.userId,
           },
         },
-        assignedIssues: {
-          connect: {
-            id: Number(project.assignedIssues),
+        ...(assignedIssue && {
+          assignedIssues: {
+            connect: {
+              id: Number(assignedIssue.id),
+            },
           },
-        },
+        }),
       },
     })
     return updatedProject
