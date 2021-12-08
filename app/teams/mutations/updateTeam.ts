@@ -16,8 +16,6 @@ export default async function updateTeam(input: any, ctx: Ctx) {
     members: any
   } = input.team
 
-  members.map((member) => delete member.name)
-
   try {
     const updatedTeam = await db.team.update({
       where: { id },

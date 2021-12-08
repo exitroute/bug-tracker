@@ -7,7 +7,7 @@ import DetailsLayout from "app/core/layouts/DetailsLayout"
 import { FORM_ERROR } from "app/core/components/AppForm"
 import { TeamForm } from "app/teams/components/TeamForm"
 
-import getTeam from "app/teams/queries/getTeam"
+import getInitialTeamData from "app/teams/queries/getIntialTeamData"
 import updateTeam from "app/teams/mutations/updateTeam"
 
 export const EditTeamForm = () => {
