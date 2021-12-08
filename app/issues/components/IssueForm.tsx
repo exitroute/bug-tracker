@@ -8,7 +8,7 @@ import { Box, Stack, useColorModeValue } from "@chakra-ui/react"
 import { Form } from "../../core/components/AppForm"
 export { FORM_ERROR } from "../../core/components/AppForm"
 
-import getUsers from "app/users/queries/getUsers"
+import getUsers from "app/users/queries/getUserProfiles"
 
 export const IssueForm = (props) => {
   const [users] = useQuery(getUsers, undefined, { suspense: false })

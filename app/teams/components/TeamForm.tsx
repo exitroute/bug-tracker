@@ -17,7 +17,7 @@ import { Button, Box, Stack, useColorModeValue, FormLabel } from "@chakra-ui/rea
 import { Form } from "../../core/components/AppForm"
 export { FORM_ERROR } from "../../core/components/AppForm"
 
-import getUsers from "app/users/queries/getUsers"
+import getUsers from "app/users/queries/getUserProfiles"
 
 export const TeamForm = (props) => {
   const team = props.initialValues.team
