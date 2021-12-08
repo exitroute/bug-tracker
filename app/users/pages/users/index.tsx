@@ -1,17 +1,38 @@
-/**
- * This is where a user sees all the user profiles
- */
-
+import { Suspense } from "react"
+import { Link, BlitzPage, Routes, useQuery } from "blitz"
+import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
+import getUserProfiles from "app/users/queries/getUserProfiles"
 
-import { BlitzPage } from "blitz"
-
-const Users: BlitzPage = () => {
-  return <h1>User List!!!!!</h1>
+const UserProfileList = () => {
+  const [users] = useQuery(getUserProfiles, undefined)
+  return (
+    <Box>
+      <UnorderedList styleType="none">
+        {users?.map((user) => (
+          <ListItem key={user.id}>
+            <Link href={Routes.UserProfilePage({ userId: user.id })}>
+              <a>{user.name}</a>
+            </Link>
+          </ListItem>
+        ))}
+      </UnorderedList>
+    </Box>
+  )
 }
 
-Users.authenticate = true
-Users.suppressFirstRenderFlicker = true
-Users.getLayout = (page) => <Layout title="Users">{page}</Layout>
+const UserProfiles: BlitzPage = () => {
+  return (
+    <main>
+      <Suspense fallback="Loading issues...">
+        <UserProfileList />
+      </Suspense>
+    </main>
+  )
+}
 
-export default Users
+UserProfiles.authenticate = true
+UserProfiles.suppressFirstRenderFlicker = true
+UserProfiles.getLayout = (page) => <Layout title="Profiles">{page}</Layout>
+
+export default UserProfiles
