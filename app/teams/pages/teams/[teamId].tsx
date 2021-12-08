@@ -38,7 +38,7 @@ const TeamDetails = () => {
               title={`${team?.title} #${team?.id}`}
               action={
                 <Link href={`/teams/${teamId}/edit`}>
-                  <Button as="a" variant="outline" minW="20">
+                  <Button as="a" variant="outline" minW="20" onClick={() => refetch()}>
                     Edit
                   </Button>
                 </Link>
