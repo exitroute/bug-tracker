@@ -10,7 +10,12 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <DocumentHead />
+        <DocumentHead>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"
+            rel="stylesheet"
+          />
+        </DocumentHead>
         <body>
           <Main />
           <BlitzScript />
