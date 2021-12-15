@@ -50,7 +50,7 @@ const CallToActionWithAnnotation = () => {
             </Text>
           </Heading>
 
-          <Text color={"gray.500"}>An Exit Route project by Ryan O'Shea</Text>
+          <Text color={"gray.500"}>An Exit Route project by Ryan O&apos;Shea</Text>
           <Stack
             direction={"row"}
             spacing={3}
