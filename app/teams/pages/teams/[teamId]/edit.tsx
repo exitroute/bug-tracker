@@ -67,7 +67,7 @@ const EditTeamPage: BlitzPage = () => {
   )
 }
 
-EditTeamPage.authenticate = true
+EditTeamPage.authenticate = { redirectTo: "/" }
 EditTeamPage.suppressFirstRenderFlicker = true
 EditTeamPage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
 export default EditTeamPage

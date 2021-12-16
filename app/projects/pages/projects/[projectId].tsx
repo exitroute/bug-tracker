@@ -83,7 +83,7 @@ const ProjectPage: BlitzPage = () => {
   )
 }
 
-ProjectPage.authenticate = true
+ProjectPage.authenticate = { redirectTo: "/" }
 ProjectPage.suppressFirstRenderFlicker = true
 ProjectPage.getLayout = (page) => <DetailsLayout title="Project">{page}</DetailsLayout>
 

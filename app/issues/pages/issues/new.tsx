@@ -42,7 +42,7 @@ const NewIssuePage: BlitzPage = () => {
   )
 }
 
-NewIssuePage.authenticate = true
+NewIssuePage.authenticate = { redirectTo: "/" }
 NewIssuePage.suppressFirstRenderFlicker = true
 NewIssuePage.getLayout = (page) => <DetailsLayout title="New">{page}</DetailsLayout>
 export default NewIssuePage

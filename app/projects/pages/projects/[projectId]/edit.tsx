@@ -66,7 +66,7 @@ const EditProjectPage: BlitzPage = () => {
   )
 }
 
-EditProjectPage.authenticate = true
+EditProjectPage.authenticate = { redirectTo: "/" }
 EditProjectPage.suppressFirstRenderFlicker = true
 EditProjectPage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
 export default EditProjectPage

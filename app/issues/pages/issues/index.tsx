@@ -36,7 +36,7 @@ const Issues: BlitzPage = () => {
   )
 }
 
-Issues.authenticate = true
+Issues.authenticate = { redirectTo: "/" }
 Issues.suppressFirstRenderFlicker = true
 Issues.getLayout = (page) => <Layout title="Issues">{page}</Layout>
 

@@ -36,7 +36,7 @@ const Teams: BlitzPage = () => {
   )
 }
 
-Teams.authenticate = true
+Teams.authenticate = { redirectTo: "/" }
 Teams.suppressFirstRenderFlicker = true
 Teams.getLayout = (page) => <Layout title="Teams">{page}</Layout>
 

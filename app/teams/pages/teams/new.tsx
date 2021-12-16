@@ -44,7 +44,7 @@ const NewTeamPage: BlitzPage = () => {
   )
 }
 
-NewTeamPage.authenticate = true
+NewTeamPage.authenticate = { redirectTo: "/" }
 NewTeamPage.suppressFirstRenderFlicker = true
 NewTeamPage.getLayout = (page) => <DetailsLayout title="New">{page}</DetailsLayout>
 export default NewTeamPage
