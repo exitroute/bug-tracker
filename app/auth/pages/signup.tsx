@@ -1,7 +1,6 @@
 import { useRouter, BlitzPage, Routes } from "blitz"
 import * as React from "react"
 
-import { SignUpLayout } from "app/core/components/AuthFormComponents"
 import AuthLayout from "app/core/layouts/AuthLayout"
 import { SignupForm } from "app/auth/components/SignupForm"
 
@@ -10,9 +9,7 @@ const SignupPage: BlitzPage = () => {
 
   return (
     <div>
-      <SignUpLayout>
-        <SignupForm onSuccess={() => router.push(Routes.LandingPage())} />
-      </SignUpLayout>
+      <SignupForm onSuccess={() => router.push(Routes.Home())} />
     </div>
   )
 }
