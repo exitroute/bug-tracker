@@ -1,5 +1,6 @@
 import { useRouter, BlitzPage } from "blitz"
 import Layout from "app/core/layouts/AuthLayout"
+import { LoginLayout } from "app/core/components/AuthFormComponents"
 import { LoginForm } from "app/auth/components/LoginForm"
 
 const LoginPage: BlitzPage = () => {
@@ -7,12 +8,14 @@ const LoginPage: BlitzPage = () => {
 
   return (
     <div>
-      <LoginForm
-        onSuccess={(_user) => {
-          const next = router.query.next ? decodeURIComponent(router.query.next as string) : "/"
-          router.push(next)
-        }}
-      />
+      <LoginLayout>
+        <LoginForm
+          onSuccess={(_user) => {
+            const next = router.query.next ? decodeURIComponent(router.query.next as string) : "/"
+            router.push(next)
+          }}
+        />
+      </LoginLayout>
     </div>
   )
 }
