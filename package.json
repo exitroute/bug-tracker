@@ -28,6 +28,7 @@
     "@emotion/react": "11.7.0",
     "@emotion/styled": "11.6.0",
     "@prisma/client": "3.x",
+    "@sendgrid/mail": "7.6.0",
     "blitz": "0.42.4",
     "final-form": "4.20.4",
     "final-form-arrays": "3.0.2",
