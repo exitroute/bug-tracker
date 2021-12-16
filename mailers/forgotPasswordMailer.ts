@@ -5,6 +5,7 @@
  * and use it straight away.
  */
 import previewEmail from "preview-email"
+import sendgridDriver from "integrations/sengrid"
 
 type ResetPasswordMailer = {
   to: string
@@ -17,7 +18,7 @@ export function forgotPasswordMailer({ to, token }: ResetPasswordMailer) {
   const resetUrl = `${origin}/reset-password?token=${token}`
 
   const msg = {
-    from: "TODO@example.com",
+    from: "ryan@ryanoshea.dev",
     to,
     subject: "Your Password Reset Instructions",
     html: `
@@ -32,10 +33,12 @@ export function forgotPasswordMailer({ to, token }: ResetPasswordMailer) {
 
   return {
     async send() {
-      if (process.env.NODE_ENV === "production") {
+      if (process.env.NODE_ENV === "development") {
         // TODO - send the production email, like this:
         // await postmark.sendEmail(msg)
-        throw new Error("No production email implementation in mailers/forgotPasswordMailer")
+        await sendgridDriver().send(msg)
+
+        // throw new Error("No production email implementation in mailers/forgotPasswordMailer")
       } else {
         // Preview email in the browser
         await previewEmail(msg)
