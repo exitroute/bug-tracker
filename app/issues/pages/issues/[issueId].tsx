@@ -17,7 +17,7 @@ import deleteIssue from "app/issues/mutations/deleteIssue"
 
 const IssueDetails = () => {
   const issueId = useParam("issueId", "number")!
-  const [issue, { refetch }] = useQuery(getIssue, issueId)
+  const [issue, { refetch }]: any = useQuery(getIssue, issueId)
   const [deleteIssueMutation] = useMutation(deleteIssue)
 
   const deleteIssueHandler = (e, id) => {
