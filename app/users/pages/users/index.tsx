@@ -31,7 +31,7 @@ const UserProfiles: BlitzPage = () => {
   )
 }
 
-UserProfiles.authenticate = true
+UserProfiles.authenticate = { redirectTo: "/" }
 UserProfiles.suppressFirstRenderFlicker = true
 UserProfiles.getLayout = (page) => <Layout title="Profiles">{page}</Layout>
 

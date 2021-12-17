@@ -42,7 +42,7 @@ const NewUserPage: BlitzPage = () => {
   )
 }
 
-NewUserPage.authenticate = true
+NewUserPage.authenticate = { redirectTo: "/" }
 NewUserPage.suppressFirstRenderFlicker = true
 NewUserPage.getLayout = (page) => <DetailsLayout title="New">{page}</DetailsLayout>
 export default NewUserPage

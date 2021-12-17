@@ -6,7 +6,7 @@ const Settings: BlitzPage = () => {
   return <h1>Your Settings</h1>
 }
 
-Settings.authenticate = true
+Settings.authenticate = { redirectTo: "/" }
 Settings.suppressFirstRenderFlicker = true
 Settings.getLayout = (page) => <Layout title="Settings">{page}</Layout>
 

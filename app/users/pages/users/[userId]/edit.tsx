@@ -63,7 +63,7 @@ const EditUserProfilePage: BlitzPage = () => {
   )
 }
 
-EditUserProfilePage.authenticate = true
+EditUserProfilePage.authenticate = { redirectTo: "/" }
 EditUserProfilePage.suppressFirstRenderFlicker = true
 EditUserProfilePage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
 

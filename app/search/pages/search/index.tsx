@@ -6,7 +6,7 @@ const Search: BlitzPage = () => {
   return <h1>Search</h1>
 }
 
-Search.authenticate = true
+Search.authenticate = { redirectTo: "/" }
 Search.suppressFirstRenderFlicker = true
 Search.getLayout = (page) => <Layout title="Search">{page}</Layout>
 

@@ -79,7 +79,7 @@ const IssuePage: BlitzPage = () => {
   )
 }
 
-IssuePage.authenticate = true
+IssuePage.authenticate = { redirectTo: "/" }
 IssuePage.suppressFirstRenderFlicker = true
 IssuePage.getLayout = (page) => <DetailsLayout title="Issue">{page}</DetailsLayout>
 

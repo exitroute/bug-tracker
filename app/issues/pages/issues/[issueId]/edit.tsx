@@ -60,7 +60,7 @@ const EditIssuePage: BlitzPage = () => {
   )
 }
 
-EditIssuePage.authenticate = true
+EditIssuePage.authenticate = { redirectTo: "/" }
 EditIssuePage.suppressFirstRenderFlicker = true
 EditIssuePage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
 export default EditIssuePage
