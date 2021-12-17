@@ -8,6 +8,25 @@ import {
   HTMLChakraProps,
 } from "@chakra-ui/react"
 
+export const ForgotPasswordLayout = ({ children }) => (
+  <Box
+    bg={useColorModeValue("gray.50", "inherit")}
+    minH="100vh"
+    py="12"
+    px={{ base: "4", lg: "8" }}
+  >
+    <Box maxW="md" mx="auto">
+      <Heading textAlign="center" size="xl" fontWeight="extrabold">
+        Password Reset
+      </Heading>
+      <Text mt="4" mb="8" align="center" maxW="md" fontWeight="medium">
+        <Text as="span">Please enter your email.</Text>
+      </Text>
+      <Card>{children}</Card>
+    </Box>
+  </Box>
+)
+
 export const SignUpLayout = ({ children }) => (
   <Box
     bg={useColorModeValue("gray.50", "inherit")}
