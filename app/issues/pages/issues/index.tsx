@@ -7,6 +7,7 @@ import { Suspense } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
+import { ItemCard } from "app/core/components/ItemCard"
 import getIssues from "app/issues/queries/getIssues"
 
 const IssueList = () => {
@@ -17,7 +18,9 @@ const IssueList = () => {
         {issues?.map((issue) => (
           <ListItem key={issue.id}>
             <Link href={Routes.IssuePage({ issueId: issue.id })}>
-              <a>{issue.title}</a>
+              <a>
+                <ItemCard id={issue.id} title={issue.title} description={issue.description} />
+              </a>
             </Link>
           </ListItem>
         ))}
