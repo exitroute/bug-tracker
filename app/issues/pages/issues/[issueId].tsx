@@ -50,7 +50,7 @@ const IssueDetails = () => {
             {issue?.assignedToProject && (
               <Property label="Project" value={`${issue?.assignedToProject.title}`} />
             )}
-            {issue?.assignedToProject && (
+            {issue?.assignedToProject.assignedTeam && (
               <Property
                 label="Project Team"
                 value={`${issue?.assignedToProject.assignedTeam.title}`}
