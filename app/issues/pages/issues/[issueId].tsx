@@ -18,6 +18,20 @@ import deleteIssue from "app/issues/mutations/deleteIssue"
 const IssueDetails = () => {
   const issueId = useParam("issueId", "number")!
   const [issue, { refetch }]: any = useQuery(getIssue, issueId)
+
+  const {
+    id,
+    title,
+    description,
+    priority,
+    assignedTo,
+    assignedToProject,
+    createdBy,
+    createdAt,
+    updatedBy,
+    updatedAt,
+  } = issue
+
   const [deleteIssueMutation] = useMutation(deleteIssue)
 
   const deleteIssueHandler = (e, id) => {
@@ -33,7 +47,7 @@ const IssueDetails = () => {
       <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
         <Card maxW="3xl" mx="auto">
           <CardHeader
-            title={`${issue?.title} #${issue?.id}`}
+            title={`${title} #${id}`}
             action={
               <Link href={`/issues/${issueId}/edit`}>
                 <Button as="a" variant="outline" minW="20">
@@ -43,27 +57,21 @@ const IssueDetails = () => {
             }
           />
           <CardContent>
-            <Property label="Description" value={`${issue?.description}`} />
-            {issue?.assignedTo && (
-              <Property label="Assigned to" value={`${issue?.assignedTo.name}`} />
-            )}
-            {issue?.assignedToProject && (
-              <Property label="Project" value={`${issue?.assignedToProject.title}`} />
-            )}
-            {issue?.assignedToProject.assignedTeam && (
-              <Property
-                label="Project Team"
-                value={`${issue?.assignedToProject.assignedTeam.title}`}
-              />
+            <Property label="Description" value={`${description}`} />
+            <Property label="Priority" value={`${priority}`} />
+            {assignedTo && <Property label="Assigned to" value={`${assignedTo.name}`} />}
+            {assignedToProject && <Property label="Project" value={`${assignedToProject.title}`} />}
+            {assignedToProject && assignedToProject.assignedTeam && (
+              <Property label="Project Team" value={`${assignedToProject.assignedTeam.title}`} />
             )}
             <Property
               label="Created by"
-              value={`${issue?.createdBy.name} on ${issue?.createdAt.toTimeString()}`}
+              value={`${createdBy.name} on ${createdAt.toTimeString()}`}
             />
-            {issue?.updatedBy && (
+            {updatedBy && (
               <Property
                 label="Updated by"
-                value={`${issue?.updatedBy.name} on ${issue?.updatedAt?.toTimeString()}`}
+                value={`${updatedBy.name} on ${updatedAt.toTimeString()}`}
               />
             )}
           </CardContent>

@@ -85,6 +85,8 @@ model Issue {
   createdBy   User     @relation(name: "createdByUser", fields: [createdById], references: [id])
   createdById Int
 
+  priority String?
+
   assignedTo   User? @relation(name: "assignedTo", fields: [assignedToId], references: [id])
   assignedToId Int?
 

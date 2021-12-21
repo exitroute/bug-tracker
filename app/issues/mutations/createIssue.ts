@@ -7,10 +7,12 @@ export default async function createIssue(input: any, ctx: Ctx) {
   const {
     title,
     description,
+    priority,
     assignedTo,
   }: {
     title: string
     description: string
+    priority: string
     assignedTo: any
   } = input.issue
 
@@ -19,6 +21,7 @@ export default async function createIssue(input: any, ctx: Ctx) {
       data: {
         title: title,
         description: description,
+        priority: priority,
         createdBy: {
           connect: {
             id: ctx.session.userId,
