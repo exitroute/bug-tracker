@@ -21,6 +21,13 @@ export default async function getIssue(id: number) {
           name: true,
         },
       },
+      assignedToProject: {
+        select: {
+          id: true,
+          title: true,
+          assignedTeam: true,
+        },
+      },
     },
   })
   if (!issue) {

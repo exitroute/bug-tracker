@@ -44,13 +44,22 @@ const IssueDetails = () => {
           />
           <CardContent>
             <Property label="Description" value={`${issue?.description}`} />
+            {issue?.assignedTo && (
+              <Property label="Assigned to" value={`${issue?.assignedTo.name}`} />
+            )}
+            {issue?.assignedToProject && (
+              <Property label="Project" value={`${issue?.assignedToProject.title}`} />
+            )}
+            {issue?.assignedToProject && (
+              <Property
+                label="Project Team"
+                value={`${issue?.assignedToProject.assignedTeam.title}`}
+              />
+            )}
             <Property
               label="Created by"
               value={`${issue?.createdBy.name} on ${issue?.createdAt.toTimeString()}`}
             />
-            {issue?.assignedTo && (
-              <Property label="Assigned to" value={`${issue?.assignedTo.name}`} />
-            )}
             {issue?.updatedBy && (
               <Property
                 label="Updated by"
