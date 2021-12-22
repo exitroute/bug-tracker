@@ -4,10 +4,30 @@ import arrayMutators from "final-form-arrays"
 import { Flex, Button } from "@chakra-ui/react"
 export { FORM_ERROR } from "final-form"
 
+const validate = (values: any) => {
+  interface Errors {
+    issue: {
+      title?: string
+      description?: string
+      priority?: string
+    }
+  }
+  const errors: Errors = { issue: {} }
+
+  if (!values.issue.title) {
+    errors.issue.title = "Required"
+  }
+  if (!values.issue.description) {
+    errors.issue.description = "Required"
+  }
+  return errors
+}
+
 export const Form = ({ children, ...props }) => {
   return (
     <FinalForm
       initialValues={props.initialValues}
+      validate={validate}
       mutators={{
         ...arrayMutators,
       }}
@@ -18,6 +38,7 @@ export const Form = ({ children, ...props }) => {
           mutators: { push, pop },
         },
         form,
+        errors,
         submitting,
         pristine,
         submitError,

@@ -30,7 +30,7 @@ export const InputControl = ({ name, placeholder, label }) => {
     <Control name={name}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Input {...input} isInvalid={meta.error && meta.touched} placeholder={placeholder} />
-      <Error name={label} />
+      <Error name={name} />
     </Control>
   )
 }
@@ -45,7 +45,7 @@ export const TextareaControl = ({ name, placeholder, label }) => {
     <Control name={name}>
       <FormLabel htmlFor={name}>{label}</FormLabel>
       <Field name={name} component={AdaptedTextarea} placeholder={placeholder} />
-      <Error name={label} />
+      <Error name={name} />
     </Control>
   )
 }
