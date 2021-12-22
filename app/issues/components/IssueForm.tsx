@@ -41,28 +41,29 @@ export const IssueForm = (props) => {
                   </option>
                 ))}
               </SelectControl>
-              <div>
-                <Field name="issue.priority" type="radio" value="URGENT" component={Radio}>
-                  Urgent
-                </Field>
-              </div>
-              <div>
-                <label>
-                  <Field name="issue.priority" type="radio" value="HIGH" component={Radio} />
-                  High
-                </label>
-              </div>
-              <div>
-                <Field name="issue.priority" type="radio" value="NORMAL" component={Radio}>
-                  Normal
-                </Field>
-              </div>
-              <div>
-                <label>
-                  <Field name="issue.priority" type="radio" value="LOW" component={Radio} />
-                  Low
-                </label>
-              </div>
+              <Stack>
+                Priority
+                <div>
+                  <Field name="issue.priority" type="radio" value="URGENT" component={Radio}>
+                    Urgent
+                  </Field>
+                </div>
+                <div>
+                  <Field name="issue.priority" type="radio" value="HIGH" component={Radio}>
+                    High
+                  </Field>
+                </div>
+                <div>
+                  <Field name="issue.priority" type="radio" value="NORMAL" component={Radio}>
+                    Normal
+                  </Field>
+                </div>
+                <div>
+                  <Field name="issue.priority" type="radio" value="LOW" component={Radio}>
+                    Low
+                  </Field>
+                </div>
+              </Stack>
             </Stack>
           </Form>
         </Stack>
@@ -77,7 +78,6 @@ const Radio: React.FC<RProps> = ({ input, children }) =>
   // input should contain checked value to indicate
   // if the input is checked
   {
-    console.log(input)
     return (
       <label>
         <input type="radio" {...input} />
