@@ -6,20 +6,23 @@ interface Props {
   id: number
   title: string
   description: string
+  status: string
 }
 
 export function ItemCard(props: Props) {
-  const { id, title, description } = props
+  const { id, title, description, status } = props
   return (
     <Card p="1rem" _hover={{ background: "gray.100" }}>
-      <CardHeader p="12px 5px" mb="12px">
+      <CardHeader p="12px 5px">
         <Text fontSize="lg" color="gray.500" fontWeight="bold">
-          {`#${id} ${title}`}
+          {`#${id} ${title} `}
+          <br />
+          {`${status}`}
         </Text>
       </CardHeader>
-      <CardBody p="0px 5px">
+      <CardBody p="0px 2px">
         <Flex direction="column">
-          <Text fontSize="md" color="gray.500" fontWeight="400" mb="30px">
+          <Text fontSize="md" color="gray.500" fontWeight="400">
             {description}
           </Text>
         </Flex>

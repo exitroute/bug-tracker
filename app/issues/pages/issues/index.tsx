@@ -10,20 +10,41 @@ import Layout from "app/core/layouts/Layout"
 import { ItemCard } from "app/core/components/ItemCard"
 import getIssues from "app/issues/queries/getIssues"
 
+const getIssueStatus = (issue) => {
+  if (issue.assignedToId === null) {
+    return "OPEN"
+  } else if (issue.assignedToId) {
+    return "ASSIGNED"
+  } else {
+    return "OPEN"
+  }
+  // Add closed
+  // Add in progress
+  // Add blocked
+}
+
 const IssueList = () => {
   const [issues] = useQuery(getIssues, undefined)
   return (
     <Box>
       <UnorderedList styleType="none">
-        {issues?.map((issue) => (
-          <ListItem key={issue.id}>
-            <Link href={Routes.IssuePage({ issueId: issue.id })}>
-              <a>
-                <ItemCard id={issue.id} title={issue.title} description={issue.description} />
-              </a>
-            </Link>
-          </ListItem>
-        ))}
+        {issues?.map((issue) => {
+          const status = getIssueStatus(issue)
+          return (
+            <ListItem key={issue.id}>
+              <Link href={Routes.IssuePage({ issueId: issue.id })}>
+                <a>
+                  <ItemCard
+                    id={issue.id}
+                    title={issue.title}
+                    description={issue.description}
+                    status={status}
+                  />
+                </a>
+              </Link>
+            </ListItem>
+          )
+        })}
       </UnorderedList>
     </Box>
   )
