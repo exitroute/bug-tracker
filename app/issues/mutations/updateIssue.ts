@@ -8,11 +8,13 @@ export default async function updateIssue(input: any, ctx: Ctx) {
     id,
     title,
     description,
+    priority,
     assignedTo,
   }: {
     id: number
     title: string
     description: string
+    priority: string
     assignedTo: any
   } = input.issue
 
@@ -22,6 +24,7 @@ export default async function updateIssue(input: any, ctx: Ctx) {
       data: {
         title: title,
         description: description,
+        ...(priority && { priority: priority }),
         updatedBy: {
           connect: {
             id: ctx.session.userId,
