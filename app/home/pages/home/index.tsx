@@ -3,7 +3,8 @@ import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
 
 import Layout from "app/core/layouts/Layout"
-import getIssues from "app/issues/queries/getIssues"
+import getCurrentUserIssues from "app/home/queries/getCurrentUserIssues"
+import getCurrentUserProjects from "app/home/queries/getCurrentUserProjects"
 
 /**
  *
@@ -29,7 +30,8 @@ import getIssues from "app/issues/queries/getIssues"
  */
 
 const HomeList = () => {
-  const [issues] = useQuery(getIssues, undefined)
+  const [issues] = useQuery(getCurrentUserIssues, undefined)
+  const [projects] = useQuery(getCurrentUserProjects, undefined)
   // This list also returns projects and teams
   return (
     <Box>
@@ -38,6 +40,13 @@ const HomeList = () => {
           <ListItem key={issue.id}>
             <Link href={Routes.IssuePage({ issueId: issue.id })}>
               <a>{issue.title}</a>
+            </Link>
+          </ListItem>
+        ))}
+        {projects?.map((project) => (
+          <ListItem key={project.id}>
+            <Link href={Routes.ProjectPage({ projectId: project.id })}>
+              <a>{project.title}</a>
             </Link>
           </ListItem>
         ))}
