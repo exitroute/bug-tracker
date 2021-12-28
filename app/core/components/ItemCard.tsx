@@ -6,11 +6,26 @@ interface Props {
   id: number
   title: string
   description: string
-  status: string
+  assigned?: number | null
+  status?: string
+}
+
+const getIssueStatus = (assigned) => {
+  if (assigned === null) {
+    return "OPEN"
+  } else if (assigned) {
+    return "ASSIGNED"
+  } else {
+    return "OPEN"
+  }
+  // Add closed
+  // Add in progress
+  // Add blocked
 }
 
 export function ItemCard(props: Props) {
-  const { id, title, description, status } = props
+  const { id, title, description, assigned } = props
+  const status = getIssueStatus(assigned)
   return (
     <Card p="1rem" _hover={{ background: "gray.100" }}>
       <CardHeader p="12px 5px">
