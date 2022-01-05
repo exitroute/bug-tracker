@@ -18,7 +18,7 @@ const CreateNewButton = ({ title }) => {
 
   if (title === "Home") {
     return (
-      <Link href={`/issue/new`}>
+      <Link href={`/issues/new`}>
         <Button as="a" size="sm" colorScheme="blue">
           <a>Create New Issue</a>
         </Button>
