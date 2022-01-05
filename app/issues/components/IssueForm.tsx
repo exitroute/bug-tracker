@@ -42,7 +42,7 @@ export const IssueForm = (props) => {
                 ))}
               </SelectControl>
               <Stack>
-                Priority
+                <label htmlFor="issue.priority">Priority</label>
                 <div>
                   <Field name="issue.priority" type="radio" value="URGENT" component={Radio}>
                     Urgent
