@@ -1,13 +1,14 @@
-import { Suspense } from "react"
+import React, { Suspense } from "react"
 import { useQuery } from "blitz"
-
-import { Field, FieldRenderProps } from "react-final-form"
-import { InputControl, TextareaControl, SelectControl } from "app/core/components/FormComponents"
 
 import { Box, Stack, useColorModeValue } from "@chakra-ui/react"
 
+import { Field, FieldRenderProps } from "react-final-form"
+
 import { Form } from "../../core/components/AppForm"
 export { FORM_ERROR } from "../../core/components/AppForm"
+import { InputControl, TextareaControl, SelectControl } from "app/core/components/FormComponents"
+import { MultipleFileUploadField } from "app/core/components/MultipleFileUploadField"
 
 import getUsers from "app/users/queries/getUserProfiles"
 
@@ -64,6 +65,7 @@ export const IssueForm = (props) => {
                   </Field>
                 </div>
               </Stack>
+              <MultipleFileUploadField name="issue.files" />
             </Stack>
           </Form>
         </Stack>
