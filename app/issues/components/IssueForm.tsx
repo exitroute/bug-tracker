@@ -1,4 +1,4 @@
-import React, { Suspense } from "react"
+import React, { Suspense, useCallback } from "react"
 import { useQuery } from "blitz"
 
 import { Box, Stack, useColorModeValue } from "@chakra-ui/react"
@@ -65,7 +65,7 @@ export const IssueForm = (props) => {
                   </Field>
                 </div>
               </Stack>
-              <MultipleFileUploadField name="issue.files" />
+              <Field name="issue.files" component={MultipleFileUploadField} />
             </Stack>
           </Form>
         </Stack>
