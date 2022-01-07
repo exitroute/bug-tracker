@@ -7,7 +7,7 @@ import { IssueForm } from "app/issues/components/IssueForm"
 import createIssue from "app/issues/mutations/createIssue"
 
 const NewIssuePage: BlitzPage = () => {
-  const initialValues = { issue: { priority: "NORMAL", files: [] } }
+  const initialValues = { issue: { priority: "NORMAL" } }
 
   const [createIssueMutation] = useMutation(createIssue)
 
