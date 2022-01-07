@@ -31,8 +31,8 @@ export function SingleFileUploadWithProgress({
 }
 
 function uploadFile(file: File, onProgress: (percentage: number) => void) {
-  const url = "https://api.cloudinary.com/v1_1/demo/image/upload"
-  const key = "docs_upload_example_us_preset"
+  const url = "https://api.cloudinary.com/v1_1/exitroute/image/upload"
+  const key = "zazqorkz"
   return new Promise<string>((res, rej) => {
     const xhr = new XMLHttpRequest()
     xhr.open("POST", url)
