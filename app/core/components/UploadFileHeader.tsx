@@ -6,7 +6,10 @@ export interface UploadFileHeaderProps {
 export function UploadFileHeader({ file, onDelete }: UploadFileHeaderProps) {
   return (
     <div>
-      {file.name} <button onClick={() => onDelete(file)}>Delete</button>
+      {file.name}{" "}
+      <button type="button" onClick={() => onDelete(file)}>
+        Delete
+      </button>
     </div>
   )
 }
