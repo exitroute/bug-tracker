@@ -9,8 +9,10 @@ export interface FilesToUpload {
   url?: string
 }
 
-export function MultipleFileUploadField({ name }: { name: string }) {
+export function MultipleFileUploadField({ input }) {
   const [files, setFiles] = useState<FilesToUpload[]>([])
+  input.onChange(files)
+
   const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
     const mappedAcc = accFiles.map((file) => ({ file, errors: [] }))
     setFiles((cur) => [...cur, ...mappedAcc, ...rejFiles])
