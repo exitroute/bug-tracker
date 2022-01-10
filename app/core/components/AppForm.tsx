@@ -67,6 +67,7 @@ export const Form = ({ children, ...props }) => {
               Reset
             </Button>
           </Flex>
+          <pre>{JSON.stringify({ values, errors }, null, 2)}</pre>
         </form>
       )}
     />
