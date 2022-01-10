@@ -10,6 +10,7 @@ const validate = (values: any) => {
       title?: string
       description?: string
       priority?: string
+      files?: string
     }
   }
   const errors: Errors = { issue: {} }
@@ -20,6 +21,10 @@ const validate = (values: any) => {
   if (!values.issue.description) {
     errors.issue.description = "Required"
   }
+  values.issue.files &&
+    values.issue.files.map((file) => {
+      if (file.errors.length) return (errors.issue.files = "Upload Error")
+    })
   return errors
 }
 
