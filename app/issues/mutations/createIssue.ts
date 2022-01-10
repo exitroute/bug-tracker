@@ -9,11 +9,17 @@ export default async function createIssue(input: any, ctx: Ctx) {
     description,
     priority,
     assignedTo,
+    files,
   }: {
     title: string
     description: string
     priority: string
     assignedTo: any
+    files: [
+      {
+        url: string
+      }
+    ]
   } = input.issue
 
   try {
@@ -34,6 +40,17 @@ export default async function createIssue(input: any, ctx: Ctx) {
             },
           },
         }),
+        ...(files && {
+          files: {
+            create: files.map((item) => {
+              const file = { url: item.url }
+              return file
+            }),
+          },
+        }),
+      },
+      include: {
+        files: true,
       },
     })
     return newIssue
