@@ -28,6 +28,7 @@ export default async function getIssue(id: number) {
           assignedTeam: true,
         },
       },
+      files: true,
     },
   })
   if (!issue) {
