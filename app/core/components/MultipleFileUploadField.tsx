@@ -37,7 +37,11 @@ export function MultipleFileUploadField({ input }) {
     setFiles((curr) => curr.filter((fw) => fw.file !== file))
   }
 
-  const { getRootProps, getInputProps } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: ["video/*", "image/*", "pdf"],
+    maxSize: 300 * 1024,
+  })
 
   return (
     <>
