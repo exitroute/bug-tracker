@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 import { BlitzPage, useParam, useQuery, useMutation, Link, Router } from "blitz"
 
-import { Box, Flex, Button, useColorModeValue } from "@chakra-ui/react"
+import { Box, Flex, Stack, Button, useColorModeValue } from "@chakra-ui/react"
 
 import {
   Card,
@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardFooter,
   CardContent,
+  CardImage,
 } from "app/core/components/CardComponents"
 
 import DetailsLayout from "app/core/layouts/DetailsLayout"
@@ -30,6 +31,7 @@ const IssueDetails = () => {
     createdAt,
     updatedBy,
     updatedAt,
+    files,
   } = issue
 
   const [deleteIssueMutation] = useMutation(deleteIssue)
@@ -74,6 +76,9 @@ const IssueDetails = () => {
                 value={`${updatedBy.name} on ${updatedAt.toTimeString()}`}
               />
             )}
+            <Stack align="center">
+              {files && files.map((file, i) => <CardImage key={i} src={file.url} />)}
+            </Stack>
           </CardContent>
           <CardFooter
             action={
