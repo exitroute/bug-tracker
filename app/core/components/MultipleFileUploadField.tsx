@@ -51,14 +51,18 @@ export function MultipleFileUploadField({ input }) {
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <p>Drag 'n' drop some files here, or click to select files</p>
       </div>
-
       {files.map((fileWrapper, i) => (
-        <SingleFileUploadWithProgress
-          key={i}
-          file={fileWrapper.file}
-          onDelete={onDelete}
-          onUpload={onUpload}
-        />
+        <div key={i}>
+          {fileWrapper.errors.length ? (
+            <UploadError file={fileWrapper.file} errors={fileWrapper.errors} onDelete={onDelete} />
+          ) : (
+            <SingleFileUploadWithProgress
+              file={fileWrapper.file}
+              onDelete={onDelete}
+              onUpload={onUpload}
+            />
+          )}
+        </div>
       ))}
     </>
   )
