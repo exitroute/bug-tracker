@@ -97,6 +97,14 @@ model Issue {
   assignedToProject Project? @relation(name: "assignedToProject", fields: [projectId], references: [id])
   projectId         Int?
 
+  files File[]
+}
+
+model File {
+  id      Int    @id @default(autoincrement())
+  issue   Issue  @relation(fields: [issueId], references: [id])
+  issueId Int
+  url     String
 }
 
 model Project {
