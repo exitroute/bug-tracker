@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { FileError, FileRejection, useDropzone } from "react-dropzone"
 import { useField } from "react-final-form"
 import { SingleFileUploadWithProgress } from "./SingleFileUploadWithProgress"
+import { UploadError } from "./UploadError"
 
 export interface FilesToUpload {
   file: File
@@ -11,7 +12,6 @@ export interface FilesToUpload {
 
 export function MultipleFileUploadField({ input }) {
   const [files, setFiles] = useState<FilesToUpload[]>([])
-  input.onChange(files)
 
   const onDrop = useCallback((accFiles: File[], rejFiles: FileRejection[]) => {
     const mappedAcc = accFiles.map((file) => ({ file, errors: [] }))
