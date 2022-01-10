@@ -1,4 +1,13 @@
-import { Box, BoxProps, Flex, FlexProps, Heading, useColorModeValue } from "@chakra-ui/react"
+import {
+  Box,
+  BoxProps,
+  Flex,
+  Stack,
+  Image,
+  FlexProps,
+  Heading,
+  useColorModeValue,
+} from "@chakra-ui/react"
 
 export const Card = (props: BoxProps) => (
   <Box
@@ -33,6 +42,19 @@ export const Property = (props: Props) => {
         {value}
       </Box>
     </Flex>
+  )
+}
+
+interface CardImageProps {
+  src: string
+}
+
+export const CardImage = (props: CardImageProps) => {
+  const { src } = props
+  return (
+    <Box p={12}>
+      <Image src={src} objectFit="cover" alt="screen shot" />
+    </Box>
   )
 }
 interface HeaderProps {
