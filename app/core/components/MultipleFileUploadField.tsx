@@ -18,6 +18,10 @@ export function MultipleFileUploadField({ input }) {
     setFiles((cur) => [...cur, ...mappedAcc, ...rejFiles])
   }, [])
 
+  useEffect(() => {
+    input.onChange(files)
+  }, [files, input])
+
   function onUpload(file: File, url: string) {
     setFiles((curr) =>
       curr.map((fw) => {
