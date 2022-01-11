@@ -12,19 +12,33 @@ const validate = (values: any) => {
       priority?: string
       files?: string
     }
+    project: {
+      title?: string
+      description?: string
+    }
   }
-  const errors: Errors = { issue: {} }
+  const errors: Errors = { issue: {}, project: {} }
 
-  if (!values.issue.title) {
-    errors.issue.title = "Required"
+  if (values.issue) {
+    if (!values.issue.title) {
+      errors.issue.title = "Required"
+    }
+    if (!values.issue.description) {
+      errors.issue.description = "Required"
+    }
+    values.issue.files &&
+      values.issue.files.map((file) => {
+        if (file.errors.length) return (errors.issue.files = "Upload Error")
+      })
   }
-  if (!values.issue.description) {
-    errors.issue.description = "Required"
+  if (values.project) {
+    if (!values.project.title) {
+      errors.project.title = "Required"
+    }
+    if (!values.project.description) {
+      errors.project.description = "Required"
+    }
   }
-  values.issue.files &&
-    values.issue.files.map((file) => {
-      if (file.errors.length) return (errors.issue.files = "Upload Error")
-    })
   return errors
 }
 
