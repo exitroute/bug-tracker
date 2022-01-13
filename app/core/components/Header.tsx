@@ -25,7 +25,7 @@ const UserButton = ({ onOpen }) => {
     return (
       <Button size="sm" onClick={onOpen}>
         <Skeleton isLoaded={!isLoading}>
-          <code>{user.name}</code>
+          <code>{user.name || user.email}</code>
         </Skeleton>
       </Button>
     )
