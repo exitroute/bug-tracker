@@ -23,7 +23,7 @@ const seed = async () => {
       createdIssues: {
         create: [
           {
-            title: `${faker.hacker.noun()} Does't Work`,
+            title: `${faker.hacker.noun()} does't Work`,
             description: faker.hacker.phrase(),
           },
         ],
@@ -41,7 +41,7 @@ const seed = async () => {
       createdIssues: {
         create: [
           {
-            title: `${faker.hacker.noun()} Does't Work`,
+            title: `${faker.hacker.noun()} does't Work`,
             description: faker.hacker.phrase(),
           },
         ],
@@ -62,23 +62,23 @@ const seed = async () => {
         createdIssues: {
           create: [
             {
-              title: `${faker.hacker.noun()} Does't Work`,
+              title: `${faker.hacker.noun()} does't Work`,
               description: faker.hacker.phrase(),
             },
             {
-              title: `${faker.hacker.noun()} Does't Work`,
+              title: `${faker.hacker.noun()} does't Work`,
               description: faker.hacker.phrase(),
             },
             {
-              title: `${faker.hacker.noun()} Does't Work`,
+              title: `${faker.hacker.noun()} does't Work`,
               description: faker.hacker.phrase(),
             },
             {
-              title: `${faker.hacker.noun()} Does't Work`,
+              title: `${faker.hacker.noun()} does't Work`,
               description: faker.hacker.phrase(),
             },
             {
-              title: `${faker.hacker.noun()} Does't Work`,
+              title: `${faker.hacker.noun()} does't Work`,
               description: faker.hacker.phrase(),
             },
           ],
