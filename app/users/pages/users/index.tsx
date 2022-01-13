@@ -6,13 +6,17 @@ import getUserProfiles from "app/users/queries/getUserProfiles"
 
 const UserProfileList = () => {
   const [users] = useQuery(getUserProfiles, undefined)
+  console.log(users)
   return (
     <Box>
       <UnorderedList styleType="none">
         {users?.map((user) => (
           <ListItem key={user.id}>
             <Link href={Routes.UserProfilePage({ userId: user.id })}>
-              <a>{user.name}</a>
+              <>
+                <a>{user.name}</a>
+                <a>{user.email}</a>
+              </>
             </Link>
           </ListItem>
         ))}
