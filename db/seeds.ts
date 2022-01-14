@@ -19,8 +19,7 @@ const seed = async () => {
     data: {
       name: "Ryan Admin",
       email: "dalryan.os@gmail.com",
-      hashedPassword:
-        "JGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTIscD0xJDZOYmpxRStHRnpjTDlmenU2b0xaZWckcEpuczkycGsyM2Q4bkQvS2lTYlAyTjNaWUQ1YnBjM3dmSDlCdlNadmlkdwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+      hashedPassword: process.env.SEEDED_USER_HASH,
       role: "ADMIN",
       createdIssues: {
         create: [
@@ -61,8 +60,7 @@ const seed = async () => {
     data: {
       name: "James User",
       email: "ryanoshea@t-mobile.de",
-      hashedPassword:
-        "JGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTIscD0xJDZOYmpxRStHRnpjTDlmenU2b0xaZWckcEpuczkycGsyM2Q4bkQvS2lTYlAyTjNaWUQ1YnBjM3dmSDlCdlNadmlkdwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+      hashedPassword: process.env.SEEDED_USER_HASH,
       role: "USER",
       createdIssues: {
         create: [
@@ -82,8 +80,7 @@ const seed = async () => {
       data: {
         name: name,
         email: email,
-        hashedPassword:
-          "JGFyZ29uMmlkJHY9MTkkbT02NTUzNix0PTIscD0xJDZOYmpxRStHRnpjTDlmenU2b0xaZWckcEpuczkycGsyM2Q4bkQvS2lTYlAyTjNaWUQ1YnBjM3dmSDlCdlNadmlkdwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        hashedPassword: process.env.SEEDED_USER_HASH,
         role: "USER",
         createdIssues: {
           create: [
