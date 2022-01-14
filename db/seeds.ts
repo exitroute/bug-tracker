@@ -10,6 +10,8 @@ var faker = require("faker")
  */
 
 const seed = async () => {
+  await db.team.deleteMany()
+  await db.project.deleteMany()
   await db.issue.deleteMany()
   await db.user.deleteMany()
 
@@ -23,7 +25,31 @@ const seed = async () => {
       createdIssues: {
         create: [
           {
-            title: `${faker.hacker.noun()} does't Work`,
+            title: `${faker.hacker.noun()} does't work`,
+            description: faker.hacker.phrase(),
+          },
+        ],
+      },
+      createdProjects: {
+        create: [
+          {
+            title: `Project ${faker.hacker.noun()}`,
+            description: faker.hacker.phrase(),
+          },
+          {
+            title: `Project ${faker.hacker.noun()}`,
+            description: faker.hacker.phrase(),
+          },
+        ],
+      },
+      createdTeams: {
+        create: [
+          {
+            title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
+            description: faker.hacker.phrase(),
+          },
+          {
+            title: `${faker.hacker.adjective()} ${faker.hacker.noun()}`,
             description: faker.hacker.phrase(),
           },
         ],
@@ -41,7 +67,7 @@ const seed = async () => {
       createdIssues: {
         create: [
           {
-            title: `${faker.hacker.noun()} does't Work`,
+            title: `${faker.hacker.noun()} does't work`,
             description: faker.hacker.phrase(),
           },
         ],
@@ -62,23 +88,33 @@ const seed = async () => {
         createdIssues: {
           create: [
             {
-              title: `${faker.hacker.noun()} does't Work`,
+              title: `${faker.hacker.noun()} does't work`,
+              description: faker.hacker.phrase(),
+              files: {
+                create: [
+                  {
+                    url: faker.random.image(),
+                  },
+                  {
+                    url: faker.random.image(),
+                  },
+                ],
+              },
+            },
+            {
+              title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
             },
             {
-              title: `${faker.hacker.noun()} does't Work`,
+              title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
             },
             {
-              title: `${faker.hacker.noun()} does't Work`,
+              title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
             },
             {
-              title: `${faker.hacker.noun()} does't Work`,
-              description: faker.hacker.phrase(),
-            },
-            {
-              title: `${faker.hacker.noun()} does't Work`,
+              title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
             },
           ],
