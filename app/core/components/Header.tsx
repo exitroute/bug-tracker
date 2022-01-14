@@ -1,5 +1,5 @@
-import { useQuery } from "blitz"
-import { Suspense } from "react"
+import { useQuery, useRouter, useSession } from "blitz"
+import { Suspense, useEffect } from "react"
 import {
   Box,
   Heading,
@@ -19,19 +19,22 @@ import LogoutButton from "./LogoutButton"
 import CreateNewButton from "app/core/components/CreateNewButton"
 
 const UserButton = ({ onOpen }) => {
+  const router = useRouter()
+  const session = useSession()
+
+  useEffect(() => {
+    if (!session.userId) router.push("./login")
+  })
+
   const [user, { isLoading }] = useQuery(getCurrentUser, null)
 
-  if (user) {
-    return (
-      <Button size="sm" onClick={onOpen}>
-        <Skeleton isLoaded={!isLoading}>
-          <code>{user.name || user.email}</code>
-        </Skeleton>
-      </Button>
-    )
-  } else {
-    return null
-  }
+  return (
+    <Button size="sm" onClick={onOpen}>
+      <Skeleton isLoaded={!isLoading}>
+        <code>{user?.name || user?.email}</code>
+      </Skeleton>
+    </Button>
+  )
 }
 
 const Header = (props) => {
