@@ -1,4 +1,4 @@
-import { Suspense } from "react"
+import { MouseEvent, Suspense } from "react"
 import { BlitzPage, useParam, useQuery, useMutation, Link, Router } from "blitz"
 
 import { Box, Flex, Button, useColorModeValue } from "@chakra-ui/react"
@@ -13,19 +13,21 @@ import {
 
 import DetailsLayout from "app/core/layouts/DetailsLayout"
 import getUserProfile from "app/users/queries/getUserProfile"
+import deleteUserProfile from "app/users/mutations/deleteUserProfile"
 
 const UserProfileDetails = () => {
   const userId = useParam("userId", "number")!
   const [user, { refetch }]: any = useQuery(getUserProfile, userId)
+  const [deleteUserProfileMutation] = useMutation(deleteUserProfile)
 
   const { id, name, email, role, assignedIssues, assignedProjects, inTeams } = user
 
-  const deleteUserProfileHandler = (e, id) => {
+  const deleteUserProfileHandler = (e, id: any) => {
     e.preventDefault()
-    // deleteUserProfileMutation({ id })
-    confirm("Warning: You are about to delete this profile. \nAre you sure?")
-    Router.push("/issues")
+    deleteUserProfileMutation({ id })
+    confirm("Warning: You are about to delete this user. \nAre you sure?")
     refetch()
+    Router.push("/users")
   }
 
   return (
@@ -81,6 +83,6 @@ const UserProfilePage: BlitzPage = () => {
 
 UserProfilePage.authenticate = { redirectTo: "/" }
 UserProfilePage.suppressFirstRenderFlicker = true
-UserProfilePage.getLayout = (page) => <DetailsLayout title="Profile">{page}</DetailsLayout>
+UserProfilePage.getLayout = (page) => <DetailsLayout title="User">{page}</DetailsLayout>
 
 export default UserProfilePage
