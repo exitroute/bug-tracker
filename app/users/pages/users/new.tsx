@@ -29,7 +29,7 @@ const NewUserPage: BlitzPage = () => {
           onSubmit={async (values) => {
             try {
               const user = await createUserMutation(values)
-              Router.push(`/user/${user?.id}`)
+              Router.push(`/users/${user?.id}`)
             } catch (error) {
               console.error("CREATE USERPROFILE MUTATION ERROR", error)
             }
