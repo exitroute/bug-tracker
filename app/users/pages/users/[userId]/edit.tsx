@@ -32,7 +32,7 @@ export const EditUserProfileForm = () => {
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading>Edit Issue: {userProfile?.name}</Heading>
+          <Heading>Update User: {userProfile?.name}</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
             What do you want to change?
           </Text>
