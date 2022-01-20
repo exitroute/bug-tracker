@@ -13,10 +13,7 @@ const UserProfileList = () => {
         {users?.map((user) => (
           <ListItem key={user.id}>
             <Link href={Routes.UserProfilePage({ userId: user.id })}>
-              <>
-                <a>{user.name}</a>
-                <a>{user.email}</a>
-              </>
+              <a>{user.name}</a>
             </Link>
           </ListItem>
         ))}
@@ -37,6 +34,6 @@ const UserProfiles: BlitzPage = () => {
 
 UserProfiles.authenticate = { redirectTo: "/" }
 UserProfiles.suppressFirstRenderFlicker = true
-UserProfiles.getLayout = (page) => <Layout title="Profiles">{page}</Layout>
+UserProfiles.getLayout = (page) => <Layout title="Users">{page}</Layout>
 
 export default UserProfiles
