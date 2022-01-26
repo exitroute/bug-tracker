@@ -12,11 +12,11 @@ interface Props {
 
 const getIssueStatus = (assigned) => {
   if (assigned === null) {
-    return "OPEN"
+    return "UNASSIGNED"
   } else if (assigned) {
     return "ASSIGNED"
   } else {
-    return "OPEN"
+    return "UNASSIGNED"
   }
   // Add closed
   // Add in progress
