@@ -1,13 +1,18 @@
 import React, { Suspense, useCallback } from "react"
 import { useQuery } from "blitz"
 
-import { Box, Stack, useColorModeValue } from "@chakra-ui/react"
+import { Box, Stack, useColorModeValue, Radio } from "@chakra-ui/react"
 
 import { Field, FieldRenderProps } from "react-final-form"
 
 import { Form } from "../../core/components/AppForm"
 export { FORM_ERROR } from "../../core/components/AppForm"
-import { InputControl, TextareaControl, SelectControl } from "app/core/components/FormComponents"
+import {
+  InputControl,
+  TextareaControl,
+  SelectControl,
+  AdaptedRadioGroup,
+} from "app/core/components/FormComponents"
 import { MultipleFileUploadField } from "app/core/components/MultipleFileUploadField"
 
 import getUsers from "app/users/queries/getUserProfiles"
@@ -42,29 +47,8 @@ export const IssueForm = (props) => {
                   </option>
                 ))}
               </SelectControl>
-              <Stack>
-                <label htmlFor="issue.priority">Priority</label>
-                <div>
-                  <Field name="issue.priority" type="radio" value="URGENT" component={Radio}>
-                    Urgent
-                  </Field>
-                </div>
-                <div>
-                  <Field name="issue.priority" type="radio" value="HIGH" component={Radio}>
-                    High
-                  </Field>
-                </div>
-                <div>
-                  <Field name="issue.priority" type="radio" value="NORMAL" component={Radio}>
-                    Normal
-                  </Field>
-                </div>
-                <div>
-                  <Field name="issue.priority" type="radio" value="LOW" component={Radio}>
-                    Low
-                  </Field>
-                </div>
-              </Stack>
+              <IssuePriority name="issue.priority" />
+              <IssueStatus name="issue.status" />
               <Field name="issue.files" component={MultipleFileUploadField} />
             </Stack>
           </Form>
@@ -74,16 +58,45 @@ export const IssueForm = (props) => {
   )
 }
 
-interface RProps extends FieldRenderProps<string, HTMLInputElement> {}
+// interface RProps extends FieldRenderProps<string, HTMLInputElement> {}
 
-const Radio: React.FC<RProps> = ({ input, children }) =>
-  // input should contain checked value to indicate
-  // if the input is checked
-  {
-    return (
-      <label>
-        <input type="radio" {...input} />
-        {children}
-      </label>
-    )
-  }
+// const Radio: React.FC<RProps> = ({ input, children }) =>
+//   // input should contain checked value to indicate
+//   // if the input is checked
+//   {
+//     return (
+//       <label>
+//         <input type="radio" {...input} />
+//         {children}
+//       </label>
+//     )
+//   }
+
+interface IssueRadioProps {
+  name: string
+}
+
+const IssuePriority = ({ name }: IssueRadioProps) => {
+  return (
+    <Field name={name} label="Priority" component={AdaptedRadioGroup}>
+      <Stack>
+        <Radio value="URGENT">Urgent</Radio>
+        <Radio value="HIGH">High</Radio>
+        <Radio value="NORMAL">Normal</Radio>
+        <Radio value="LOW">Low</Radio>
+      </Stack>
+    </Field>
+  )
+}
+
+const IssueStatus = ({ name }: IssueRadioProps) => {
+  return (
+    <Field name={name} label="Priority" component={AdaptedRadioGroup}>
+      <Stack>
+        <Radio value="NEW">New</Radio>
+        <Radio value="IN_PROGRESS">In Progress</Radio>
+        <Radio value="CLOSED">Closed</Radio>
+      </Stack>
+    </Field>
+  )
+}
