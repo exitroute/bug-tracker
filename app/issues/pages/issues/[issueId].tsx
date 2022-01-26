@@ -25,6 +25,7 @@ const IssueDetails = () => {
     title,
     description,
     priority,
+    status,
     assignedTo,
     assignedToProject,
     createdBy,
@@ -61,6 +62,7 @@ const IssueDetails = () => {
           <CardContent>
             <Property label="Description" value={`${description}`} />
             <Property label="Priority" value={`${priority}`} />
+            <Property label="Status" value={`${status}`} />
             {assignedTo && <Property label="Assigned to" value={`${assignedTo.name}`} />}
             {assignedToProject && <Property label="Project" value={`${assignedToProject.title}`} />}
             {assignedToProject && assignedToProject.assignedTeam && (
