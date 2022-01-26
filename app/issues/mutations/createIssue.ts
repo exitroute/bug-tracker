@@ -8,12 +8,14 @@ export default async function createIssue(input: any, ctx: Ctx) {
     title,
     description,
     priority,
+    status,
     assignedTo,
     files,
   }: {
     title: string
     description: string
     priority: string
+    status: string
     assignedTo: any
     files: [
       {
@@ -28,6 +30,7 @@ export default async function createIssue(input: any, ctx: Ctx) {
         title: title,
         description: description,
         priority: priority,
+        status: status,
         createdBy: {
           connect: {
             id: ctx.session.userId,
