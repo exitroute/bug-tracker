@@ -10,6 +10,7 @@ const validate = (values: any) => {
       title?: string
       description?: string
       priority?: string
+      status?: string
       files?: string
     }
     project: {
@@ -25,6 +26,9 @@ const validate = (values: any) => {
     }
     if (!values.issue.description) {
       errors.issue.description = "Required"
+    }
+    if (values.issue.status !== "NEW" && !values.issue.assignedTo) {
+      errors.issue.status = "Please Assign the Issue"
     }
     values.issue.files &&
       values.issue.files.map((file) => {
