@@ -7,6 +7,7 @@ import {
   FormControl,
   FormLabel,
   Checkbox,
+  RadioGroup,
   FormErrorMessage,
 } from "@chakra-ui/react"
 
@@ -111,5 +112,15 @@ export const CheckboxArrayControl = ({ name, value, isMember, children }) => {
     >
       {children}
     </Checkbox>
+  )
+}
+
+export const AdaptedRadioGroup = ({ input, meta, label, children }) => {
+  return (
+    <FormControl isInvalid={meta.touched && meta.invalid} my={4}>
+      <FormLabel htmlFor={input.name}>{label}</FormLabel>
+      <RadioGroup {...input}>{children}</RadioGroup>
+      <FormErrorMessage>{meta.error}</FormErrorMessage>
+    </FormControl>
   )
 }
