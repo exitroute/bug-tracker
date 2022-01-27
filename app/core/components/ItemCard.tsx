@@ -1,4 +1,4 @@
-import { Text, Box, Flex, Link, useStyleConfig } from "@chakra-ui/react"
+import { Text, Box, Flex, Grid, GridItem, useStyleConfig } from "@chakra-ui/react"
 
 import React from "react"
 
@@ -6,34 +6,57 @@ interface Props {
   id: number
   title: string
   description: string
-  assigned?: number | null
-  status?: string
+  assigned?: {} | null
+  status?: string | null
+  priority?: string | null
 }
 
-const getIssueStatus = (assigned) => {
+const assignedStatusOutput = (assigned) => {
   if (assigned === null) {
-    return "UNASSIGNED"
-  } else if (assigned) {
-    return "ASSIGNED"
+    return "Unassigned"
   } else {
-    return "UNASSIGNED"
+    return assigned.name
   }
-  // Add closed
-  // Add in progress
-  // Add blocked
+}
+
+const progressStatusOutput = (status) => {
+  if (status === "IN_PROGRESS") {
+    return "IN PROGRESS"
+  } else if (status === null) {
+    return "Progress not set"
+  } else {
+    return status
+  }
+}
+
+const priorityStatusOutput = (priority) => {
+  if (priority === null) {
+    return "Priority not set"
+  } else {
+    return priority
+  }
 }
 
 export function ItemCard(props: Props) {
-  const { id, title, description, assigned } = props
-  const status = getIssueStatus(assigned)
+  const { id, title, description, priority, status, assigned } = props
+
+  const assignedStatus = assignedStatusOutput(assigned)
+  const displayStatus = progressStatusOutput(status)
+  const priorityStatus = priorityStatusOutput(priority)
+
   return (
     <Card p="1rem" _hover={{ background: "gray.100" }}>
-      <CardHeader p="12px 5px">
-        <Text fontSize="lg" color="gray.500" fontWeight="bold">
-          {`#${id} ${title} `}
-          <br />
-          {`${status}`}
-        </Text>
+      <CardHeader p="12px 5px" fontSize="lg" color="gray.500" fontWeight="bold">
+        <Grid
+          gridTemplateColumns="repeat(2, 1fr)"
+          gridTemplateRows="repeat(2, 1fr)"
+          justifyContent="space-between"
+        >
+          <GridItem>{`#${id} ${title} `}</GridItem>
+          <GridItem>{`${assignedStatus}`}</GridItem>
+          <GridItem>{`${displayStatus}`}</GridItem>
+          <GridItem>{`${priorityStatus}`}</GridItem>
+        </Grid>
       </CardHeader>
       <CardBody p="0px 2px">
         <Flex direction="column">
