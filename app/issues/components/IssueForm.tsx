@@ -58,20 +58,6 @@ export const IssueForm = (props) => {
   )
 }
 
-// interface RProps extends FieldRenderProps<string, HTMLInputElement> {}
-
-// const Radio: React.FC<RProps> = ({ input, children }) =>
-//   // input should contain checked value to indicate
-//   // if the input is checked
-//   {
-//     return (
-//       <label>
-//         <input type="radio" {...input} />
-//         {children}
-//       </label>
-//     )
-//   }
-
 interface IssueRadioProps {
   name: string
 }
@@ -91,7 +77,7 @@ const IssuePriority = ({ name }: IssueRadioProps) => {
 
 const IssueStatus = ({ name }: IssueRadioProps) => {
   return (
-    <Field name={name} label="Priority" component={AdaptedRadioGroup}>
+    <Field name={name} label="Progress Status" component={AdaptedRadioGroup}>
       <Stack>
         <Radio value="NEW">New</Radio>
         <Radio value="IN_PROGRESS">In Progress</Radio>
