@@ -24,7 +24,9 @@ const IssueList = () => {
                     id={issue.id}
                     title={issue.title}
                     description={issue.description}
-                    assigned={issue.assignedToId}
+                    assigned={issue.assignedTo}
+                    status={issue.status}
+                    priority={issue.priority}
                   />
                 </a>
               </Link>
