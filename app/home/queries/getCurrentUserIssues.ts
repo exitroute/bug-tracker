@@ -7,6 +7,13 @@ export default async function getCurrentUserIssues(_ = null, { session }: Ctx) {
   try {
     const issues = await db.issue.findMany({
       where: { assignedToId: id },
+      include: {
+        assignedTo: {
+          select: {
+            name: true,
+          },
+        },
+      },
     })
     return issues
   } catch (error) {

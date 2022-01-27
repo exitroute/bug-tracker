@@ -46,7 +46,9 @@ const HomeList = () => {
                   id={issue.id}
                   title={issue.title}
                   description={issue.description}
-                  status={status}
+                  assigned={issue.assignedTo}
+                  status={issue.status}
+                  priority={issue.priority}
                 />
               </a>
             </Link>
