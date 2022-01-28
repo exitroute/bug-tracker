@@ -87,6 +87,8 @@ const seed = async () => {
             {
               title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
+              priority: "NORMAL",
+              status: "NEW",
               files: {
                 create: [
                   {
@@ -101,18 +103,26 @@ const seed = async () => {
             {
               title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
+              priority: "LOW",
+              status: "NEW",
             },
             {
               title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
+              priority: "NORMAL",
+              status: "NEW",
             },
             {
               title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
+              priority: "NORMAL",
+              status: "NEW",
             },
             {
               title: `${faker.hacker.noun()} does't work`,
               description: faker.hacker.phrase(),
+              priority: "NORMAL",
+              status: "NEW",
             },
           ],
         },
