@@ -26,6 +26,5 @@ export default async function getProject(id: number) {
   if (!project) {
     throw new NotFoundError()
   }
-  console.log(project)
   return project
 }

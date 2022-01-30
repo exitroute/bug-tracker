@@ -6,7 +6,6 @@ import getUserProfiles from "app/users/queries/getUserProfiles"
 
 const UserProfileList = () => {
   const [users] = useQuery(getUserProfiles, undefined)
-  console.log(users)
   return (
     <Box>
       <UnorderedList styleType="none">
