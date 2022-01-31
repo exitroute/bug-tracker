@@ -1,5 +1,5 @@
-import React, { Suspense, useCallback } from "react"
-import { useQuery } from "blitz"
+import React, { Suspense, useCallback, useState, useEffect } from "react"
+import { useQuery, useRouter } from "blitz"
 
 import { Box, Stack, useColorModeValue, Radio } from "@chakra-ui/react"
 
@@ -19,6 +19,8 @@ import getUsers from "app/users/queries/getUserProfiles"
 
 export const IssueForm = (props) => {
   const [users] = useQuery(getUsers, undefined, { suspense: false })
+  const router = useRouter()
+  const path = router.pathname.split("/").pop()
 
   return (
     <Suspense fallback="Loading...">
@@ -49,12 +51,58 @@ export const IssueForm = (props) => {
               </SelectControl>
               <IssuePriority name="issue.priority" />
               <IssueStatus name="issue.status" />
-              <Field name="issue.files" component={MultipleFileUploadField} />
+              {path === "new" ? (
+                <Field name="issue.files" component={MultipleFileUploadField} />
+              ) : (
+                <>
+                  <Field name="issue.newFiles" component={MultipleFileUploadField} />
+                  {props.initialValues.issue.files && (
+                    <Field name="issue.files" files={props.initialValues.issue.files}>
+                      {(props) => <EditIssueFiles props={props} />}
+                    </Field>
+                  )}
+                </>
+              )}
             </Stack>
           </Form>
         </Stack>
       </Box>
     </Suspense>
+  )
+}
+
+interface FilesToEdit {
+  id: number
+  issueId: number
+  url: string
+}
+
+const EditIssueFiles = ({ props }: any) => {
+  const input = props.input
+  const initFiles = props.files
+
+  const [files, setFiles] = useState<FilesToEdit[]>(initFiles)
+
+  const onDelete = (id: number, url: string, files: FilesToEdit[]) => {
+    setFiles(files.filter((file) => file.id != id))
+    confirm(`This will remove image ${url} \n Are you sure?`)
+  }
+
+  useEffect(() => {
+    input.onChange(files)
+  }, [files, input])
+
+  return (
+    <>
+      {files.map((file, i, files) => (
+        <div key={i}>
+          {file.url} {file.id}
+          <button type="button" onClick={() => onDelete(file.id, file.url, files)}>
+            X
+          </button>
+        </div>
+      ))}
+    </>
   )
 }
 
