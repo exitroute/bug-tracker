@@ -30,10 +30,13 @@ const validate = (values: any) => {
     if (values.issue.status !== "NEW" && !values.issue.assignedTo) {
       errors.issue.status = "Please Assign the Issue"
     }
-    values.issue.files &&
+    if (!values.issue.id && values.issue.files) {
       values.issue.files.map((file) => {
-        if (file.errors.length) return (errors.issue.files = "Upload Error")
+        if (file.errors.length) {
+          return (errors.issue.files = "Upload Error")
+        }
       })
+    }
   }
   if (values.project) {
     if (!values.project.title) {
