@@ -11,6 +11,8 @@ export default async function updateIssue(input: any, ctx: Ctx) {
     priority,
     status,
     assignedTo,
+    files,
+    newFiles,
   }: {
     id: number
     title: string
@@ -18,7 +20,39 @@ export default async function updateIssue(input: any, ctx: Ctx) {
     priority: string
     status: string
     assignedTo: any
+    files: any
+    newFiles: any
   } = input.issue
+
+  const setFiles = (arr: []) => {
+    interface File {
+      id: number
+    }
+
+    if (!arr.length) {
+      return []
+    } else {
+      return arr.map((item: File) => {
+        const file: File = { id: item.id }
+        return file
+      })
+    }
+  }
+
+  const createFiles = (arr: []) => {
+    interface File {
+      url: string
+    }
+
+    if (arr.length < 1) {
+      return []
+    } else {
+      return arr.map((item: File) => {
+        const file: File = { url: item.url }
+        return file
+      })
+    }
+  }
 
   try {
     const updatedIssue = await db.issue.update({
@@ -40,6 +74,10 @@ export default async function updateIssue(input: any, ctx: Ctx) {
             },
           },
         }),
+        files: {
+          set: setFiles(files),
+          create: createFiles(newFiles),
+        },
       },
     })
     return updatedIssue
