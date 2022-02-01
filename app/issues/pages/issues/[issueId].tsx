@@ -46,52 +46,57 @@ const IssueDetails = () => {
   }
 
   return (
-    <Box as="main" height="100%" bg={useColorModeValue("gray.100", "inherit")}>
-      <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
-        <Card maxW="3xl" mx="auto">
-          <CardHeader
-            title={`${title} #${id}`}
-            action={
-              <Link href={`/issues/${issueId}/edit`}>
-                <Button as="a" variant="outline" minW="20">
-                  Edit
-                </Button>
-              </Link>
-            }
-          />
-          <CardContent>
-            <Property label="Description" value={`${description}`} />
-            <Property label="Priority" value={`${priority}`} />
-            <Property label="Status" value={`${status}`} />
-            {assignedTo && <Property label="Assigned to" value={`${assignedTo.name}`} />}
-            {assignedToProject && <Property label="Project" value={`${assignedToProject.title}`} />}
-            {assignedToProject && assignedToProject.assignedTeam && (
-              <Property label="Project Team" value={`${assignedToProject.assignedTeam.title}`} />
-            )}
-            <Property
-              label="Created by"
-              value={`${createdBy.name} on ${createdAt.toTimeString()}`}
+    <>
+      <Box as="main" height="100%" bg={useColorModeValue("gray.100", "inherit")}>
+        <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
+          <Card maxW="3xl" mx="auto">
+            <CardHeader
+              title={`${title} #${id}`}
+              action={
+                <Link href={`/issues/${issueId}/edit`}>
+                  <Button as="a" variant="outline" minW="20">
+                    Edit
+                  </Button>
+                </Link>
+              }
             />
-            {updatedBy && (
+            <CardContent>
+              <Property label="Description" value={`${description}`} />
+              <Property label="Priority" value={`${priority}`} />
+              <Property label="Status" value={`${status}`} />
+              {assignedTo && <Property label="Assigned to" value={`${assignedTo.name}`} />}
+              {assignedToProject && (
+                <Property label="Project" value={`${assignedToProject.title}`} />
+              )}
+              {assignedToProject && assignedToProject.assignedTeam && (
+                <Property label="Project Team" value={`${assignedToProject.assignedTeam.title}`} />
+              )}
               <Property
-                label="Updated by"
-                value={`${updatedBy.name} on ${updatedAt.toTimeString()}`}
+                label="Created by"
+                value={`${createdBy.name} on ${createdAt.toTimeString()}`}
               />
-            )}
-            <Stack align="center">
-              {files && files.map((file, i) => <CardImage key={i} src={file.url} />)}
-            </Stack>
-          </CardContent>
-          <CardFooter
-            action={
-              <Button colorScheme="pink" onClick={(e) => deleteIssueHandler(e, issueId)}>
-                Delete
-              </Button>
-            }
-          />
-        </Card>
-      </Flex>
-    </Box>
+              {updatedBy && (
+                <Property
+                  label="Updated by"
+                  value={`${updatedBy.name} on ${updatedAt.toTimeString()}`}
+                />
+              )}
+              <Stack align="center">
+                {files && files.map((file, i) => <CardImage key={i} src={file.url} />)}
+              </Stack>
+            </CardContent>
+            <CardFooter
+              action={
+                <Button colorScheme="pink" onClick={(e) => deleteIssueHandler(e, issueId)}>
+                  Delete
+                </Button>
+              }
+            />
+          </Card>
+        </Flex>
+      </Box>
+      <pre>{JSON.stringify({ issue }, null, 2)}</pre>
+    </>
   )
 }
 
