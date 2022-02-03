@@ -1,5 +1,6 @@
 import { Ctx } from "blitz"
 import db from "db"
+import { sortIssues } from "app/core/filters/filters"
 
 export default async function getCurrentUserIssues(_ = null, { session }: Ctx) {
   const id = session.userId
@@ -15,7 +16,7 @@ export default async function getCurrentUserIssues(_ = null, { session }: Ctx) {
         },
       },
     })
-    return issues
+    return sortIssues(issues)
   } catch (error) {
     console.error("getIssues Error ", error)
   }
