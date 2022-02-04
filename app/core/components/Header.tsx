@@ -1,7 +1,8 @@
-import { useQuery, useRouter, useSession } from "blitz"
+import { useQuery, useRouter, useSession, Link } from "blitz"
 import { Suspense, useEffect } from "react"
 import {
   Box,
+  Stack,
   Heading,
   Drawer,
   DrawerBody,
@@ -52,8 +53,10 @@ const Header = (props) => {
                 <DrawerHeader borderBottomWidth="1px">Basic Drawer</DrawerHeader>
                 <DrawerBody>
                   <LogoutButton />
-                  <p>Some contents...</p>
-                  <p>Some contents...</p>
+                  <Stack>
+                    <Link href="./settings">Settings</Link>
+                    <Link href="./users/new">Edit My Profile</Link>
+                  </Stack>
                 </DrawerBody>
               </DrawerContent>
             </Drawer>
