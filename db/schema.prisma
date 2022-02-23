@@ -103,8 +103,8 @@ model Issue {
 
 model File {
   id      Int    @id @default(autoincrement())
-  issue   Issue? @relation(fields: [issueId], references: [id], onUpdate: Cascade)
-  issueId Int?
+  issue   Issue  @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  issueId Int
   url     String
 }
 
