@@ -45,24 +45,19 @@ export function ItemCard(props: Props) {
   const priorityStatus = priorityStatusOutput(priority)
 
   return (
-    <Card p="1rem" _hover={{ background: "gray.100" }}>
+    <Card p="1rem" px={{ base: "0rem" }} _hover={{ background: "gray.100" }}>
       <CardHeader p="12px 5px" fontSize="lg" color="gray.500" fontWeight="bold">
-        <Grid
-          gridTemplateColumns="repeat(2, 1fr)"
-          gridTemplateRows="repeat(2, 1fr)"
-          justifyContent="space-between"
-        >
-          <GridItem>{`#${id} ${title} `}</GridItem>
-          <GridItem>{`${assignedStatus}`}</GridItem>
-          <GridItem>{`${displayStatus}`}</GridItem>
-          <GridItem>{`${priorityStatus}`}</GridItem>
-        </Grid>
+        {`#${id} ${title} `}
       </CardHeader>
-      <CardBody p="0px 2px">
+      <CardBody p="0px 2px" fontSize="md" color="gray.500" fontWeight="400">
         <Flex direction="column">
-          <Text fontSize="md" color="gray.500" fontWeight="400">
-            {description}
+          <Text>
+            <strong>{`${assignedStatus}`}</strong>
+            <br />
+            Progress: <strong>{`${displayStatus}`} </strong>| Priority:{" "}
+            <strong>{`${priorityStatus}`}</strong>
           </Text>
+          <Text>{description.substring(0, 50)}...</Text>
         </Flex>
       </CardBody>
     </Card>
