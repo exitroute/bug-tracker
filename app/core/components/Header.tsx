@@ -29,10 +29,31 @@ const UserButton = ({ onOpen }) => {
 
   const [user, { isLoading }] = useQuery(getCurrentUser, null)
 
+  const initials = user?.name
+    ?.split(" ")
+    .map((e) => e.slice(0, 1).toUpperCase())
+    .join("")
+    .toString()
+
+  const emailInitial = user?.email?.slice(0, 1).toUpperCase()
+
   return (
     <Button size="sm" onClick={onOpen}>
       <Skeleton isLoaded={!isLoading}>
-        <code>{user?.name || user?.email}</code>
+        <Box
+          sx={{
+            "@media(min-width: 480px)": { display: "none" },
+          }}
+        >
+          {initials || emailInitial}
+        </Box>
+        <Box
+          sx={{
+            "@media(max-width: 480px)": { display: "none" },
+          }}
+        >
+          {user?.name || user?.email}
+        </Box>
       </Skeleton>
     </Button>
   )
