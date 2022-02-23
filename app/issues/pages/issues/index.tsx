@@ -14,7 +14,7 @@ const IssueList = () => {
   const [issues] = useQuery(getIssues, undefined)
   return (
     <Box>
-      <UnorderedList styleType="none">
+      <UnorderedList styleType="none" marginLeft={{ base: "0rem", sm: "1rem" }}>
         {issues?.map((issue) => {
           return (
             <ListItem key={issue.id}>
