@@ -20,7 +20,7 @@ const CreateNewButton = ({ title }) => {
     return (
       <Link href={`/issues/new`}>
         <Button as="a" size="sm" colorScheme="blue">
-          <a>Create New Issue</a>
+          <a>+ Issue</a>
         </Button>
       </Link>
     )
@@ -28,7 +28,7 @@ const CreateNewButton = ({ title }) => {
     return (
       <Link href={`/${path}/new`}>
         <Button as="a" size="sm" colorScheme="blue">
-          <a>Create New {capitalized}</a>
+          <a>+ {capitalized}</a>
         </Button>
       </Link>
     )
