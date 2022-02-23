@@ -1,4 +1,4 @@
-import { Text, Box, Flex, Grid, GridItem, useStyleConfig } from "@chakra-ui/react"
+import { Text, Box, Flex, useStyleConfig, Stack } from "@chakra-ui/react"
 
 import React from "react"
 
@@ -50,15 +50,26 @@ export function ItemCard(props: Props) {
         {`#${id} ${title} `}
       </CardHeader>
       <CardBody p="0px 2px" fontSize="md" color="gray.500" fontWeight="400">
-        <Flex direction="column">
+        <Stack>
           <Text>
             <strong>{`${assignedStatus}`}</strong>
             <br />
             Progress: <strong>{`${displayStatus}`} </strong>| Priority:{" "}
             <strong>{`${priorityStatus}`}</strong>
           </Text>
-          <Text>{description.substring(0, 50)}...</Text>
-        </Flex>
+          <Text
+            sx={{
+              "@media(max-width: 480px)": { display: "none" },
+            }}
+          >
+            {description.length > 150 ? `${description.substring(0, 150)}...` : description}
+          </Text>
+          <Text
+            sx={{
+              "@media(min-width: 480px)": { display: "none" },
+            }}
+          >{`${description.substring(0, 50)}...`}</Text>
+        </Stack>
       </CardBody>
     </Card>
   )
