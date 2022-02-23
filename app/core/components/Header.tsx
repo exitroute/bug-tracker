@@ -38,7 +38,7 @@ const UserButton = ({ onOpen }) => {
   const emailInitial = user?.email?.slice(0, 1).toUpperCase()
 
   return (
-    <Button size="sm" onClick={onOpen}>
+    <Button size="sm" onClick={onOpen} colorScheme="blue">
       <Skeleton isLoaded={!isLoading}>
         <Box
           sx={{
