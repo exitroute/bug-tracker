@@ -23,7 +23,7 @@ const Header = ({ title, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Flex direction="column" justify="space-between" h="100vh">
-      <Sidebar isOpen={isOpen} onClose={onClose} display={{ base: "none", md: "block" }} />
+      <Sidebar onClose={onClose} display={{ base: "none", md: "block" }} />
       <Drawer
         isOpen={isOpen}
         placement="left"
