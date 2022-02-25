@@ -19,7 +19,7 @@ const CreateNewButton = ({ title }) => {
   if (title === "Home") {
     return (
       <Link href={`/issues/new`}>
-        <Button as="a" size="sm" colorScheme="blue">
+        <Button as="a" size="sm" w={{ base: "auto", md: "20%" }} colorScheme="blue">
           <a>+ Issue</a>
         </Button>
       </Link>
@@ -27,7 +27,7 @@ const CreateNewButton = ({ title }) => {
   } else
     return (
       <Link href={`/${path}/new`}>
-        <Button as="a" size="sm" colorScheme="blue">
+        <Button as="a" size="sm" w={{ base: "auto", md: "20%" }} colorScheme="blue">
           <a>+ {capitalized}</a>
         </Button>
       </Link>
