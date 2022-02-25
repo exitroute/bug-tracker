@@ -1,4 +1,4 @@
-import { useQuery, useRouter, useSession, Link } from "blitz"
+import { useQuery, useRouter, useSession, Link as BlitzLink } from "blitz"
 import { Suspense, useEffect } from "react"
 import {
   Box,
@@ -9,6 +9,7 @@ import {
   Button,
   CloseButton,
   Flex,
+  Link,
   Skeleton,
   useDisclosure,
 } from "@chakra-ui/react"
@@ -78,11 +79,16 @@ const Sidebar = ({ onClose, ...rest }) => {
       </Flex>
       <Flex h="80vh" direction="column" justify="space-between" px="2">
         <Stack>
-          <Link href="./users/new">Edit My Profile</Link>
+          <BlitzLink href="/users/new">
+            <Link>Edit My Profile</Link>
+          </BlitzLink>
+          <BlitzLink href="/settings">
+            <Link>Settings</Link>
+          </BlitzLink>
           {routes.map((route, index) => (
-            <Link key={index} href={`/${route.toLowerCase()}`}>
-              <a>{route}</a>
-            </Link>
+            <BlitzLink key={index} href={`/${route.toLowerCase()}`}>
+              <Link display={{ base: "none", md: "inline" }}>{route}</Link>
+            </BlitzLink>
           ))}
         </Stack>
         <LogoutButton />
