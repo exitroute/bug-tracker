@@ -60,7 +60,7 @@ const Header = ({ title, children }) => {
 }
 
 const Sidebar = ({ onClose, ...rest }) => {
-  const routes = ["Settings", "Home", "Issues", "Projects", "Users", "Teams"]
+  const routes = ["Home", "Issues", "Projects", "Users", "Teams"]
 
   return (
     <Box
