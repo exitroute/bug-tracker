@@ -45,7 +45,12 @@ export function ItemCard(props: Props) {
   const priorityStatus = priorityStatusOutput(priority)
 
   return (
-    <Card p="1rem" px={{ base: "0rem" }} _hover={{ background: "gray.100" }}>
+    <Card
+      p="1rem"
+      px={{ base: "0rem", md: "1rem" }}
+      _hover={{ background: displayStatus === "CLOSED" ? "gray.300" : "gray.100" }}
+      bg={displayStatus === "CLOSED" ? "gray.100" : "white"}
+    >
       <CardHeader p="12px 5px" fontSize="lg" color="gray.500" fontWeight="bold">
         {`#${id} ${title} `}
       </CardHeader>
