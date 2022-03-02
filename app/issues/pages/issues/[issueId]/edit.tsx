@@ -27,7 +27,7 @@ export const EditIssueForm = () => {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
         <Stack align={"center"}>
           <Heading>Edit Issue: {issue?.title}</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>

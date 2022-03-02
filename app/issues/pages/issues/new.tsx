@@ -18,7 +18,7 @@ const NewIssuePage: BlitzPage = () => {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
         <Stack align={"center"}>
           <Heading>Create Issue</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
