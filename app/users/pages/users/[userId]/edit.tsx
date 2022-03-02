@@ -1,7 +1,7 @@
 import { Suspense } from "react"
-import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "blitz"
+import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery, useSession } from "blitz"
 
-import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
+import { Flex, Stack, Heading, Text, Center, useColorModeValue } from "@chakra-ui/react"
 
 import DetailsLayout from "app/core/layouts/DetailsLayout"
 import { FORM_ERROR } from "app/core/components/AppForm"
@@ -13,11 +13,13 @@ import updateUserProfile from "app/users/mutations/updateUserProfile"
 export const EditUserProfileForm = () => {
   const router = useRouter()
   const userId = useParam("userId", "number")!
+  const session = useSession()
 
   const [userProfile] = useQuery(getInitialUserProfileData, userId, {
     suspense: false,
     staleTime: Infinity,
   })
+
   const initialValues = { userProfile }
 
   const redirect = (updated) => router.push(Routes.UserProfilePage({ userId: updated.id }))
@@ -30,25 +32,35 @@ export const EditUserProfileForm = () => {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading>Update User: {userProfile?.name}</Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            What do you want to change?
-          </Text>
+      {session.userId === userId || session.role === "ADMIN" ? (
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading>
+              Update User Profile {userProfile?.name ? `:  ${userProfile?.name}` : ""}
+            </Heading>
+            <Text fontSize={"lg"} color={"gray.600"}>
+              What do you want to change?
+            </Text>
+          </Stack>
+          <UserProfileForm
+            initialValues={initialValues}
+            submitText="Update Issue"
+            onSubmit={async (values) => {
+              try {
+                await updateUserProfileMutation(values)
+              } catch (error: any) {
+                return { [FORM_ERROR]: error.toString() }
+              }
+            }}
+          />
         </Stack>
-        <UserProfileForm
-          initialValues={initialValues}
-          submitText="Update Issue"
-          onSubmit={async (values) => {
-            try {
-              await updateUserProfileMutation(values)
-            } catch (error: any) {
-              return { [FORM_ERROR]: error.toString() }
-            }
-          }}
-        />
-      </Stack>
+      ) : (
+        <Center>
+          <Heading as="h3" size="md" color="gray.500">
+            You cannot edit this user&apos;s data.
+          </Heading>
+        </Center>
+      )}
     </Flex>
   )
 }
