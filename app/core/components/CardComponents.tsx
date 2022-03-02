@@ -15,6 +15,7 @@ export const Card = (props: BoxProps) => (
     rounded={{ md: "lg" }}
     shadow="base"
     overflow="hidden"
+    w="100%"
     {...props}
   />
 )

@@ -49,7 +49,7 @@ const IssueDetails = () => {
     <>
       <Box as="main" height="100%" bg={useColorModeValue("gray.100", "inherit")}>
         <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
-          <Card maxW="3xl" mx="auto">
+          <Card>
             <CardHeader
               title={`${title} #${id}`}
               action={
