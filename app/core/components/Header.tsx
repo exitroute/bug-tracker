@@ -60,6 +60,11 @@ const Header = ({ title, children }) => {
 }
 
 const Sidebar = ({ onClose, ...rest }) => {
+  const [user] = useQuery(getCurrentUser, null, {
+    suspense: false,
+    staleTime: Infinity,
+  })
+
   const routes = ["Home", "Issues", "Projects", "Users", "Teams"]
 
   return (
@@ -79,7 +84,7 @@ const Sidebar = ({ onClose, ...rest }) => {
       </Flex>
       <Flex h="80vh" direction="column" justify="space-between" px="2">
         <Stack>
-          <BlitzLink href="/users/new">
+          <BlitzLink href={`/users/${user?.id}/edit`}>
             <Link>Edit My Profile</Link>
           </BlitzLink>
           <BlitzLink href="/settings">
