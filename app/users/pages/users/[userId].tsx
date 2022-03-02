@@ -1,5 +1,5 @@
 import { MouseEvent, Suspense } from "react"
-import { BlitzPage, useParam, useQuery, useMutation, Link, Router } from "blitz"
+import { BlitzPage, useParam, useQuery, useMutation, Link, Router, useSession } from "blitz"
 
 import { Box, Flex, Button, useColorModeValue } from "@chakra-ui/react"
 
@@ -16,6 +16,7 @@ import getUserProfile from "app/users/queries/getUserProfile"
 import deleteUserProfile from "app/users/mutations/deleteUserProfile"
 
 const UserProfileDetails = () => {
+  const session = useSession()
   const userId = useParam("userId", "number")!
   const [user, { refetch }]: any = useQuery(getUserProfile, userId)
   const [deleteUserProfileMutation] = useMutation(deleteUserProfile)
@@ -34,16 +35,20 @@ const UserProfileDetails = () => {
     <Box as="main" height="100%" bg={useColorModeValue("gray.100", "inherit")}>
       <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
         <Card>
-          <CardHeader
-            title={`${name}`}
-            action={
-              <Link href={`/users/${userId}/edit`}>
-                <Button as="a" variant="outline" minW="20">
-                  Edit
-                </Button>
-              </Link>
-            }
-          />
+          {session.userId === userId || session.role === "ADMIN" ? (
+            <CardHeader
+              title={`${name}`}
+              action={
+                <Link href={`/users/${userId}/edit`}>
+                  <Button as="a" variant="outline" minW="20">
+                    Edit
+                  </Button>
+                </Link>
+              }
+            />
+          ) : (
+            <CardHeader title={`${name}`} />
+          )}
           <CardContent>
             <Property label="Role" value={`${role}`} />
             <Property label="Email" value={`${email}`} />
@@ -60,13 +65,16 @@ const UserProfileDetails = () => {
                 <Property key={index} label="Team" value={`${team.title}`} />
               ))}
           </CardContent>
-          <CardFooter
-            action={
-              <Button colorScheme="pink" onClick={(e) => deleteUserProfileHandler(e, id)}>
-                Delete
-              </Button>
-            }
-          />
+
+          {session.role === "ADMIN" ? (
+            <CardFooter
+              action={
+                <Button colorScheme="pink" onClick={(e) => deleteUserProfileHandler(e, id)}>
+                  Delete
+                </Button>
+              }
+            />
+          ) : null}
         </Card>
       </Flex>
     </Box>
