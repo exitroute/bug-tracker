@@ -2,7 +2,7 @@ import { Link, useRouter } from "blitz"
 import { Button } from "@chakra-ui/react"
 import React from "react"
 
-const CreateNewButton = ({ title }) => {
+const CreateNewButton = ({ title, display }) => {
   const router = useRouter()
   let slashes = new Array()
   let letters = new Array()
@@ -16,22 +16,21 @@ const CreateNewButton = ({ title }) => {
   const singular = path.substring(0, path.length - 1)
   const capitalized = singular.charAt(0).toUpperCase() + singular.slice(1)
 
-  if (title === "Home") {
-    return (
-      <Link href={`/issues/new`}>
-        <Button as="a" size="sm" w={{ base: "auto", md: "20%" }} colorScheme="blue">
-          + Issue
-        </Button>
-      </Link>
-    )
-  } else
-    return (
-      <Link href={`/${path}/new`}>
-        <Button as="a" size="sm" w={{ base: "auto", md: "20%" }} colorScheme="blue">
-          + {capitalized}
-        </Button>
-      </Link>
-    )
+  return (
+    <Link href={title === "Home" ? `/issues/new` : `/${path}/new`}>
+      <Button
+        as="a"
+        size="sm"
+        w={{ base: "auto" }}
+        colorScheme="blue"
+        display={display}
+        justify-content="center"
+        align-items="center"
+      >
+        {title === "Home" ? `+ Issue` : `+ ${capitalized}`}
+      </Button>
+    </Link>
+  )
 }
 
 export default CreateNewButton
