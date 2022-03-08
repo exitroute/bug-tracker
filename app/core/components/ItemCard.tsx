@@ -1,4 +1,4 @@
-import { Text, Box, Flex, useStyleConfig, Stack } from "@chakra-ui/react"
+import { Text, Box, Flex, useStyleConfig, Stack, Heading } from "@chakra-ui/react"
 
 import React from "react"
 
@@ -46,13 +46,14 @@ export function ItemCard(props: Props) {
 
   return (
     <Card
+      borderBottom="1px solid"
+      borderBottomColor="gray.200"
       p="1rem"
-      px={{ base: "0rem", md: "1rem" }}
       _hover={{ background: displayStatus === "CLOSED" ? "gray.300" : "gray.100" }}
       bg={displayStatus === "CLOSED" ? "gray.100" : "white"}
     >
-      <CardHeader p="12px 5px" fontSize="lg" color="gray.500" fontWeight="bold">
-        {`#${id} ${title} `}
+      <CardHeader fontSize="lg" color="gray.500" fontWeight="bold">
+        <Heading mb={2} as="h3" size="md">{`#${id} ${title} `}</Heading>
       </CardHeader>
       <CardBody p="0px 2px" fontSize="md" color="gray.500" fontWeight="400">
         <Stack>
