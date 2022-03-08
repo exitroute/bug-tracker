@@ -1,9 +1,9 @@
 import { Suspense } from "react"
 import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "blitz"
 
-import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
+import { Flex, Stack, Heading, Text } from "@chakra-ui/react"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import { FORM_ERROR } from "app/core/components/AppForm"
 import { IssueForm } from "app/issues/components/IssueForm"
 
@@ -21,15 +21,13 @@ export const EditIssueForm = () => {
   const [updateIssueMutation] = useMutation(updateIssue, { onSuccess: redirect })
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
+    <Flex minH={"100vh"}>
       <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
         <Stack align={"center"}>
-          <Heading>Edit Issue: {issue?.title}</Heading>
+          <Heading>
+            Edit Issue #{issue?.id}:<br />
+            {issue?.title}
+          </Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
             What do you want to change?
           </Text>
@@ -62,5 +60,5 @@ const EditIssuePage: BlitzPage = () => {
 
 EditIssuePage.authenticate = { redirectTo: "/" }
 EditIssuePage.suppressFirstRenderFlicker = true
-EditIssuePage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
+EditIssuePage.getLayout = (page) => <Layout title="Edit">{page}</Layout>
 export default EditIssuePage
