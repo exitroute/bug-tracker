@@ -12,7 +12,7 @@ import {
   CardImage,
 } from "app/core/components/CardComponents"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import getIssue from "app/issues/queries/getIssue"
 import deleteIssue from "app/issues/mutations/deleteIssue"
 
@@ -48,7 +48,7 @@ const IssueDetails = () => {
   return (
     <>
       <Box as="main" height="100%" bg={useColorModeValue("gray.100", "inherit")}>
-        <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
+        <Flex as="section" minH={"100vh"}>
           <Card>
             <CardHeader
               title={`${title} #${id}`}
@@ -95,7 +95,7 @@ const IssueDetails = () => {
           </Card>
         </Flex>
       </Box>
-      <pre>{JSON.stringify({ issue }, null, 2)}</pre>
+      {/* <pre>{JSON.stringify({ issue }, null, 2)}</pre> */}
     </>
   )
 }
@@ -110,6 +110,6 @@ const IssuePage: BlitzPage = () => {
 
 IssuePage.authenticate = { redirectTo: "/" }
 IssuePage.suppressFirstRenderFlicker = true
-IssuePage.getLayout = (page) => <DetailsLayout title="Issue">{page}</DetailsLayout>
+IssuePage.getLayout = (page) => <Layout title="Issue">{page}</Layout>
 
 export default IssuePage
