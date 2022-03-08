@@ -2,7 +2,7 @@ import { BlitzPage, Router, useMutation } from "blitz"
 
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import { IssueForm } from "app/issues/components/IssueForm"
 import createIssue from "app/issues/mutations/createIssue"
 
@@ -12,13 +12,8 @@ const NewIssuePage: BlitzPage = () => {
   const [createIssueMutation] = useMutation(createIssue)
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
+    <Flex minH={"100vh"}>
+      <Stack spacing={8} mx={"auto"} w="100%" pt={8}>
         <Stack align={"center"}>
           <Heading>Create Issue</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
@@ -44,5 +39,5 @@ const NewIssuePage: BlitzPage = () => {
 
 NewIssuePage.authenticate = { redirectTo: "/" }
 NewIssuePage.suppressFirstRenderFlicker = true
-NewIssuePage.getLayout = (page) => <DetailsLayout title="New">{page}</DetailsLayout>
+NewIssuePage.getLayout = (page) => <Layout title="New">{page}</Layout>
 export default NewIssuePage
