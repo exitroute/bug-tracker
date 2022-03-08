@@ -1,5 +1,6 @@
 import { Link, useParam, useRouter } from "blitz"
 import { Box } from "@chakra-ui/react"
+import { ArrowBackIcon } from "@chakra-ui/icons"
 
 export const BackButton = ({ title }) => {
   const router = useRouter()
@@ -47,6 +48,7 @@ export const BackButton = ({ title }) => {
 export const DetailsHeader = ({ title }) => {
   return (
     <Box as="header" p="1rem">
+      <ArrowBackIcon />
       <BackButton title={title} />
     </Box>
   )
