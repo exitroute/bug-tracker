@@ -3,6 +3,7 @@ import { FileError, FileRejection, useDropzone } from "react-dropzone"
 import { useField } from "react-final-form"
 import { SingleFileUploadWithProgress } from "./SingleFileUploadWithProgress"
 import { UploadError } from "./UploadError"
+import { Box, Text } from "@chakra-ui/react"
 
 export interface FilesToUpload {
   file: File
@@ -45,12 +46,12 @@ export function MultipleFileUploadField({ input }) {
 
   return (
     <>
-      <div {...getRootProps()}>
+      <Box {...getRootProps()} border="dashed" borderRadius="lg" p={3}>
         <input {...getInputProps()} />
 
         {/* eslint-disable-next-line react/no-unescaped-entities */}
-        <p>Drag 'n' drop some files here, or click to select files</p>
-      </div>
+        <Text textAlign="center">Drag 'n' drop some files here, or click to select files</Text>
+      </Box>
       {files.map((fileWrapper, i) => (
         <div key={i}>
           {fileWrapper.errors.length ? (
