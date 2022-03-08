@@ -24,7 +24,7 @@ const Header = ({ title, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Flex direction="column" justify="space-between" h="100vh">
-      <Sidebar onClose={onClose} display={{ base: "none", md: "block" }} />
+      <Sidebar onClose={onClose} display={{ base: "none", md: "block" }} title={title} />
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -35,13 +35,22 @@ const Header = ({ title, children }) => {
         size="full"
       >
         <DrawerContent>
-          <Sidebar onClose={onClose} />
+          <Sidebar onClose={onClose} title={title} />
         </DrawerContent>
       </Drawer>
-      <Flex p="2" as="header" justifyContent={"space-between"} alignItems={"center"}>
+      <Flex
+        p="2"
+        as="header"
+        justifyContent={{ base: "space-between", md: "left" }}
+        borderBottom="1px solid"
+        borderBottomColor="gray.200"
+      >
         <Suspense fallback={<Skeleton />}>
           <UserButton onOpen={onOpen} />
         </Suspense>
+        <Heading size="lg" marginLeft={{ md: "calc(20% + 1rem)" }}>
+          {title}
+        </Heading>
         <CreateNewButton title={title} display={{ base: "inline-flex", md: "none" }} />
       </Flex>
       <Box
@@ -78,13 +87,13 @@ const Sidebar = ({ onClose, title, ...rest }) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Box borderBottomWidth="1px">User Info</Box>
+        <Box borderBottomWidth="1px">{user?.name}</Box>
         <CloseButton as="button" display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       <Flex h="80vh" direction="column" justify="space-between" px="2">
         <Stack>
-          <BlitzLink href={`/users/${user?.id}/edit`}>
-            <Link>Edit My Profile</Link>
+          <BlitzLink href={`/users/${user?.id}`}>
+            <Link>My Profile</Link>
           </BlitzLink>
           <BlitzLink href="/settings">
             <Link>Settings</Link>
@@ -125,7 +134,7 @@ const UserButton = ({ onOpen }) => {
       size="sm"
       onClick={onOpen}
       colorScheme="blue"
-      visibility={{ md: "hidden" }}
+      display={{ md: "none" }}
       w={{ base: "auto", md: "20%" }}
     >
       <Skeleton isLoaded={!isLoading}>
