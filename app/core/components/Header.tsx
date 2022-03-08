@@ -42,8 +42,7 @@ const Header = ({ title, children }) => {
         <Suspense fallback={<Skeleton />}>
           <UserButton onOpen={onOpen} />
         </Suspense>
-        <Heading textAlign="center">{title}</Heading>
-        <CreateNewButton title={title} />
+        <CreateNewButton title={title} display={{ base: "inline-flex", md: "none" }} />
       </Flex>
       <Box
         h="100%"
@@ -59,7 +58,7 @@ const Header = ({ title, children }) => {
   )
 }
 
-const Sidebar = ({ onClose, ...rest }) => {
+const Sidebar = ({ onClose, title, ...rest }) => {
   const [user] = useQuery(getCurrentUser, null, {
     suspense: false,
     staleTime: Infinity,
@@ -95,6 +94,7 @@ const Sidebar = ({ onClose, ...rest }) => {
               <Link display={{ base: "none", md: "inline" }}>{route}</Link>
             </BlitzLink>
           ))}
+          <CreateNewButton title={title} display={{ base: "none", md: "inline-flex" }} />
         </Stack>
         <LogoutButton />
       </Flex>
