@@ -25,7 +25,7 @@ export const IssueForm = (props) => {
 
   return (
     <Suspense fallback="Loading...">
-      <Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")} boxShadow={"lg"} p={8}>
+      <Box p={8}>
         <Stack spacing={4}>
           <Form {...props}>
             <Stack spacing={8}>
