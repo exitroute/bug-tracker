@@ -12,7 +12,6 @@ import {
 export const Card = (props: BoxProps) => (
   <Box
     bg={useColorModeValue("white", "gray.700")}
-    rounded={{ md: "lg" }}
     shadow="base"
     overflow="hidden"
     w="100%"
