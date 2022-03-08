@@ -1,7 +1,8 @@
-import React, { Suspense, useCallback, useState, useEffect } from "react"
+import React, { Suspense, useState, useEffect } from "react"
 import { useQuery, useRouter } from "blitz"
 
-import { Box, Stack, useColorModeValue, Radio } from "@chakra-ui/react"
+import { Box, Stack, Flex, Radio, Image, IconButton } from "@chakra-ui/react"
+import { DeleteIcon } from "@chakra-ui/icons"
 
 import { Field, FieldRenderProps } from "react-final-form"
 
@@ -95,12 +96,18 @@ const EditIssueFiles = ({ props }: any) => {
   return (
     <>
       {files.map((file, i, files) => (
-        <div key={i}>
-          {file.url} {file.id}
-          <button type="button" onClick={() => onDelete(file.id, file.url, files)}>
-            X
-          </button>
-        </div>
+        <Flex key={i} alignItems="center">
+          <Image boxSize="100px" src={file.url} alt="screen shot" />
+          <IconButton
+            type="button"
+            aria-label="Delete issue screenshot"
+            colorScheme="gray.700"
+            onClick={() => onDelete(file.id, file.url, files)}
+            ml={4}
+            variant="outline"
+            icon={<DeleteIcon />}
+          ></IconButton>
+        </Flex>
       ))}
     </>
   )
