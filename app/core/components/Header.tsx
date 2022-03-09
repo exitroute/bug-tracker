@@ -63,6 +63,19 @@ const Header = ({ title, children }) => {
         {children}
       </Box>
       <Navigation />
+      <Box
+        h="full"
+        w="20%"
+        pos="fixed"
+        top="0px"
+        left="80%"
+        borderLeft="1px"
+        borderLeftColor="gray.200"
+        display={{ base: "none", md: "block" }}
+        bg="white"
+      >
+        Filters
+      </Box>
     </Flex>
   )
 }
