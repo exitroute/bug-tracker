@@ -11,7 +11,7 @@ import {
   CardContent,
 } from "app/core/components/CardComponents"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import getTeam from "app/teams/queries/getTeam"
 import deleteTeam from "app/teams/mutations/deleteTeam"
 
@@ -32,7 +32,7 @@ const TeamDetails = () => {
   return (
     <>
       <Box as="main" height="100%" bg={useColorModeValue("gray.100", "inherit")}>
-        <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
+        <Flex as="section" minH={"100vh"}>
           <Card>
             <CardHeader
               title={`${team?.title} #${team?.id}`}
@@ -88,6 +88,6 @@ const TeamPage: BlitzPage = () => {
 
 TeamPage.authenticate = { redirectTo: "/" }
 TeamPage.suppressFirstRenderFlicker = true
-TeamPage.getLayout = (page) => <DetailsLayout title="Team">{page}</DetailsLayout>
+TeamPage.getLayout = (page) => <Layout title="Team">{page}</Layout>
 
 export default TeamPage
