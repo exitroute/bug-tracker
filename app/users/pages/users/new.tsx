@@ -2,7 +2,7 @@ import { BlitzPage, Router, useMutation } from "blitz"
 
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import { UserProfileForm } from "app/users/components/UserProfileForm"
 import createUser from "app/users/mutations/createUser"
 
@@ -12,13 +12,8 @@ const NewUserPage: BlitzPage = () => {
   const [createUserMutation] = useMutation(createUser)
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+    <Flex minH={"100vh"}>
+      <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
         <Stack align={"center"}>
           <Heading>New User</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
@@ -44,5 +39,5 @@ const NewUserPage: BlitzPage = () => {
 
 NewUserPage.authenticate = { redirectTo: "/" }
 NewUserPage.suppressFirstRenderFlicker = true
-NewUserPage.getLayout = (page) => <DetailsLayout title="New">{page}</DetailsLayout>
+NewUserPage.getLayout = (page) => <Layout title="New">{page}</Layout>
 export default NewUserPage
