@@ -11,7 +11,7 @@ import {
   CardContent,
 } from "app/core/components/CardComponents"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import getProject from "app/projects/queries/getProject"
 import deleteProject from "app/projects/mutations/deleteProject"
 // TODO refactor as delete project
@@ -33,7 +33,7 @@ const ProjectDetails = () => {
   return (
     <>
       <Box as="main" height="100%" bg={useColorModeValue("gray.100", "inherit")}>
-        <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
+        <Flex as="section" minH={"100vh"}>
           <Card>
             <CardHeader
               title={`${project?.title} - Project ID #${project?.id}`}
@@ -85,6 +85,6 @@ const ProjectPage: BlitzPage = () => {
 
 ProjectPage.authenticate = { redirectTo: "/" }
 ProjectPage.suppressFirstRenderFlicker = true
-ProjectPage.getLayout = (page) => <DetailsLayout title="Project">{page}</DetailsLayout>
+ProjectPage.getLayout = (page) => <Layout title="Project">{page}</Layout>
 
 export default ProjectPage
