@@ -24,9 +24,8 @@ export const EditIssueForm = () => {
     <Flex minH={"100vh"}>
       <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
         <Stack align={"center"}>
-          <Heading>
-            Edit Issue #{issue?.id}:<br />
-            {issue?.title}
+          <Heading as="h3" size="lg">
+            Edit Issue #{issue?.id}: {issue?.title}
           </Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
             What do you want to change?
