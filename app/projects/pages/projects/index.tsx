@@ -9,7 +9,8 @@ const ProjectList = () => {
   const [projects] = useQuery(getProjects, undefined)
   return (
     <Box>
-      <UnorderedList styleType="none">
+      <UnorderedList styleType="none" marginLeft="0rem">
+        {" "}
         {projects?.map((project) => (
           <ListItem key={project.id}>
             <Link href={`/projects/${project.id}`}>
