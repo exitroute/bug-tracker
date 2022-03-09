@@ -13,7 +13,7 @@ const TeamList = () => {
   const [teams] = useQuery(getTeams, undefined)
   return (
     <Box>
-      <UnorderedList styleType="none">
+      <UnorderedList styleType="none" marginLeft="0px">
         {teams?.map((team) => (
           <ListItem key={team.id}>
             <Link href={Routes.TeamPage({ teamId: team.id })}>
