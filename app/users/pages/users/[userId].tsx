@@ -11,7 +11,7 @@ import {
   CardContent,
 } from "app/core/components/CardComponents"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import getUserProfile from "app/users/queries/getUserProfile"
 import deleteUserProfile from "app/users/mutations/deleteUserProfile"
 
@@ -33,7 +33,7 @@ const UserProfileDetails = () => {
 
   return (
     <Box as="main" height="100%" bg={useColorModeValue("gray.100", "inherit")}>
-      <Flex as="section" minH={"100vh"} align={"center"} justify={"center"}>
+      <Flex as="section" minH={"100vh"}>
         <Card>
           {session.userId === userId || session.role === "ADMIN" ? (
             <CardHeader
@@ -91,6 +91,6 @@ const UserProfilePage: BlitzPage = () => {
 
 UserProfilePage.authenticate = { redirectTo: "/" }
 UserProfilePage.suppressFirstRenderFlicker = true
-UserProfilePage.getLayout = (page) => <DetailsLayout title="User">{page}</DetailsLayout>
+UserProfilePage.getLayout = (page) => <Layout title="User">{page}</Layout>
 
 export default UserProfilePage
