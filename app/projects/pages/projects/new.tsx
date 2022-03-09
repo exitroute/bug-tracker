@@ -2,7 +2,7 @@ import { useRouter, BlitzPage, Routes, useMutation } from "blitz"
 
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import { FORM_ERROR } from "app/core/components/AppForm"
 import { ProjectForm } from "app/projects/components/ProjectForm"
 import createProject from "app/projects/mutations/createProject"
@@ -15,15 +15,12 @@ const NewProjectPage: BlitzPage = () => {
   const onSuccess = (project) => router.push(Routes.ProjectPage({ projectId: project.id }))
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+    <Flex minH={"100vh"}>
+      <Stack spacing={8} mx={"auto"} w="100%" pt={8}>
         <Stack align={"center"}>
-          <Heading>Create Project</Heading>
+          <Heading as="h3" size="lg">
+            Create Project
+          </Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
             What&apos;s the goal?
           </Text>
@@ -47,5 +44,5 @@ const NewProjectPage: BlitzPage = () => {
 
 NewProjectPage.authenticate = { redirectTo: "/" }
 NewProjectPage.suppressFirstRenderFlicker = true
-NewProjectPage.getLayout = (page) => <DetailsLayout title="New">{page}</DetailsLayout>
+NewProjectPage.getLayout = (page) => <Layout title="New">{page}</Layout>
 export default NewProjectPage
