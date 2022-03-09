@@ -3,7 +3,7 @@ import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "b
 
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import { FORM_ERROR } from "app/core/components/AppForm"
 import { TeamForm } from "app/teams/components/TeamForm"
 
@@ -25,12 +25,7 @@ export const EditTeamForm = () => {
 
   return (
     <>
-      <Flex
-        minH={"100vh"}
-        align={"center"}
-        justify={"center"}
-        bg={useColorModeValue("gray.50", "gray.800")}
-      >
+      <Flex minH={"100vh"}>
         <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
           <Stack align={"center"}>
             <Heading>Edit Team: {team?.title}</Heading>
@@ -69,5 +64,5 @@ const EditTeamPage: BlitzPage = () => {
 
 EditTeamPage.authenticate = { redirectTo: "/" }
 EditTeamPage.suppressFirstRenderFlicker = true
-EditTeamPage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
+EditTeamPage.getLayout = (page) => <Layout title="Edit">{page}</Layout>
 export default EditTeamPage
