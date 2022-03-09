@@ -3,7 +3,7 @@ import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "b
 
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import { FORM_ERROR } from "app/core/components/AppForm"
 import { ProjectForm } from "app/projects/components/ProjectForm"
 
@@ -22,15 +22,12 @@ export const EditProjectForm = () => {
 
   return (
     <>
-      <Flex
-        minH={"100vh"}
-        align={"center"}
-        justify={"center"}
-        bg={useColorModeValue("gray.50", "gray.800")}
-      >
-        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Flex minH={"100vh"}>
+        <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
           <Stack align={"center"}>
-            <Heading>Edit Project: {project?.title}</Heading>
+            <Heading as="h3" size="lg">
+              Edit Project #{project?.id}: {project?.title}
+            </Heading>
             <Text fontSize={"lg"} color={"gray.600"}>
               What do you want to change?
             </Text>
@@ -68,5 +65,5 @@ const EditProjectPage: BlitzPage = () => {
 
 EditProjectPage.authenticate = { redirectTo: "/" }
 EditProjectPage.suppressFirstRenderFlicker = true
-EditProjectPage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
+EditProjectPage.getLayout = (page) => <Layout title="Edit">{page}</Layout>
 export default EditProjectPage
