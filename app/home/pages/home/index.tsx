@@ -37,7 +37,7 @@ const HomeList = () => {
   // This list also returns projects and teams
   return (
     <Box>
-      <UnorderedList styleType="none">
+      <UnorderedList styleType="none" marginLeft="0rem">
         {issues?.map((issue) => (
           <ListItem key={issue.id}>
             <Link href={Routes.IssuePage({ issueId: issue.id })}>
