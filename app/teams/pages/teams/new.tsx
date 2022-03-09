@@ -2,7 +2,7 @@ import { useRouter, BlitzPage, Routes, useMutation } from "blitz"
 
 import { Flex, Stack, Heading, Text, useColorModeValue } from "@chakra-ui/react"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import { TeamForm } from "app/teams/components/TeamForm"
 import createTeam from "app/teams/mutations/createTeam"
 
@@ -14,13 +14,8 @@ const NewTeamPage: BlitzPage = () => {
   const onSuccess = (team) => router.push(Routes.TeamPage({ teamId: team.id }))
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+    <Flex minH={"100vh"}>
+      <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
         <Stack align={"center"}>
           <Heading>Create Team</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>
@@ -46,5 +41,5 @@ const NewTeamPage: BlitzPage = () => {
 
 NewTeamPage.authenticate = { redirectTo: "/" }
 NewTeamPage.suppressFirstRenderFlicker = true
-NewTeamPage.getLayout = (page) => <DetailsLayout title="New">{page}</DetailsLayout>
+NewTeamPage.getLayout = (page) => <Layout title="New">{page}</Layout>
 export default NewTeamPage
