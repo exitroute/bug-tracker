@@ -8,7 +8,7 @@ const UserProfileList = () => {
   const [users] = useQuery(getUserProfiles, undefined)
   return (
     <Box>
-      <UnorderedList styleType="none">
+      <UnorderedList styleType="none" marginLeft="0px">
         {users?.map((user) => (
           <ListItem key={user.id}>
             <Link href={Routes.UserProfilePage({ userId: user.id })}>
