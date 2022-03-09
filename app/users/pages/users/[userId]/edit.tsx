@@ -3,7 +3,7 @@ import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery, useSessi
 
 import { Flex, Stack, Heading, Text, Center, useColorModeValue } from "@chakra-ui/react"
 
-import DetailsLayout from "app/core/layouts/DetailsLayout"
+import Layout from "app/core/layouts/Layout"
 import { FORM_ERROR } from "app/core/components/AppForm"
 import { UserProfileForm } from "app/users/components/UserProfileForm"
 
@@ -26,19 +26,14 @@ export const EditUserProfileForm = () => {
   const [updateUserProfileMutation] = useMutation(updateUserProfile, { onSuccess: redirect })
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
-    >
+    <Flex minH={"100vh"}>
       {session.userId === userId || session.role === "ADMIN" ? (
-        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack spacing={8} mx={"auto"} w={"100%"} py={12} px={6}>
           <Stack align={"center"}>
-            <Heading>
-              Update User Profile {userProfile?.name ? `:  ${userProfile?.name}` : ""}
+            <Heading textAlign="center" as="h3" size="md">
+              Update User Profile: {userProfile?.name ? `${userProfile?.name}` : ""}
             </Heading>
-            <Text fontSize={"lg"} color={"gray.600"}>
+            <Text fontSize={"md"} color={"gray.600"}>
               What do you want to change?
             </Text>
           </Stack>
@@ -77,6 +72,6 @@ const EditUserProfilePage: BlitzPage = () => {
 
 EditUserProfilePage.authenticate = { redirectTo: "/" }
 EditUserProfilePage.suppressFirstRenderFlicker = true
-EditUserProfilePage.getLayout = (page) => <DetailsLayout title="Edit">{page}</DetailsLayout>
+EditUserProfilePage.getLayout = (page) => <Layout title="Edit">{page}</Layout>
 
 export default EditUserProfilePage
