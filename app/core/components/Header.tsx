@@ -35,7 +35,11 @@ const Header = ({ title, children }) => {
         size="full"
       >
         <DrawerContent>
-          <Sidebar onClose={onClose} title={title} />
+          {placement === "left" ? (
+            <Sidebar onClose={onClose} title={title} />
+          ) : (
+            <ChartsSidebar onClose={onClose} />
+          )}
         </DrawerContent>
       </Drawer>
       <Flex
