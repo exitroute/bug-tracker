@@ -14,6 +14,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 
+import { GrBarChart, GrFilter } from "react-icons/gr"
+
 import Navigation from "../components/Navigation"
 
 import getCurrentUser from "app/users/queries/getCurrentUser"
