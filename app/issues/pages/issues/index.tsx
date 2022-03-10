@@ -5,15 +5,33 @@
 
 import { Suspense } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
-import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
+import { Box, UnorderedList, ListItem, Heading, Collapse } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
 import { ItemCard } from "app/core/components/ItemCard"
 import getIssues from "app/issues/queries/getIssues"
+import { useAppContext } from "../../../context/AppContext"
 
 const IssueList = () => {
+  const { isOpen } = useAppContext()
   const [issues] = useQuery(getIssues, undefined)
+
   return (
     <Box>
+      <Collapse in={isOpen} animateOpacity>
+        <Box
+          w={{ base: "100%", md: "60%" }}
+          position="fixed"
+          bg="white"
+          py="2"
+          borderBottom="solid 1px"
+          borderColor="gray.200"
+          shadow="md"
+        >
+          <Heading as="h3" size="sm" textAlign="center">
+            Filters coming soon!
+          </Heading>
+        </Box>
+      </Collapse>
       <UnorderedList styleType="none" marginLeft="0rem">
         {issues?.map((issue) => {
           return (
