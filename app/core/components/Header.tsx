@@ -49,13 +49,40 @@ const Header = ({ title, children }) => {
         borderBottom="1px solid"
         borderBottomColor="gray.200"
       >
-        <Suspense fallback={<Skeleton />}>
-          <UserButton onOpen={onOpen} />
-        </Suspense>
-        <Heading size="lg" marginLeft={{ md: "calc(20% + 1rem)" }}>
-          {title}
-        </Heading>
-        <CreateNewButton title={title} display={{ base: "inline-flex", md: "none" }} />
+        <Flex marginLeft={{ md: "calc(20% + 1rem)" }} alignItems="center">
+          <Suspense fallback={<Skeleton />}>
+            <UserButton onOpen={onOpen} sideBarEventHandler={sideBarEventHandler} />
+          </Suspense>
+          <Heading size="lg" ml={{ base: 4, md: 0 }}>
+            {title}
+          </Heading>
+        </Flex>
+
+        <Box mr={{ md: "calc(20%)" }}>
+          <IconButton
+            variant="outline"
+            colorScheme="teal"
+            aria-label="Open filter list"
+            w="auto"
+            size="sm"
+            fontSize={{ base: "sm", md: "md" }}
+            icon={<GrFilter />}
+            mr={{ base: 2, md: "none" }}
+            onClick={onToggle}
+          />
+          <IconButton
+            display={{ base: "inline-flex", md: "none" }}
+            variant="outline"
+            colorScheme="teal"
+            aria-label="Open charts"
+            fontSize={{ base: "sm", md: "md" }}
+            size="sm"
+            icon={<GrBarChart />}
+            mr={2}
+            onClick={chartSideBarEventHandler}
+          />
+          <CreateNewButton title={title} display={{ base: "inline-flex", md: "none" }} />
+        </Box>
       </Flex>
       <Box
         h="100%"
