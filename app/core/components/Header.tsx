@@ -1,7 +1,10 @@
 import { useQuery, useRouter, useSession, Link as BlitzLink } from "blitz"
-import { Suspense, useEffect } from "react"
+import { Suspense, useEffect, useState } from "react"
+import { useAppContext } from "../../context/AppContext"
+
 import {
   Box,
+  Text,
   Stack,
   Heading,
   Drawer,
@@ -12,6 +15,7 @@ import {
   Link,
   Skeleton,
   useDisclosure,
+  IconButton,
 } from "@chakra-ui/react"
 
 import { GrBarChart, GrFilter } from "react-icons/gr"
@@ -60,7 +64,7 @@ const Header = ({ title, children }) => {
       <Flex
         p="2"
         as="header"
-        justifyContent={{ base: "space-between", md: "left" }}
+        justifyContent={{ base: "space-between" }}
         borderBottom="1px solid"
         borderBottomColor="gray.200"
       >
@@ -109,6 +113,7 @@ const Header = ({ title, children }) => {
         {children}
       </Box>
       <Navigation />
+
       {/* Charts */}
 
       <ChartsSidebar
@@ -190,6 +195,7 @@ const ChartsSidebar = ({ onClose, ...rest }) => {
     </Box>
   )
 }
+
 const UserButton = ({ onOpen, sideBarEventHandler }) => {
   const router = useRouter()
   const session = useSession()
