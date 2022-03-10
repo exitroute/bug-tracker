@@ -22,12 +22,25 @@ import CreateNewButton from "app/core/components/CreateNewButton"
 
 const Header = ({ title, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [placement, setPlacement] = useState<any>("")
+  const { onToggle } = useAppContext()
+
+  const chartSideBarEventHandler = () => {
+    setPlacement("right")
+    onOpen()
+  }
+
+  const sideBarEventHandler = () => {
+    setPlacement("left")
+    onOpen()
+  }
+
   return (
     <Flex direction="column" justify="space-between" h="100vh">
       <Sidebar onClose={onClose} display={{ base: "none", md: "block" }} title={title} />
       <Drawer
         isOpen={isOpen}
-        placement="left"
+        placement={placement}
         onClose={onClose}
         autoFocus={false}
         returnFocusOnClose={false}
@@ -117,6 +130,7 @@ const Sidebar = ({ onClose, title, ...rest }) => {
 
   return (
     <Box
+      as="nav"
       transition="3s ease"
       bg="white"
       borderRight="1px"
@@ -174,6 +188,7 @@ const ChartsSidebar = ({ onClose, ...rest }) => {
     </Box>
   )
 }
+const UserButton = ({ onOpen, sideBarEventHandler }) => {
   const router = useRouter()
   const session = useSession()
 
@@ -194,7 +209,7 @@ const ChartsSidebar = ({ onClose, ...rest }) => {
   return (
     <Button
       size="sm"
-      onClick={onOpen}
+      onClick={sideBarEventHandler}
       colorScheme="blue"
       display={{ md: "none" }}
       w={{ base: "auto", md: "20%" }}
