@@ -63,19 +63,15 @@ const Header = ({ title, children }) => {
         {children}
       </Box>
       <Navigation />
-      <Box
-        h="full"
-        w="20%"
+      {/* Charts */}
+
+      <ChartsSidebar
+        display={{ base: "none", md: "block" }}
         pos="fixed"
         top="0px"
         left="80%"
-        borderLeft="1px"
-        borderLeftColor="gray.200"
-        display={{ base: "none", md: "block" }}
-        bg="white"
-      >
-        Filters
-      </Box>
+        onClose={onClose}
+      />
     </Flex>
   )
 }
@@ -124,7 +120,29 @@ const Sidebar = ({ onClose, title, ...rest }) => {
   )
 }
 
-const UserButton = ({ onOpen }) => {
+const ChartsSidebar = ({ onClose, ...rest }) => {
+  return (
+    <Box
+      as="aside"
+      h="full"
+      w={{ base: "full", md: "20%" }}
+      borderLeft="1px"
+      borderLeftColor="gray.200"
+      bg="white"
+      {...rest}
+    >
+      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+        <Heading as="h2" size="md" textAlign="center">
+          Charts
+        </Heading>
+        <CloseButton as="button" display={{ base: "flex", md: "none" }} onClick={onClose} />{" "}
+      </Flex>
+      <Flex h="50%" direction="column" justify="center" alignItems="center">
+        <Text textAlign="center">Charts coming soon</Text>
+      </Flex>
+    </Box>
+  )
+}
   const router = useRouter()
   const session = useSession()
 
