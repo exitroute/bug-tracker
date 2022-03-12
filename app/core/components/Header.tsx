@@ -57,18 +57,25 @@ const Header = ({ title, children }) => {
           {placement === "left" ? (
             <Sidebar onClose={onClose} title={title} />
           ) : (
-            <ChartsSidebar onClose={onClose} />
+            <ChartsSidebar
+              onClose={onClose}
+              pos={{ md: "fixed" }}
+              top={{ md: "0px" }}
+              left={{ md: "80%" }}
+            />
           )}
         </DrawerContent>
       </Drawer>
       <Flex
-        p="2"
+        p="1rem"
         as="header"
         justifyContent={{ base: "space-between" }}
         borderBottom="1px solid"
         borderBottomColor="gray.200"
+        mx={{ md: "auto" }}
+        w={{ base: "100%", md: "60%" }}
       >
-        <Flex marginLeft={{ md: "calc(20% + 1rem)" }} alignItems="center">
+        <Flex alignItems="center">
           <Suspense fallback={<Skeleton />}>
             <UserButton onOpen={onOpen} sideBarEventHandler={sideBarEventHandler} />
           </Suspense>
@@ -77,16 +84,15 @@ const Header = ({ title, children }) => {
           </Heading>
         </Flex>
 
-        <Box mr={{ md: "calc(20%)" }}>
+        <Flex alignItems="center">
           <IconButton
             variant="outline"
             colorScheme="teal"
             aria-label="Open filter list"
-            w="auto"
             size="sm"
             fontSize={{ base: "sm", md: "md" }}
             icon={<GrFilter />}
-            mr={{ base: 2, md: "none" }}
+            mr={{ base: 2, md: "0px" }}
             onClick={onToggle}
           />
           <IconButton
@@ -101,7 +107,7 @@ const Header = ({ title, children }) => {
             onClick={chartSideBarEventHandler}
           />
           <CreateNewButton title={title} display={{ base: "inline-flex", md: "none" }} />
-        </Box>
+        </Flex>
       </Flex>
       <Box
         h="100%"
@@ -147,11 +153,23 @@ const Sidebar = ({ onClose, title, ...rest }) => {
       h="full"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Box borderBottomWidth="1px">{user?.name}</Box>
-        <CloseButton as="button" display={{ base: "flex", md: "none" }} onClick={onClose} />
+      <Flex py="1rem" justifyContent="center" alignItems="center" w="100%">
+        <Heading size="lg">bgTrckr</Heading>
       </Flex>
-      <Flex h="80vh" direction="column" justify="space-between" px="2">
+      <Flex
+        display={{ base: "flex", md: "none" }}
+        h={{ base: "20", md: "auto" }}
+        py={{ md: "2rem" }}
+        alignItems="center"
+        mx={{ base: "8", md: "auto" }}
+        justifyContent={{ base: "space-between", md: "center" }}
+        fontWeight="bold"
+        size="lg"
+      >
+        <Box borderBottomWidth="1px">{user?.name}</Box>
+        <CloseButton as="button" onClick={onClose} />
+      </Flex>
+      <Flex h="80vh" direction="column" justify="space-between" px="1rem" pt="1rem">
         <Stack>
           <BlitzLink href={`/users/${user?.id}`}>
             <Link>My Profile</Link>
@@ -166,7 +184,12 @@ const Sidebar = ({ onClose, title, ...rest }) => {
           ))}
           <CreateNewButton title={title} display={{ base: "none", md: "inline-flex" }} />
         </Stack>
-        <LogoutButton />
+        <Stack w="100%">
+          <Text size="lg" textAlign="center" display={{ base: "none", md: "block" }}>
+            {user?.name}
+          </Text>
+          <LogoutButton />
+        </Stack>
       </Flex>
     </Box>
   )
@@ -183,8 +206,8 @@ const ChartsSidebar = ({ onClose, ...rest }) => {
       bg="white"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Heading as="h2" size="md" textAlign="center">
+      <Flex p="1rem" justifyContent={{ base: "space-between" }} alignItems="center" w="100%">
+        <Heading textAlign={{ base: "center" }} size="lg" w={{ md: "100%" }}>
           Charts
         </Heading>
         <CloseButton as="button" display={{ base: "flex", md: "none" }} onClick={onClose} />{" "}
