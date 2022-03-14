@@ -29,7 +29,7 @@ import CreateNewButton from "app/core/components/CreateNewButton"
 const Header = ({ title, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [placement, setPlacement] = useState<any>("")
-  const { onToggle } = useAppContext()
+  const { onToggle, isFilterOpen } = useAppContext()
 
   const chartSideBarEventHandler = () => {
     setPlacement("right")
@@ -74,6 +74,8 @@ const Header = ({ title, children }) => {
         borderBottomColor="gray.200"
         mx={{ md: "auto" }}
         w={{ base: "100%", md: "60%" }}
+        zIndex="1"
+        boxShadow={isFilterOpen ? "none" : "md"}
       >
         <Flex alignItems="center">
           <Suspense fallback={<Skeleton />}>
