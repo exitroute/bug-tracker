@@ -2,7 +2,7 @@ import { createContext, useContext, ReactNode } from "react"
 import { useDisclosure } from "@chakra-ui/react"
 
 interface AppContextType {
-  isOpen?: boolean
+  isFilterOpen?: boolean
   onToggle?: any
 }
 
@@ -15,10 +15,10 @@ interface Props {
 }
 
 export function AppProvider({ children }: Props) {
-  const { isOpen, onToggle } = useDisclosure()
+  const { isOpen: isFilterOpen, onToggle } = useDisclosure()
 
   const value = {
-    isOpen,
+    isFilterOpen,
     onToggle,
   }
 
