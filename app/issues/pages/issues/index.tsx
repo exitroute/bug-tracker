@@ -12,12 +12,12 @@ import getIssues from "app/issues/queries/getIssues"
 import { useAppContext } from "../../../context/AppContext"
 
 const IssueList = () => {
-  const { isOpen } = useAppContext()
+  const { isFilterOpen } = useAppContext()
   const [issues] = useQuery(getIssues, undefined)
 
   return (
     <Box>
-      <Collapse in={isOpen} animateOpacity>
+      <Collapse in={isFilterOpen} animateOpacity>
         <Box
           w={{ base: "100%", md: "60%" }}
           position="fixed"
