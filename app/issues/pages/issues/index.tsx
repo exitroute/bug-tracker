@@ -3,35 +3,101 @@
  *  can see tickets
  * */
 
-import { Suspense } from "react"
+import { Suspense, useState } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem, Heading, Collapse } from "@chakra-ui/react"
+import { Select, Stack, Button, Flex } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
 import { ItemCard } from "app/core/components/ItemCard"
-import getIssues from "app/issues/queries/getIssues"
 import { useAppContext } from "../../../context/AppContext"
+import getUsers from "app/users/queries/getUsers"
+import getFilteredIssues, { Filter } from "app/issues/queries/getFilteredIssues"
 
 const IssueList = () => {
   const { isFilterOpen } = useAppContext()
-  const [issues] = useQuery(getIssues, undefined)
+  // console.log("isFilterOpen", isFilterOpen)
+
+  const [filter, setFilter] = useState<Filter>({
+    id: 0,
+    status: "",
+    priority: "",
+  })
+
+  const [issues] = useQuery(getFilteredIssues, filter)
+  const [users] = useQuery(getUsers, undefined)
+
+  const [selectedUser, setSelectedUser] = useState<number | null>(0)
+  const [selectedStatus, setSelectedStatus] = useState<string | null>("")
+  const [selectedPriority, setSelectedPriority] = useState<string | null>("")
+
+  const selectUserChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = JSON.parse(event.target.value)
+    setSelectedUser(id)
+  }
+
+  const selectStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const status = JSON.parse(event.target.value)
+    setSelectedStatus(status)
+  }
+
+  const selectPriorityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const priority = JSON.parse(event.target.value)
+    setSelectedPriority(priority)
+  }
 
   return (
     <Box>
-      <Collapse in={isFilterOpen} animateOpacity>
-        <Box
-          w={{ base: "100%", md: "60%" }}
-          position="fixed"
-          bg="white"
-          py="2"
-          borderBottom="solid 1px"
-          borderColor="gray.200"
-          shadow="md"
-        >
-          <Heading as="h3" size="sm" textAlign="center">
-            Filters coming soon!
-          </Heading>
-        </Box>
-      </Collapse>
+      <Box position="sticky" top="0">
+        <Collapse in={isFilterOpen} animateOpacity>
+          <Box
+            w={{ base: "100%" }}
+            bg="white"
+            p="4"
+            borderBottom="solid 1px"
+            borderColor="gray.200"
+            shadow="md"
+          >
+            <Stack>
+              <Heading as="h3" size="sm" textAlign="center">
+                Coming soon: filtering by status and priority!
+              </Heading>
+              <Flex>
+                <Select onChange={selectUserChange}>
+                  <option value={JSON.stringify(0)}>{`All Users`}</option>
+                  <option value={JSON.stringify(null)}>{`Unassigned`}</option>
+                  {users?.map((el: any, i: any) => (
+                    <option key={i} value={JSON.stringify(el.id)}>
+                      {el.name}
+                    </option>
+                  ))}
+                </Select>
+                <Select onChange={selectStatusChange} disabled>
+                  <option value={JSON.stringify("")}>{`All Statuses`}</option>
+                  <option value={JSON.stringify(null)}>{`Status not set`}</option>
+                  <option value={JSON.stringify("NEW")}>{`New`}</option>
+                  <option value={JSON.stringify("IN_PROGRESS")}>{`In progress`}</option>
+                  <option value={JSON.stringify("CLOSED")}>{`Closed`}</option>
+                </Select>
+                <Select onChange={selectPriorityChange} disabled>
+                  <option value={JSON.stringify("")}>{`All Priorities`}</option>
+                  <option value={JSON.stringify(null)}>{`Priority not set`}</option>
+                  <option value={JSON.stringify("LOW")}>{`Low`}</option>
+                  <option value={JSON.stringify("NORMAL")}>{`Normal`}</option>
+                  <option value={JSON.stringify("HIGH")}>{`High`}</option>
+                </Select>
+              </Flex>
+              <Flex align="center">
+                <FilterButton
+                  setFilter={setFilter}
+                  selectedUser={selectedUser}
+                  selectedStatus={selectedStatus}
+                  selectedPriority={selectedPriority}
+                />
+              </Flex>
+            </Stack>
+          </Box>
+        </Collapse>
+      </Box>
       <UnorderedList styleType="none" marginLeft="0rem">
         {issues?.map((issue) => {
           return (
@@ -53,6 +119,23 @@ const IssueList = () => {
         })}
       </UnorderedList>
     </Box>
+  )
+}
+
+const FilterButton = ({ setFilter, selectedUser, selectedStatus, selectedPriority }) => {
+  const handleFilterEvent = (e) => {
+    e.preventDefault()
+    setFilter({
+      id: selectedUser,
+      status: selectedStatus,
+      priority: selectedPriority,
+    })
+  }
+
+  return (
+    <Button width="33%" mx="auto" onClick={(e) => handleFilterEvent(e)}>
+      Filter
+    </Button>
   )
 }
 
