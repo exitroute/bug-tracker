@@ -2,11 +2,13 @@ import { createContext, useContext, ReactNode } from "react"
 import { useDisclosure } from "@chakra-ui/react"
 
 interface AppContextType {
-  isFilterOpen?: boolean
-  onToggle?: any
+  isFilterOpen: boolean
+  onToggle?: () => void
 }
 
-const appContextDefaultValues: AppContextType = {}
+const appContextDefaultValues: AppContextType = {
+  isFilterOpen: false,
+}
 
 const AppContext = createContext<AppContextType>(appContextDefaultValues)
 
