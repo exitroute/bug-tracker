@@ -160,7 +160,7 @@ const Sidebar = ({ onClose, title, ...rest }) => {
       </Flex>
       <Flex
         display={{ base: "flex", md: "none" }}
-        h={{ base: "20", md: "auto" }}
+        h="20"
         py={{ md: "2rem" }}
         alignItems="center"
         mx={{ base: "8", md: "auto" }}
