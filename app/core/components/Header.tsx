@@ -1,5 +1,5 @@
 import { useQuery, useRouter, useSession, Link as BlitzLink } from "blitz"
-import { Suspense, useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import { useAppContext } from "../../context/AppContext"
 
 import {
@@ -21,7 +21,7 @@ import {
 import { GrBarChart, GrFilter } from "react-icons/gr"
 
 import Navigation from "../components/Navigation"
-import { StatusChart } from "../../issues/components/IssueCharts"
+import { ChartsSidebar } from "app/core/components/ChartsSidebar"
 
 import getCurrentUser from "app/users/queries/getCurrentUser"
 import LogoutButton from "./LogoutButton"
@@ -194,32 +194,6 @@ const Sidebar = ({ onClose, title, ...rest }) => {
           </Text>
           <LogoutButton />
         </Stack>
-      </Flex>
-    </Box>
-  )
-}
-
-const ChartsSidebar = ({ onClose, ...rest }) => {
-  return (
-    <Box
-      as="aside"
-      h="full"
-      w={{ base: "full", md: "20%" }}
-      borderLeft="1px"
-      borderLeftColor="gray.200"
-      bg="white"
-      {...rest}
-    >
-      <Flex p="1rem" justifyContent={{ base: "space-between" }} alignItems="center" w="100%">
-        <Heading textAlign={{ base: "center" }} size="lg" w={{ md: "100%" }}>
-          Charts
-        </Heading>
-        <CloseButton as="button" display={{ base: "flex", md: "none" }} onClick={onClose} />{" "}
-      </Flex>
-      <Flex h="100%" direction="column" pt="4" alignItems="center">
-        <StatusChart />
-        <StatusChart />
-        <StatusChart />
       </Flex>
     </Box>
   )
