@@ -48,7 +48,7 @@ const IssueList = () => {
   return (
     <Box>
       <Box position="sticky" top="0">
-        <Collapse in={isFilterOpen} animateOpacity>
+        <Collapse in={isFilterOpen} animateOpacity unmountOnExit={true}>
           <Box
             w={{ base: "100%" }}
             bg="white"
