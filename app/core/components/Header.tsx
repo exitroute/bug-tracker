@@ -21,6 +21,7 @@ import {
 import { GrBarChart, GrFilter } from "react-icons/gr"
 
 import Navigation from "../components/Navigation"
+import { StatusChart } from "../../issues/components/IssueCharts"
 
 import getCurrentUser from "app/users/queries/getCurrentUser"
 import LogoutButton from "./LogoutButton"
@@ -88,6 +89,7 @@ const Header = ({ title, children }) => {
 
         <Flex alignItems="center">
           <IconButton
+            display={title === "Issues" ? "inline-flex" : "none"}
             variant="outline"
             colorScheme="teal"
             aria-label="Open filter list"
@@ -214,8 +216,10 @@ const ChartsSidebar = ({ onClose, ...rest }) => {
         </Heading>
         <CloseButton as="button" display={{ base: "flex", md: "none" }} onClick={onClose} />{" "}
       </Flex>
-      <Flex h="50%" direction="column" justify="center" alignItems="center">
-        <Text textAlign="center">Charts coming soon</Text>
+      <Flex h="100%" direction="column" pt="4" alignItems="center">
+        <StatusChart />
+        <StatusChart />
+        <StatusChart />
       </Flex>
     </Box>
   )
