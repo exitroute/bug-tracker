@@ -6,7 +6,7 @@
 import { Suspense, useState } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem, Heading, Collapse } from "@chakra-ui/react"
-import { Select, Stack, Button, Flex } from "@chakra-ui/react"
+import { Select, Stack, Button, Flex, Spacer } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
 import { ItemCard } from "app/core/components/ItemCard"
 import { useAppContext } from "../../../context/AppContext"
@@ -58,11 +58,8 @@ const IssueList = () => {
             shadow="md"
           >
             <Stack>
-              <Heading as="h3" size="sm" textAlign="center">
-                Coming soon: filtering by status and priority!
-              </Heading>
               <Flex>
-                <Select onChange={selectUserChange}>
+                <Select size="sm" w="30%" onChange={selectUserChange}>
                   <option value={JSON.stringify(0)}>{`All Users`}</option>
                   <option value={JSON.stringify(null)}>{`Unassigned`}</option>
                   {users?.map((el: any, i: any) => (
@@ -71,14 +68,16 @@ const IssueList = () => {
                     </option>
                   ))}
                 </Select>
-                <Select onChange={selectStatusChange} disabled>
+                <Spacer />
+                <Select size="sm" w="30%" onChange={selectStatusChange} disabled>
                   <option value={JSON.stringify("")}>{`All Statuses`}</option>
                   <option value={JSON.stringify(null)}>{`Status not set`}</option>
                   <option value={JSON.stringify("NEW")}>{`New`}</option>
                   <option value={JSON.stringify("IN_PROGRESS")}>{`In progress`}</option>
                   <option value={JSON.stringify("CLOSED")}>{`Closed`}</option>
                 </Select>
-                <Select onChange={selectPriorityChange} disabled>
+                <Spacer />
+                <Select size="sm" w="30%" onChange={selectPriorityChange} disabled>
                   <option value={JSON.stringify("")}>{`All Priorities`}</option>
                   <option value={JSON.stringify(null)}>{`Priority not set`}</option>
                   <option value={JSON.stringify("LOW")}>{`Low`}</option>
@@ -133,7 +132,7 @@ const FilterButton = ({ setFilter, selectedUser, selectedStatus, selectedPriorit
   }
 
   return (
-    <Button width="33%" mx="auto" onClick={(e) => handleFilterEvent(e)}>
+    <Button width="30%" mx="auto" onClick={(e) => handleFilterEvent(e)}>
       Filter
     </Button>
   )
