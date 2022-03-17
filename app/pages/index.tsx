@@ -24,7 +24,7 @@ const LandingPage: BlitzPage = () => {
   return (
     <div className="container">
       <CallToActionWithAnnotation />
-      <GridListWithCTA />
+      {/* <GridListWithCTA /> */}
     </div>
   )
 }
