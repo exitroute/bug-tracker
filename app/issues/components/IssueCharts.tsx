@@ -1,7 +1,7 @@
-import React, { Suspense } from "react"
+import React from "react"
 import { Box } from "@chakra-ui/react"
 import { useQuery } from "blitz"
-import getIssues from "../queries/getIssues"
+import getIssuesForCharts from "../queries/getIssuesForCharts"
 
 import {
   Chart as ChartJS,
@@ -13,13 +13,27 @@ import {
   Tooltip,
   Legend,
 } from "chart.js"
-import { Bar, Doughnut } from "react-chartjs-2"
-import faker from "faker"
+import { Doughnut } from "react-chartjs-2"
 
 ChartJS.register(CategoryScale, LinearScale, ArcElement, BarElement, Title, Tooltip, Legend)
 
 export function StatusChart({ selectedChart }) {
-  const [issues] = useQuery(getIssues, undefined)
+  const [data] = useQuery(getIssuesForCharts, undefined)
+
+  const { totalIssues, issuesPerUser, priority, status, users }: any = data
+
+  const totalUnassignedIssues = totalIssues._all - totalIssues.assignedToId
+
+  const userChartData = issuesPerUser.map((user) => {
+    if (user.assignedToId === null) {
+      user.assignedToName = "Unassigned"
+      user._count.assignedToId = totalUnassignedIssues
+    } else {
+      const { name } = users.find((el) => el.id === user.assignedToId)
+      user.assignedToName = name
+    }
+    return user
+  })
 
   const options = {
     maintainAspectRatio: false,
@@ -35,14 +49,12 @@ export function StatusChart({ selectedChart }) {
     },
   }
 
-  const statusLabels = ["New", "In progress", "Closed"]
-
   const statusData = {
-    labels: statusLabels,
+    labels: status.map((el) => el.status),
     datasets: [
       {
         label: "Progress Status",
-        data: statusLabels.map(() => faker.datatype.number({ min: 0, max: 20 })),
+        data: status.map((el) => el._count.status),
         // backgroundColor: "#3182ce",
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -61,40 +73,12 @@ export function StatusChart({ selectedChart }) {
     ],
   }
 
-  const priorityLabels = ["Low", "Normal", "High"]
-
   const priorityData = {
-    labels: priorityLabels,
+    labels: priority.map((el) => el.priority),
     datasets: [
       {
         label: "Priority",
-        data: priorityLabels.map(() => faker.datatype.number({ min: 0, max: 20 })),
-        // backgroundColor: "#3182ce",
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          // "rgba(75, 192, 192, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          // "rgba(75, 192, 192, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  }
-
-  const userLabels = ["Ryan", "James", "Felton", "Astrid"]
-
-  const userData = {
-    labels: userLabels,
-    datasets: [
-      {
-        label: "Users",
-        data: userLabels.map(() => faker.datatype.number({ min: 0, max: 20 })),
+        data: priority.map((el) => el._count.priority),
         // backgroundColor: "#3182ce",
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -107,6 +91,32 @@ export function StatusChart({ selectedChart }) {
           "rgba(54, 162, 235, 1)",
           "rgba(255, 206, 86, 1)",
           "rgba(75, 192, 192, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  }
+
+  const userData = {
+    labels: userChartData.map((el) => el.assignedToName),
+    datasets: [
+      {
+        label: "Users",
+        data: userChartData.map((el) => el._count.assignedToId),
+        // backgroundColor: "#3182ce",
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "#9733e852",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "#9633e8",
         ],
         borderWidth: 1,
       },
