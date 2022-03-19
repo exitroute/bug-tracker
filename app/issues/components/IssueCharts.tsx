@@ -17,7 +17,7 @@ import { Doughnut } from "react-chartjs-2"
 
 ChartJS.register(CategoryScale, LinearScale, ArcElement, BarElement, Title, Tooltip, Legend)
 
-export function StatusChart({ selectedChart }) {
+export function IssueCharts({ selectedChart }) {
   const [data] = useQuery(getIssuesForCharts, undefined)
 
   const { totalIssues, issuesPerUser, priority, status, users }: any = data

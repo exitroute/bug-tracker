@@ -1,6 +1,6 @@
 import { ChevronLeftIcon } from "@chakra-ui/icons"
 import { Box, Flex, Heading, CloseButton, Select } from "@chakra-ui/react"
-import { StatusChart } from "app/issues/components/IssueCharts"
+import { IssueCharts } from "app/issues/components/IssueCharts"
 import { Suspense, useState } from "react"
 
 export const ChartsSidebar = ({ onClose, ...rest }) => {
@@ -38,7 +38,7 @@ export const ChartsSidebar = ({ onClose, ...rest }) => {
       </Box>
       <Flex h="100%" direction="column" pt="4" alignItems="center">
         <Suspense fallback="Loading...">
-          <StatusChart selectedChart={selectedChart} />
+          <IssueCharts selectedChart={selectedChart} />
         </Suspense>
       </Flex>
     </Box>
