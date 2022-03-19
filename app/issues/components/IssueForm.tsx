@@ -121,7 +121,6 @@ const IssuePriority = ({ name }: IssueRadioProps) => {
   return (
     <Field name={name} label="Priority" component={AdaptedRadioGroup}>
       <Stack>
-        <Radio value="URGENT">Urgent</Radio>
         <Radio value="HIGH">High</Radio>
         <Radio value="NORMAL">Normal</Radio>
         <Radio value="LOW">Low</Radio>
