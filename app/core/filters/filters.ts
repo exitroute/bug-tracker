@@ -45,6 +45,7 @@ export const sortIssues = (arr) => {
     } else if (status === closed) {
       closedArr.push(issue)
     } else {
+      console.log("WARNING Rest in sort")
       rest.push(issue)
     }
   })
