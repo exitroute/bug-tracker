@@ -30,7 +30,7 @@ export const ChartsSidebar = ({ onClose, ...rest }) => {
       <Box>
         <Box p="4">
           <Select placeholder="Select Chart" size="sm" onChange={selectChartChange}>
-            <option value="users">Users</option>
+            <option value="users">Issues per user</option>
             <option value="status">Status</option>
             <option value="priority">Priority</option>
           </Select>
