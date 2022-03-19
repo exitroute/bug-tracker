@@ -173,7 +173,13 @@ const Sidebar = ({ onClose, title, ...rest }) => {
         <Box borderBottomWidth="1px">{user?.name}</Box>
         <CloseButton as="button" onClick={onClose} />
       </Flex>
-      <Flex h="80vh" direction="column" justify="space-between" px="1rem" pt="1rem">
+      <Flex
+        h={{ base: "70vh", md: "80vh" }}
+        direction="column"
+        justify="space-between"
+        px="1rem"
+        pt="1rem"
+      >
         <Stack>
           <BlitzLink href={`/users/${user?.id}`}>
             <Link>My Profile</Link>
