@@ -17,14 +17,12 @@ import { Doughnut } from "react-chartjs-2"
 
 ChartJS.register(CategoryScale, LinearScale, ArcElement, BarElement, Title, Tooltip, Legend)
 
-export function IssueCharts({ selectedChart }) {
-  const [data] = useQuery(getIssuesForCharts, undefined)
+export function IssueCharts({ selectedChart, chartData }) {
+  const { totalIssues, issuesPerUser, priority, status, users }: any = chartData
 
-  const { totalIssues, issuesPerUser, priority, status, users }: any = data
+  const totalUnassignedIssues = totalIssues?._all - totalIssues?.assignedToId
 
-  const totalUnassignedIssues = totalIssues._all - totalIssues.assignedToId
-
-  const userChartData = issuesPerUser.map((user) => {
+  const userChartData = issuesPerUser?.map((user) => {
     if (user.assignedToId === null) {
       user.assignedToName = "Unassigned"
       user._count.assignedToId = totalUnassignedIssues
@@ -50,11 +48,11 @@ export function IssueCharts({ selectedChart }) {
   }
 
   const statusData = {
-    labels: status.map((el) => el.status),
+    labels: status?.map((el) => el.status),
     datasets: [
       {
         label: "Progress Status",
-        data: status.map((el) => el._count.status),
+        data: status?.map((el) => el._count.status),
         // backgroundColor: "#3182ce",
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -74,11 +72,11 @@ export function IssueCharts({ selectedChart }) {
   }
 
   const priorityData = {
-    labels: priority.map((el) => el.priority),
+    labels: priority?.map((el) => el.priority),
     datasets: [
       {
         label: "Priority",
-        data: priority.map((el) => el._count.priority),
+        data: priority?.map((el) => el._count.priority),
         // backgroundColor: "#3182ce",
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -98,11 +96,11 @@ export function IssueCharts({ selectedChart }) {
   }
 
   const userData = {
-    labels: userChartData.map((el) => el.assignedToName),
+    labels: userChartData?.map((el) => el.assignedToName),
     datasets: [
       {
         label: "Users",
-        data: userChartData.map((el) => el._count.assignedToId),
+        data: userChartData?.map((el) => el._count.assignedToId),
         // backgroundColor: "#3182ce",
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
