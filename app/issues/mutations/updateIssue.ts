@@ -11,6 +11,7 @@ export default async function updateIssue(input: any, ctx: Ctx) {
     priority,
     status,
     assignedTo,
+    assignedToProject,
     files,
     newFiles,
   }: {
@@ -20,6 +21,7 @@ export default async function updateIssue(input: any, ctx: Ctx) {
     priority: string
     status: string
     assignedTo: any
+    assignedToProject: any
     files: any
     newFiles: any
   } = input.issue
@@ -71,6 +73,13 @@ export default async function updateIssue(input: any, ctx: Ctx) {
           assignedTo: {
             connect: {
               id: Number(assignedTo.id),
+            },
+          },
+        }),
+        ...(assignedToProject && {
+          assignedToProject: {
+            connect: {
+              id: Number(assignedToProject.id),
             },
           },
         }),
