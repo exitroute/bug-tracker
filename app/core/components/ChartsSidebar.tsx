@@ -1,9 +1,24 @@
-import { ChevronLeftIcon } from "@chakra-ui/icons"
-import { Box, Flex, Heading, CloseButton, Select } from "@chakra-ui/react"
+import {
+  Box,
+  Flex,
+  Heading,
+  CloseButton,
+  Select,
+  Stack,
+  Stat,
+  StatNumber,
+  StatLabel,
+} from "@chakra-ui/react"
+import { useRouter } from "blitz"
 import { IssueCharts } from "app/issues/components/IssueCharts"
-import { Suspense, useState } from "react"
+import React, { Suspense, useState } from "react"
+import { useAppContext } from "app/context/AppContext"
 
 export const ChartsSidebar = ({ onClose, ...rest }) => {
+  const router = useRouter()
+  const disabled = router.pathname.split("/").find((el) => el === "issues" || el === "home")
+    ? false
+    : true
   const [selectedChart, setSelectedChart] = useState<string>("")
 
   const selectChartChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -27,15 +42,15 @@ export const ChartsSidebar = ({ onClose, ...rest }) => {
         </Heading>
         <CloseButton as="button" display={{ base: "flex", md: "none" }} onClick={onClose} />{" "}
       </Flex>
-      <Box>
-        <Box p="4">
-          <Select placeholder="Select Chart" size="sm" onChange={selectChartChange}>
-            <option value="users">Issues per user</option>
-            <option value="status">Status</option>
-            <option value="priority">Priority</option>
-          </Select>
-        </Box>
-      </Box>
+      <Stack p="4">
+        <Stat display={!disabled ? "block" : "none"}>
+          <Suspense fallback="Loading...">
+            <StatLabel>Total Issues</StatLabel>
+            <StatNumber>{chartData.totalIssues?._all}</StatNumber>
+          </Suspense>
+        </Stat>
+          disabled={disabled}
+        >
       <Flex h="100%" direction="column" pt="4" alignItems="center">
         <Suspense fallback="Loading...">
           <IssueCharts selectedChart={selectedChart} />
