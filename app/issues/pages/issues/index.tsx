@@ -3,7 +3,7 @@
  *  can see tickets
  * */
 
-import { Suspense, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem, Heading, Collapse } from "@chakra-ui/react"
 import { Select, Stack, Button, Flex, Spacer } from "@chakra-ui/react"
@@ -12,10 +12,16 @@ import { ItemCard } from "app/core/components/ItemCard"
 import { useAppContext } from "../../../context/AppContext"
 import getUsers from "app/users/queries/getUsers"
 import getFilteredIssues, { Filter } from "app/issues/queries/getFilteredIssues"
+import getIssuesForCharts from "app/issues/queries/getIssuesForCharts"
 
 const IssueList = () => {
-  const { isFilterOpen } = useAppContext()
+  const { isFilterOpen, setChartData } = useAppContext()
   // console.log("isFilterOpen", isFilterOpen)
+
+  const [data] = useQuery(getIssuesForCharts, undefined)
+  useEffect(() => {
+    data && setChartData(data)
+  }, [data, setChartData])
 
   const [filter, setFilter] = useState<Filter>({
     id: 0,
