@@ -9,6 +9,7 @@ import {
   StatNumber,
   StatLabel,
 } from "@chakra-ui/react"
+
 import { useRouter } from "blitz"
 import { IssueCharts } from "app/issues/components/IssueCharts"
 import React, { Suspense, useState } from "react"
@@ -19,6 +20,8 @@ export const ChartsSidebar = ({ onClose, ...rest }) => {
   const disabled = router.pathname.split("/").find((el) => el === "issues" || el === "home")
     ? false
     : true
+
+  const { chartData } = useAppContext()
   const [selectedChart, setSelectedChart] = useState<string>("")
 
   const selectChartChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -49,11 +52,20 @@ export const ChartsSidebar = ({ onClose, ...rest }) => {
             <StatNumber>{chartData.totalIssues?._all}</StatNumber>
           </Suspense>
         </Stat>
+        <Select
+          placeholder="Select Chart"
+          size="sm"
+          onChange={selectChartChange}
           disabled={disabled}
         >
+          <option value="users">Issues per user</option>
+          <option value="status">Status</option>
+          <option value="priority">Priority</option>
+        </Select>
+      </Stack>
       <Flex h="100%" direction="column" pt="4" alignItems="center">
         <Suspense fallback="Loading...">
-          <IssueCharts selectedChart={selectedChart} />
+          <IssueCharts selectedChart={selectedChart} chartData={chartData} />
         </Suspense>
       </Flex>
     </Box>
