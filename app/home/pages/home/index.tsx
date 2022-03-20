@@ -1,4 +1,4 @@
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
 
@@ -7,6 +7,8 @@ import { ItemCard } from "app/core/components/ItemCard"
 import Layout from "app/core/layouts/Layout"
 import getCurrentUserIssues from "app/home/queries/getCurrentUserIssues"
 import getCurrentUserProjects from "app/home/queries/getCurrentUserProjects"
+import { useAppContext } from "app/context/AppContext"
+import getIssuesForCharts from "app/issues/queries/getIssuesForCharts"
 
 /**
  *
@@ -34,6 +36,14 @@ import getCurrentUserProjects from "app/home/queries/getCurrentUserProjects"
 const HomeList = () => {
   const [issues] = useQuery(getCurrentUserIssues, undefined)
   const [projects] = useQuery(getCurrentUserProjects, undefined)
+
+  const { setChartData } = useAppContext()
+  const [data] = useQuery(getIssuesForCharts, undefined)
+
+  useEffect(() => {
+    data && setChartData(data)
+  }, [data, setChartData])
+
   // This list also returns projects and teams
   return (
     <Box>
