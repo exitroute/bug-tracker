@@ -55,7 +55,7 @@ export const SelectControl = ({ name, label, children, placeholder, ...props }) 
   const { input, meta } = useField(name)
   return (
     <Control name={name}>
-      <FormLabel htmlFor={name} />
+      <FormLabel htmlFor={name}>{label}</FormLabel>
       <Select placeholder={placeholder} id={name} {...input} isInvalid={meta.error && meta.touched}>
         {children}
       </Select>
