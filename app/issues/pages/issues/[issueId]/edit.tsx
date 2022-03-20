@@ -34,29 +34,32 @@ export const EditIssueForm = () => {
   const [updateIssueMutation] = useMutation(updateIssue, { onSuccess: redirect })
 
   return (
-    <Flex minH={"100vh"}>
-      <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading as="h3" size="lg">
-            Edit Issue #{issue?.id}: {issue?.title}
-          </Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
-            What do you want to change?
-          </Text>
+    <>
+      <Flex minH={"100vh"}>
+        <Stack spacing={8} mx={"auto"} w="100%" py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading as="h3" size="lg">
+              Edit Issue #{issue?.id}: {issue?.title}
+            </Heading>
+            <Text fontSize={"lg"} color={"gray.600"}>
+              What do you want to change?
+            </Text>
+          </Stack>
+          <IssueForm
+            initialValues={initialValues}
+            submitText="Update Issue"
+            onSubmit={async (values) => {
+              try {
+                await updateIssueMutation(values)
+              } catch (error: any) {
+                return { [FORM_ERROR]: error.toString() }
+              }
+            }}
+          />
         </Stack>
-        <IssueForm
-          initialValues={initialValues}
-          submitText="Update Issue"
-          onSubmit={async (values) => {
-            try {
-              await updateIssueMutation(values)
-            } catch (error: any) {
-              return { [FORM_ERROR]: error.toString() }
-            }
-          }}
-        />
-      </Stack>
-    </Flex>
+      </Flex>
+      {/* <pre>{JSON.stringify(issue, null, 2)}</pre> */}
+    </>
   )
 }
 
