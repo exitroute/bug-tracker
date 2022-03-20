@@ -125,14 +125,15 @@ const Header = ({ title, children }) => {
       <Navigation />
 
       {/* Charts */}
-
-      <ChartsSidebar
-        display={{ base: "none", md: "block" }}
-        pos="fixed"
-        top="0px"
-        left="80%"
-        onClose={onClose}
-      />
+      <Suspense fallback="Loading...">
+        <ChartsSidebar
+          display={{ base: "none", md: "block" }}
+          pos="fixed"
+          top="0px"
+          left="80%"
+          onClose={onClose}
+        />
+      </Suspense>
     </Flex>
   )
 }
