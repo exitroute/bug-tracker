@@ -47,6 +47,8 @@ const ProjectDetails = () => {
             />
             <CardContent>
               <Property label="Description" value={`${project?.description}`} />
+              <Property label="Project manager" value={`${project?.assignedTo?.name}`} />
+              <Property label="Team" value={`${project?.assignedTeam?.title}`} />
               <Property
                 label="Created by"
                 value={`${project?.createdBy.name} on ${project?.createdAt.toTimeString()}`}
