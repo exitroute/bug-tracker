@@ -10,6 +10,7 @@ export default async function createIssue(input: any, ctx: Ctx) {
     priority,
     status,
     assignedTo,
+    assignedToProject,
     files,
   }: {
     title: string
@@ -17,6 +18,7 @@ export default async function createIssue(input: any, ctx: Ctx) {
     priority: string
     status: string
     assignedTo: any
+    assignedToProject: any
     files: [
       {
         url: string
@@ -40,6 +42,13 @@ export default async function createIssue(input: any, ctx: Ctx) {
           assignedTo: {
             connect: {
               id: Number(assignedTo.id),
+            },
+          },
+        }),
+        ...(assignedToProject && {
+          assignedToProject: {
+            connect: {
+              id: Number(assignedToProject.id),
             },
           },
         }),
