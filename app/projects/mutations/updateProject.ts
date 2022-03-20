@@ -9,11 +9,15 @@ export default async function updateProject(input: any, ctx: Ctx) {
     title,
     description,
     assignedIssue,
+    assignedUser,
+    assignedTeam,
   }: {
     id: number
     title: string
     description: string
     assignedIssue: any
+    assignedUser: any
+    assignedTeam: any
   } = input.project
 
   try {
@@ -31,6 +35,20 @@ export default async function updateProject(input: any, ctx: Ctx) {
           assignedIssues: {
             connect: {
               id: Number(assignedIssue.id),
+            },
+          },
+        }),
+        ...(assignedUser && {
+          assignedTo: {
+            connect: {
+              id: Number(assignedUser.id),
+            },
+          },
+        }),
+        ...(assignedTeam && {
+          assignedTeam: {
+            connect: {
+              id: Number(assignedTeam.id),
             },
           },
         }),
