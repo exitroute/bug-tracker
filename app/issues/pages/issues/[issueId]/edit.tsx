@@ -1,4 +1,4 @@
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import { BlitzPage, Routes, useRouter, useParam, useMutation, useQuery } from "blitz"
 
 import { Flex, Stack, Heading, Text } from "@chakra-ui/react"
@@ -9,6 +9,8 @@ import { IssueForm } from "app/issues/components/IssueForm"
 
 import getIssue from "app/issues/queries/getIssue"
 import updateIssue from "app/issues/mutations/updateIssue"
+import { useAppContext } from "app/context/AppContext"
+import getIssuesForCharts from "app/issues/queries/getIssuesForCharts"
 
 export const EditIssueForm = () => {
   const router = useRouter()
@@ -17,7 +19,18 @@ export const EditIssueForm = () => {
   const [issue] = useQuery(getIssue, issueId, { suspense: false, staleTime: Infinity })
   const initialValues = { issue }
 
-  const redirect = (updated) => router.push(Routes.IssuePage({ issueId: updated.id }))
+  const { setChartData } = useAppContext()
+  const [data, { refetch }] = useQuery(getIssuesForCharts, undefined)
+
+  useEffect(() => {
+    data && setChartData(data)
+  }, [data, setChartData])
+
+  const redirect = (updated) => {
+    refetch()
+    router.push(Routes.IssuePage({ issueId: updated.id }))
+  }
+
   const [updateIssueMutation] = useMutation(updateIssue, { onSuccess: redirect })
 
   return (
