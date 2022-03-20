@@ -12,13 +12,22 @@ import {
   CardImage,
 } from "app/core/components/CardComponents"
 
+import { useAppContext } from "app/context/AppContext"
 import Layout from "app/core/layouts/Layout"
 import getIssue from "app/issues/queries/getIssue"
 import deleteIssue from "app/issues/mutations/deleteIssue"
+import getIssuesForCharts from "app/issues/queries/getIssuesForCharts"
 
 const IssueDetails = () => {
   const issueId = useParam("issueId", "number")!
-  const [issue, { refetch }]: any = useQuery(getIssue, issueId)
+  const [issue, { refetch }] = useQuery(getIssue, issueId)
+
+  const { setChartData } = useAppContext()
+  const [data, { refetch: refetchChartData }] = useQuery(getIssuesForCharts, undefined)
+
+  useEffect(() => {
+    data && setChartData(data)
+  }, [data, setChartData])
 
   const {
     id,
