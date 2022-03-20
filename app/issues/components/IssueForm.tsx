@@ -17,9 +17,12 @@ import {
 import { MultipleFileUploadField } from "app/core/components/MultipleFileUploadField"
 
 import getUsers from "app/users/queries/getUserProfiles"
+import getProjects from "app/projects/queries/getProjects"
 
 export const IssueForm = (props) => {
   const [users] = useQuery(getUsers, undefined, { suspense: false })
+  const [projects] = useQuery(getProjects, undefined, { suspense: false })
+
   const router = useRouter()
   const path = router.pathname.split("/").pop()
 
@@ -39,14 +42,21 @@ export const IssueForm = (props) => {
                 placeholder="What did you expect to happen?"
                 label="Expected Behaviour"
               />
-              <SelectControl
-                name="issue.assignedTo.id"
-                label="Assigned to"
-                placeholder="Assign this issue!"
-              >
+              <SelectControl name="issue.assignedTo.id" label="Assign to user" placeholder="Users">
                 {users?.map((user) => (
                   <option key={user.id} value={user.id}>
                     {user.name}
+                  </option>
+                ))}
+              </SelectControl>
+              <SelectControl
+                name="issue.assignedToProject.id"
+                label="Assign to project"
+                placeholder="Projects"
+              >
+                {projects?.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.title}
                   </option>
                 ))}
               </SelectControl>
