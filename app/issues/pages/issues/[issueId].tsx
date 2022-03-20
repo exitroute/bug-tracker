@@ -1,4 +1,4 @@
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import { BlitzPage, useParam, useQuery, useMutation, Link, Router } from "blitz"
 
 import { Box, Flex, Stack, Button, useColorModeValue } from "@chakra-ui/react"
@@ -44,14 +44,18 @@ const IssueDetails = () => {
     files,
   } = issue
 
-  const [deleteIssueMutation] = useMutation(deleteIssue)
+  const redirect = () => {
+    refetchChartData()
+    refetch()
+    Router.push("/issues")
+  }
+
+  const [deleteIssueMutation] = useMutation(deleteIssue, { onSuccess: redirect })
 
   const deleteIssueHandler = (e, id) => {
     e.preventDefault()
     deleteIssueMutation({ id })
     confirm("Warning: You are about to delete this issue. \nAre you sure?")
-    Router.push("/issues")
-    refetch()
   }
 
   return (
@@ -87,7 +91,7 @@ const IssueDetails = () => {
               {updatedBy && (
                 <Property
                   label="Updated by"
-                  value={`${updatedBy.name} on ${updatedAt.toTimeString()}`}
+                  value={`${updatedBy.name} on ${updatedAt?.toTimeString()}`}
                 />
               )}
               <Stack align="center">
