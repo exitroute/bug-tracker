@@ -8,7 +8,7 @@ import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem, Heading, Collapse } from "@chakra-ui/react"
 import { Select, Stack, Button, Flex, Spacer } from "@chakra-ui/react"
 import Layout from "app/core/layouts/Layout"
-import { ItemCard } from "app/core/components/ItemCard"
+import { IssueItemCard } from "app/issues/components/IssueItemCard"
 import { useAppContext } from "../../../context/AppContext"
 import getUsers from "app/users/queries/getUsers"
 import getFilteredIssues, { Filter } from "app/issues/queries/getFilteredIssues"
@@ -109,7 +109,7 @@ const IssueList = () => {
             <ListItem key={issue.id}>
               <Link href={Routes.IssuePage({ issueId: issue.id })}>
                 <a>
-                  <ItemCard
+                  <IssueItemCard
                     id={issue.id}
                     title={issue.title}
                     description={issue.description}
