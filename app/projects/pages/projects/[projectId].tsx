@@ -46,8 +46,12 @@ const ProjectDetails = () => {
             />
             <CardContent>
               <Property label="Description" value={`${project?.description}`} />
-              <Property label="Project manager" value={`${project?.assignedTo?.name}`} />
-              <Property label="Team" value={`${project?.assignedTeam?.title}`} />
+              {project?.assignedTo && (
+                <Property label="Project manager" value={`${project?.assignedTo?.name}`} />
+              )}
+              {project?.assignedTeam && (
+                <Property label="Team" value={`${project?.assignedTeam?.title}`} />
+              )}
               {project?.assignedIssues.map((issue, index) => (
                 <Property key={index} label="Issue" value={`${issue.title}`} />
               ))}
