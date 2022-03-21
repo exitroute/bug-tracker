@@ -49,13 +49,13 @@ const ProjectDetails = () => {
               <Property label="Description" value={`${project?.description}`} />
               <Property label="Project manager" value={`${project?.assignedTo?.name}`} />
               <Property label="Team" value={`${project?.assignedTeam?.title}`} />
+              {project?.assignedIssues.map((issue, index) => (
+                <Property key={index} label="Issue" value={`${issue.title}`} />
+              ))}
               <Property
                 label="Created by"
                 value={`${project?.createdBy.name} on ${project?.createdAt.toTimeString()}`}
               />
-              {project?.assignedIssues.map((issue, index) => (
-                <Property key={index} label="Issue" value={`${issue.title}`} />
-              ))}
               {project?.updatedBy && (
                 <Property
                   label="Updated by"
