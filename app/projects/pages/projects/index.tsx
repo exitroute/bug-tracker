@@ -4,6 +4,8 @@ import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
 
 import getProjects from "app/projects/queries/getProjects"
 import Layout from "app/core/layouts/Layout"
+import { ProjectItemCard } from "app/projects/components/ProjectItemCards"
+import { Project } from "db"
 
 const ProjectList = () => {
   const [projects] = useQuery(getProjects, undefined)
@@ -14,7 +16,9 @@ const ProjectList = () => {
         {projects?.map((project) => (
           <ListItem key={project.id}>
             <Link href={`/projects/${project.id}`}>
-              <a>{project.title}</a>
+              <a>
+                <ProjectItemCard props={project} />
+              </a>
             </Link>
           </ListItem>
         ))}
