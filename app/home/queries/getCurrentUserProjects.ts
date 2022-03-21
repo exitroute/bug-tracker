@@ -7,6 +7,29 @@ export default async function getCurrentUserProjects(_ = null, { session }: Ctx)
   try {
     const projects = await db.project.findMany({
       where: { assignedUserId: id },
+      include: {
+        assignedTeam: {
+          select: {
+            title: true,
+          },
+        },
+        assignedTo: {
+          select: {
+            name: true,
+          },
+        },
+        assignedIssues: {
+          select: {
+            priority: true,
+            status: true,
+          },
+        },
+        _count: {
+          select: {
+            assignedIssues: true,
+          },
+        },
+      },
     })
     return projects
   } catch (error) {

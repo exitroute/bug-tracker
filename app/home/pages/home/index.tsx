@@ -1,14 +1,15 @@
-import { Suspense, useEffect } from "react"
+import React, { Suspense, useEffect } from "react"
 import { Link, BlitzPage, Routes, useQuery } from "blitz"
 import { Box, UnorderedList, ListItem } from "@chakra-ui/react"
 
-import { ItemCard } from "app/core/components/ItemCard"
+import { IssueItemCard } from "app/issues/components/IssueItemCard"
 
 import Layout from "app/core/layouts/Layout"
 import getCurrentUserIssues from "app/home/queries/getCurrentUserIssues"
 import getCurrentUserProjects from "app/home/queries/getCurrentUserProjects"
 import { useAppContext } from "app/context/AppContext"
 import getIssuesForCharts from "app/issues/queries/getIssuesForCharts"
+import { ProjectItemCard } from "app/projects/components/ProjectItemCards"
 
 /**
  *
@@ -52,7 +53,7 @@ const HomeList = () => {
           <ListItem key={issue.id}>
             <Link href={Routes.IssuePage({ issueId: issue.id })}>
               <a>
-                <ItemCard
+                <IssueItemCard
                   id={issue.id}
                   title={issue.title}
                   description={issue.description}
@@ -67,7 +68,9 @@ const HomeList = () => {
         {projects?.map((project) => (
           <ListItem key={project.id}>
             <Link href={Routes.ProjectPage({ projectId: project.id })}>
-              <a>{project.title}</a>
+              <a>
+                <ProjectItemCard props={project} />
+              </a>
             </Link>
           </ListItem>
         ))}
