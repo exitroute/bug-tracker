@@ -14,7 +14,6 @@ import {
 import Layout from "app/core/layouts/Layout"
 import getProject from "app/projects/queries/getProject"
 import deleteProject from "app/projects/mutations/deleteProject"
-// TODO refactor as delete project
 
 const ProjectDetails = () => {
   const projectId = useParam("projectId", "number")!
@@ -26,7 +25,7 @@ const ProjectDetails = () => {
     deleteProjectMutation({ id })
     confirm("Warning: You are about to delete this project. \nAre you sure?")
     console.log("issue " + id + " deleted")
-    Router.push("/issues")
+    Router.push("/projects")
     refetch()
   }
 
