@@ -8,13 +8,13 @@ export default async function createProject(input: any, ctx: Ctx) {
     title,
     description,
     assignedIssue,
-    assignedUser,
+    assignedTo,
     assignedTeam,
   }: {
     title: string
     description: string
     assignedIssue: any
-    assignedUser: any
+    assignedTo: any
     assignedTeam: any
   } = input.project
 
@@ -35,10 +35,10 @@ export default async function createProject(input: any, ctx: Ctx) {
             },
           },
         }),
-        ...(assignedUser && {
+        ...(assignedTo && {
           assignedTo: {
             connect: {
-              id: Number(assignedUser.id),
+              id: Number(assignedTo.id),
             },
           },
         }),

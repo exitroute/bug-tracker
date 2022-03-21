@@ -9,14 +9,14 @@ export default async function updateProject(input: any, ctx: Ctx) {
     title,
     description,
     assignedIssue,
-    assignedUser,
+    assignedTo,
     assignedTeam,
   }: {
     id: number
     title: string
     description: string
     assignedIssue: any
-    assignedUser: any
+    assignedTo: any
     assignedTeam: any
   } = input.project
 
@@ -38,10 +38,10 @@ export default async function updateProject(input: any, ctx: Ctx) {
             },
           },
         }),
-        ...(assignedUser && {
+        ...(assignedTo && {
           assignedTo: {
             connect: {
-              id: Number(assignedUser.id),
+              id: Number(assignedTo.id),
             },
           },
         }),
