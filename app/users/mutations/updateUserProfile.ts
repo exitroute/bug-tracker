@@ -2,17 +2,25 @@ import { Ctx } from "blitz"
 import db from "db"
 
 export default async function updateUserProfile(input: any, ctx: Ctx) {
-  ctx.session.$authorize("ADMIN")
-
   const {
     id,
-    name,
     email,
+    name,
+    role,
+    inTeams,
   }: {
     id: number
-    name: string
     email: string
+    role: string
+    name: string
+    inTeams?: {
+      id: number
+    }
   } = input.userProfile
+
+  if (ctx.session.userId === id) {
+    ctx.session.$authorize("USER" || "ADMIN")
+  }
 
   try {
     const updatedIssue = await db.user.update({
@@ -20,14 +28,14 @@ export default async function updateUserProfile(input: any, ctx: Ctx) {
       data: {
         name: name,
         email: email,
-        // role: role,
-        // ...(assignedTo && {
-        //   assignedTo: {
-        //     connect: {
-        //       id: Number(assignedTo.id),
-        //     },
-        //   },
-        // }),
+        role: role,
+        ...(inTeams && {
+          inTeams: {
+            connect: {
+              id: Number(inTeams.id),
+            },
+          },
+        }),
       },
     })
     return updatedIssue
