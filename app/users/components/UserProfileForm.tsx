@@ -8,10 +8,10 @@ import { Box, Stack, useColorModeValue } from "@chakra-ui/react"
 import { Form } from "../../core/components/AppForm"
 export { FORM_ERROR } from "../../core/components/AppForm"
 
-// import getUsers from "app/users/queries/getUserProfiles"
+import getTeams from "app/teams/queries/getTeams"
 
 export const UserProfileForm = (props) => {
-  // const [users] = useQuery(getUsers, undefined, { suspense: false })
+  const [teams] = useQuery(getTeams, undefined, { suspense: false })
 
   return (
     <Suspense fallback="Loading...">
@@ -19,19 +19,28 @@ export const UserProfileForm = (props) => {
         <Stack spacing={4}>
           <Form {...props}>
             <Stack spacing={8}>
-              <InputControl name="userProfile.name" placeholder="Your name" label="Name" />
-              <InputControl name="userProfile.email" placeholder="Your email" label="Email" />
-              {/* <SelectControl
-                name="issue.assignedTo.id"
-                label="Assigned to"
-                placeholder="Assign this issue!"
+              <InputControl name="userProfile.name" placeholder="" label="Name" />
+              <InputControl name="userProfile.email" placeholder="" label="Email" />
+              {/* <TextareaControl name="userProfile.about" placeholder="" label="About" /> */}
+              <SelectControl
+                name="userProfile.inTeams.id"
+                label="Assign to team"
+                placeholder="Find a team!"
               >
-                {users?.map((user) => (
-                  <option key={user.id} value={user.id}>
-                    {user.name}
+                {teams?.map((team) => (
+                  <option key={team.id} value={team.id}>
+                    {team.title}
                   </option>
                 ))}
-              </SelectControl> */}
+              </SelectControl>
+              <SelectControl name="userProfile.role" label="Role" placeholder="User role">
+                <option key={1} value="USER">
+                  USER
+                </option>
+                <option key={2} value="ADMIN">
+                  ADMIN
+                </option>
+              </SelectControl>
             </Stack>
           </Form>
         </Stack>
