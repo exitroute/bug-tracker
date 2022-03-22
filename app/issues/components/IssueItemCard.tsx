@@ -10,6 +10,7 @@ interface Props {
   assigned?: {} | null
   status?: string | null
   priority?: string | null
+  tag?: string | null
 }
 
 const assignedStatusOutput = (assigned) => {
@@ -39,7 +40,7 @@ const priorityStatusOutput = (priority) => {
 }
 
 export function IssueItemCard(props: Props) {
-  const { id, title, description, priority, status, assigned } = props
+  const { id, title, description, priority, status, assigned, tag } = props
 
   const assignedStatus = assignedStatusOutput(assigned)
   const displayStatus = progressStatusOutput(status)
@@ -54,7 +55,7 @@ export function IssueItemCard(props: Props) {
       bg={displayStatus === "CLOSED" ? "gray.100" : "white"}
     >
       <CardHeader fontSize="lg" color="gray.500" fontWeight="bold">
-        <Heading mb={2} as="h3" size="md">{`#${id} ${title} `}</Heading>
+        <Heading mb={2} as="h3" size="md">{`${tag ? `${tag} ` : ""}#${id} ${title}`}</Heading>
       </CardHeader>
       <CardBody p="0px 2px" fontSize="md" color="gray.500" fontWeight="400">
         <Stack>

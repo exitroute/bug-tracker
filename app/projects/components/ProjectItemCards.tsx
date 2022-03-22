@@ -53,7 +53,7 @@ function reducer(arr, property) {
   }, {})
 }
 
-export function ProjectItemCard({ props }: any) {
+export function ProjectItemCard({ props, tag }: any) {
   const { id, title, description, status, assignedTo, assignedTeam, assignedIssues } = props
 
   const displayStatus = progressStatusOutput(status)
@@ -71,7 +71,7 @@ export function ProjectItemCard({ props }: any) {
       bg={displayStatus === "CLOSED" ? "gray.100" : "white"}
     >
       <CardHeader fontSize="lg" color="gray.500" fontWeight="bold">
-        <Heading mb={2} as="h3" size="md">{`#${id} ${title} `}</Heading>
+        <Heading mb={2} as="h3" size="md">{`${tag ? `${tag} ` : ""}#${id} ${title} `}</Heading>
       </CardHeader>
       <CardBody p="0px 2px" fontSize="md" color="gray.500" fontWeight="400">
         <Stack>

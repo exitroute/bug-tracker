@@ -60,6 +60,7 @@ const HomeList = () => {
                   assigned={issue.assignedTo}
                   status={issue.status}
                   priority={issue.priority}
+                  tag="Issue"
                 />
               </a>
             </Link>
@@ -69,7 +70,7 @@ const HomeList = () => {
           <ListItem key={project.id}>
             <Link href={Routes.ProjectPage({ projectId: project.id })}>
               <a>
-                <ProjectItemCard props={project} />
+                <ProjectItemCard props={project} tag="Project" />
               </a>
             </Link>
           </ListItem>
