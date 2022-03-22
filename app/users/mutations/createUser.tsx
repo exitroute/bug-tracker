@@ -5,11 +5,17 @@ export default async function createUser(input: any, ctx: Ctx) {
   ctx.session.$authorize("ADMIN")
 
   const {
-    name,
     email,
+    name,
+    role,
+    inTeams,
   }: {
-    name: string
     email: string
+    role: string
+    name: string
+    inTeams?: {
+      id: number
+    }
   } = input.userProfile
 
   try {
@@ -17,6 +23,14 @@ export default async function createUser(input: any, ctx: Ctx) {
       data: {
         name: name,
         email: email,
+        role: role,
+        ...(inTeams && {
+          inTeams: {
+            connect: {
+              id: Number(inTeams.id),
+            },
+          },
+        }),
       },
     })
     return newUser
