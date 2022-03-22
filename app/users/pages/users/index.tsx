@@ -24,7 +24,7 @@ const UserProfileList = () => {
 const UserProfiles: BlitzPage = () => {
   return (
     <main>
-      <Suspense fallback="Loading issues...">
+      <Suspense fallback="Loading users...">
         <UserProfileList />
       </Suspense>
     </main>
