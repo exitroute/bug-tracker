@@ -30,12 +30,25 @@ export const EditUserProfileForm = () => {
       {session.userId === userId || session.role === "ADMIN" ? (
         <Stack spacing={8} mx={"auto"} w={"100%"} py={12} px={6}>
           <Stack align={"center"}>
-            <Heading textAlign="center" as="h3" size="md">
-              Update User Profile: {userProfile?.name ? `${userProfile?.name}` : ""}
-            </Heading>
-            <Text fontSize={"md"} color={"gray.600"}>
-              What do you want to change?
-            </Text>
+            {userProfile?.name ? (
+              <>
+                <Heading textAlign="center" as="h3" size="md">
+                  Update User Profile: {userProfile?.name}
+                </Heading>
+                <Text fontSize={"md"} color={"gray.600"}>
+                  What do you want to change?
+                </Text>
+              </>
+            ) : (
+              <>
+                <Heading textAlign="center" as="h3" size="md">
+                  Welcome new user!
+                </Heading>
+                <Text fontSize={"md"} color={"gray.600"} px="32px">
+                  We would like to know you more. Please complete your profile to finish signing up.
+                </Text>
+              </>
+            )}
           </Stack>
           <UserProfileForm
             initialValues={initialValues}
