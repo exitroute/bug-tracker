@@ -17,8 +17,12 @@ const validate = (values: any) => {
       title?: string
       description?: string
     }
+    userProfile: {
+      name?: string
+      email?: string
+    }
   }
-  const errors: Errors = { issue: {}, project: {} }
+  const errors: Errors = { userProfile: {}, issue: {}, project: {} }
 
   if (values.issue) {
     if (!values.issue.title) {
@@ -44,6 +48,14 @@ const validate = (values: any) => {
     }
     if (!values.project.description) {
       errors.project.description = "Required"
+    }
+  }
+  if (values.userProfile) {
+    if (!values.userProfile.name) {
+      errors.userProfile.name = "Required"
+    }
+    if (!values.userProfile.email) {
+      errors.userProfile.email = "Required"
     }
   }
   return errors
