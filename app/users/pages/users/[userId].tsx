@@ -18,17 +18,24 @@ import deleteUserProfile from "app/users/mutations/deleteUserProfile"
 const UserProfileDetails = () => {
   const session = useSession()
   const userId = useParam("userId", "number")!
-  const [user, { refetch }]: any = useQuery(getUserProfile, userId)
-  const [deleteUserProfileMutation] = useMutation(deleteUserProfile)
+  const [user, { refetch }] = useQuery(getUserProfile, userId)
 
-  const { id, name, email, role, assignedIssues, assignedProjects, inTeams } = user
+  const { id, name, email, role, assignedIssues, assignedProjects, inTeams }: any = user
 
-  const deleteUserProfileHandler = (e, id: any) => {
+  const redirect = () => {
+    refetch()
+    Router.push("/users")
+  }
+
+  const [deleteUserProfileMutation] = useMutation(deleteUserProfile, { onSuccess: redirect })
+
+  const deleteUserProfileHandler = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+    id: number
+  ) => {
     e.preventDefault()
     deleteUserProfileMutation({ id })
     confirm("Warning: You are about to delete this user. \nAre you sure?")
-    refetch()
-    Router.push("/users")
   }
 
   return (
