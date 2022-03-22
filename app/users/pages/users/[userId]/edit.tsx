@@ -39,7 +39,7 @@ export const EditUserProfileForm = () => {
           </Stack>
           <UserProfileForm
             initialValues={initialValues}
-            submitText="Update Issue"
+            submitText="Update Profile"
             onSubmit={async (values) => {
               try {
                 await updateUserProfileMutation(values)
@@ -50,8 +50,8 @@ export const EditUserProfileForm = () => {
           />
         </Stack>
       ) : (
-        <Center>
-          <Heading as="h3" size="md" color="gray.500">
+        <Center w="100%">
+          <Heading as="h3" size="md" color="gray.500" textAlign="center">
             You cannot edit this user&apos;s data.
           </Heading>
         </Center>
