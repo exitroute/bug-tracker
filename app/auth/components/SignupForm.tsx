@@ -6,7 +6,7 @@ import signup from "app/auth/mutations/signup"
 import { Signup } from "app/auth/validations"
 
 type SignupFormProps = {
-  onSuccess?: () => void
+  onSuccess?: (id: any) => void
 }
 
 export const SignupForm = (props: SignupFormProps) => {
@@ -20,8 +20,9 @@ export const SignupForm = (props: SignupFormProps) => {
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
           try {
-            await signupMutation(values)
-            props.onSuccess?.()
+            const user = await signupMutation(values)
+            console.log("userId", user.id)
+            props.onSuccess?.(user.id)
           } catch (error: any) {
             if (error.code === "P2002" && error.meta?.target?.includes("email")) {
               // This error comes from Prisma
