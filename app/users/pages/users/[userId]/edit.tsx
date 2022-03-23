@@ -44,7 +44,7 @@ export const EditUserProfileForm = () => {
                 <Heading textAlign="center" as="h3" size="md">
                   Welcome new user!
                 </Heading>
-                <Text fontSize={"md"} color={"gray.600"} px="32px">
+                <Text fontSize={"md"} color={"gray.600"} mx="auto" maxW="40ch">
                   We would like to know you more. Please complete your profile to finish signing up.
                 </Text>
               </>
