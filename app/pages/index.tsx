@@ -32,37 +32,24 @@ const LandingPage: BlitzPage = () => {
 const CallToActionWithAnnotation = () => {
   return (
     <>
-      <Container maxW={"3xl"}>
-        <Stack
-          as={Box}
-          textAlign={"center"}
-          spacing={{ base: 8, md: 14 }}
-          py={{ base: 20, md: 36 }}
-        >
-          <Heading
-            fontWeight={600}
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
-            lineHeight={"110%"}
-          >
-            Every issue is&nbsp;
-            <Text as={"span"} color={"green.400"}>
-              tracked
-            </Text>
-          </Heading>
-
-          <Text color={"gray.500"}>An Exit Route project by Ryan O&apos;Shea</Text>
+      <Flex flexDirection="column" justifyContent="space-between" h="100vh">
+        <Flex justifyContent="space-between">
+          <Flex h="100%" pl={8} alignItems="center" justifyContent="center">
+            <Box>BugTwitter</Box>
+          </Flex>
           <Stack
             direction={"row"}
             spacing={3}
             align={"center"}
             alignSelf={"center"}
             position={"relative"}
+            p={8}
           >
             <Link href={Routes.SignupPage()}>
               <Button
                 as="a"
-                colorScheme={"green"}
-                bg={"green.400"}
+                colorScheme={"blue"}
+                bg={"blue.400"}
                 rounded={"full"}
                 px={6}
                 _hover={{
@@ -75,8 +62,8 @@ const CallToActionWithAnnotation = () => {
             <Link href={Routes.LoginPage()}>
               <Button
                 as="a"
-                colorScheme={"green"}
-                bg={"green.400"}
+                colorScheme={"blue"}
+                bg={"blue.400"}
                 rounded={"full"}
                 px={6}
                 _hover={{
@@ -87,8 +74,38 @@ const CallToActionWithAnnotation = () => {
               </Button>
             </Link>
           </Stack>
-        </Stack>
-      </Container>
+        </Flex>
+        <Container centerContent>
+          <Stack
+            as={Box}
+            textAlign={"center"}
+            spacing={{ base: 4, md: 8 }}
+            // py={{ base: 20, md: 36 }}
+          >
+            <Heading
+              fontWeight={600}
+              fontSize={{ base: "2xl", sm: "6xl", md: "6xl" }}
+              lineHeight={"100%"}
+            >
+              A bit like Jira
+              <br />
+              <Text as={"span"} color={"blue.400"}>
+                A bit like Twitter
+              </Text>
+            </Heading>
+
+            <Text color={"gray.500"} lineHeight="110%">
+              A demo project by Ryan O&apos;Shea
+              <br /> Find out how it is built <a href="https://ryanoshea.dev/projects">here</a>
+            </Text>
+          </Stack>
+        </Container>
+        <Flex justifyContent="center" w="100%">
+          <Box p={4}>Github</Box>
+          <Box p={4}>Linkedin</Box>
+          <Box p={4}>Website</Box>
+        </Flex>
+      </Flex>
     </>
   )
 }
