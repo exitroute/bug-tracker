@@ -159,7 +159,7 @@ const Sidebar = ({ onClose, title, ...rest }) => {
       {...rest}
     >
       <Flex py="1rem" justifyContent="center" alignItems="center" w="100%">
-        <Heading size="lg">bgTrckr</Heading>
+        <Heading size="lg">BugTwitter</Heading>
       </Flex>
       <Flex
         display={{ base: "flex", md: "none" }}
