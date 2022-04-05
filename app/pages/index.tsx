@@ -7,13 +7,12 @@ import {
   Text,
   Button,
   Stack,
-  VStack,
   Flex,
-  Divider,
-  chakra,
-  Grid,
-  GridItem,
+  Icon,
+  Link as ChakLink,
 } from "@chakra-ui/react"
+import { GrGithub, GrLinkedin } from "react-icons/gr"
+import { ExternalLinkIcon } from "@chakra-ui/icons"
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -24,7 +23,6 @@ const LandingPage: BlitzPage = () => {
   return (
     <div className="container">
       <CallToActionWithAnnotation />
-      {/* <GridListWithCTA /> */}
     </div>
   )
 }
@@ -33,9 +31,16 @@ const CallToActionWithAnnotation = () => {
   return (
     <>
       <Flex flexDirection="column" justifyContent="space-between" h="100vh">
-        <Flex justifyContent="space-between">
-          <Flex h="100%" pl={8} alignItems="center" justifyContent="center">
-            <Box>BugTwitter</Box>
+        <Flex justifyContent="space-between" borderBottom="1px" borderBottomColor="gray.200">
+          <Flex
+            h="100%"
+            pl={{ base: "2", sm: "4", md: "8" }}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Text fontSize={{ base: "sm", sm: "lg", md: "xl" }} fontWeight="bold">
+              BugTwitter
+            </Text>
           </Flex>
           <Stack
             direction={"row"}
@@ -43,15 +48,16 @@ const CallToActionWithAnnotation = () => {
             align={"center"}
             alignSelf={"center"}
             position={"relative"}
-            p={8}
+            p={{ base: "2", sm: "4", md: "8" }}
           >
             <Link href={Routes.SignupPage()}>
               <Button
                 as="a"
                 colorScheme={"blue"}
                 bg={"blue.400"}
-                rounded={"full"}
-                px={6}
+                rounded={"lg"}
+                px={{ base: "3", sm: "6" }}
+                fontSize={{ base: "sm", sm: "md" }}
                 _hover={{
                   bg: "green.500",
                 }}
@@ -64,8 +70,9 @@ const CallToActionWithAnnotation = () => {
                 as="a"
                 colorScheme={"blue"}
                 bg={"blue.400"}
-                rounded={"full"}
-                px={6}
+                rounded={"lg"}
+                px={{ base: "3", sm: "6" }}
+                fontSize={{ base: "sm", sm: "md" }}
                 _hover={{
                   bg: "green.500",
                 }}
@@ -75,7 +82,7 @@ const CallToActionWithAnnotation = () => {
             </Link>
           </Stack>
         </Flex>
-        <Container centerContent>
+        <Container centerContent maxW="container.lg">
           <Stack
             as={Box}
             textAlign={"center"}
@@ -84,8 +91,8 @@ const CallToActionWithAnnotation = () => {
           >
             <Heading
               fontWeight={600}
-              fontSize={{ base: "2xl", sm: "6xl", md: "6xl" }}
-              lineHeight={"100%"}
+              fontSize={{ base: "3xl", sm: "5xl", md: "8xl" }}
+              lineHeight={"105%"}
             >
               A bit like Jira
               <br />
@@ -94,95 +101,32 @@ const CallToActionWithAnnotation = () => {
               </Text>
             </Heading>
 
-            <Text color={"gray.500"} lineHeight="110%">
+            <Text color={"gray.500"} lineHeight="116%">
               A demo project by Ryan O&apos;Shea
-              <br /> Find out how it is built <a href="https://ryanoshea.dev/projects">here</a>
+              <br /> Find out how it is built{" "}
+              <ChakLink href="https://ryanoshea.dev/blog/how-i-made-bugtwitter" isExternal>
+                here <ExternalLinkIcon />
+              </ChakLink>
             </Text>
           </Stack>
         </Container>
         <Flex justifyContent="center" w="100%">
-          <Box p={4}>Github</Box>
-          <Box p={4}>Linkedin</Box>
-          <Box p={4}>Website</Box>
+          <Box p={4}>
+            <a href="https://github.com/exitroute/bug-tracker">
+              <Icon as={GrGithub} w={6} h={6} />
+            </a>
+          </Box>
+          <Box p={4}>
+            <a href="https://www.linkedin.com/in/ryanjamesoshea/">
+              <Icon as={GrLinkedin} w={6} h={6} />
+            </a>
+          </Box>
+          <Box p={4}>
+            <a href="https://ryanoshea.dev/">ryanoshea.dev</a>
+          </Box>
         </Flex>
       </Flex>
     </>
-  )
-}
-
-interface FeatureProps {
-  heading: string
-  text: string
-}
-
-const Feature = ({ heading, text }: FeatureProps) => {
-  return (
-    <GridItem>
-      <chakra.h3 fontSize="xl" fontWeight="600">
-        {heading}
-      </chakra.h3>
-      <chakra.p>{text}</chakra.p>
-    </GridItem>
-  )
-}
-
-const GridListWithCTA = () => {
-  return (
-    <Box as={Container} maxW="7xl" mt={14} p={4}>
-      <Grid
-        templateColumns={{
-          base: "repeat(1, 1fr)",
-          sm: "repeat(2, 1fr)",
-          md: "repeat(2, 1fr)",
-        }}
-        gap={4}
-      >
-        <GridItem colSpan={1}>
-          <VStack alignItems="flex-start" spacing="20px">
-            <chakra.h2 fontSize="3xl" fontWeight="700">
-              Medium length title
-            </chakra.h2>
-            <Button colorScheme="green" size="md">
-              Call To Action
-            </Button>
-          </VStack>
-        </GridItem>
-        <GridItem>
-          <Flex>
-            <chakra.p>
-              Provide your customers a story they would enjoy keeping in mind the objectives of your
-              website. Pay special attention to the tone of voice.
-            </chakra.p>
-          </Flex>
-        </GridItem>
-      </Grid>
-      <Divider mt={12} mb={12} />
-      <Grid
-        templateColumns={{
-          base: "repeat(1, 1fr)",
-          sm: "repeat(2, 1fr)",
-          md: "repeat(4, 1fr)",
-        }}
-        gap={{ base: "8", sm: "12", md: "16" }}
-      >
-        <Feature
-          heading={"First Feature"}
-          text={"Short text describing one of you features/service"}
-        />
-        <Feature
-          heading={"Second Feature"}
-          text={"Short text describing one of you features/service"}
-        />
-        <Feature
-          heading={"Third Feature"}
-          text={"Short text describing one of you features/service"}
-        />
-        <Feature
-          heading={"Fourth Feature"}
-          text={"Short text describing one of you features/service"}
-        />
-      </Grid>
-    </Box>
   )
 }
 
